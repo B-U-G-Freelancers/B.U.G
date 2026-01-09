@@ -1,21 +1,11 @@
 // src/sections/Feedback.jsx
-import { Quote } from "lucide-react";
-
 export default function Feedback() {
   return (
     <section className="py-40 px-6 lg:px-8 border-t border-border-subtle bg-bg-primary overflow-hidden">
       <div className="mx-auto max-w-4xl relative">
-        {/* Opening Quote */}
-        <Quote
-          className="absolute -top-8 -left-8 size-40 text-text-primary/5 select-none pointer-events-none"
-          strokeWidth={1}
-        />
-
-        {/* Closing Quote */}
-        <Quote
-          className="absolute -bottom-8 -right-8 size-40 text-text-primary/5 select-none pointer-events-none rotate-180"
-          strokeWidth={1}
-        />
+        <span className="material-symbols-outlined absolute -top-16 -left-12 text-[200px] text-text-primary/5 select-none pointer-events-none">
+          format_quote
+        </span>
 
         <blockquote className="relative z-10 text-center">
           <p className="text-3xl sm:text-4xl lg:text-5xl font-medium leading-tight text-text-primary tracking-tight">

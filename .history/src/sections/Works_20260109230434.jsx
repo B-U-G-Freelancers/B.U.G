@@ -1,6 +1,4 @@
 // src/sections/Works.jsx
-import { ArrowRight, ArrowUpRight } from "lucide-react";
-
 const PROJECTS = [
   {
     title: "Nova Finance",
@@ -45,7 +43,9 @@ export default function Works() {
             className="hidden sm:flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-accent hover:text-text-primary transition-colors duration-300 group"
           >
             View all projects
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+            <span className="material-symbols-outlined text-lg transition-transform group-hover:translate-x-1">
+              arrow_forward
+            </span>
           </a>
         </div>
 
@@ -68,7 +68,9 @@ export default function Works() {
                 {/* Overlay text shown on hover for mobile/extra context */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <div className="h-14 w-14 rounded-full bg-accent flex items-center justify-center text-text-primary scale-75 group-hover:scale-100 transition-transform duration-500">
-                    <ArrowUpRight className="size-6" />
+                    <span className="material-symbols-outlined">
+                      north_east
+                    </span>
                   </div>
                 </div>
               </div>
@@ -91,7 +93,9 @@ export default function Works() {
             className="flex items-center justify-center gap-2 w-full py-5 border border-border-subtle rounded-lg text-sm font-bold uppercase tracking-widest text-text-primary"
           >
             View all projects
-            <ArrowRight className="size-4" />
+            <span className="material-symbols-outlined text-lg">
+              arrow_forward
+            </span>
           </a>
         </div>
       </div>

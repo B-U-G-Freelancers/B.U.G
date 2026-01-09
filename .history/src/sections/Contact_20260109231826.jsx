@@ -1,6 +1,5 @@
 // src/sections/Contact.jsx
 import { useState } from "react";
-import { Mail, MapPin } from "lucide-react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -28,7 +27,9 @@ export default function Contact() {
             <div className="flex flex-col gap-6">
               <div className="group flex items-center gap-5 text-text-primary">
                 <div className="flex size-12 items-center justify-center rounded-lg bg-bg-primary border border-border-subtle transition-colors group-hover:border-accent">
-                  <Mail className="size-5 text-accent" />
+                  <span className="material-symbols-outlined text-accent">
+                    mail
+                  </span>
                 </div>
                 <a
                   href="mailto:hello@bug.agency"
@@ -40,7 +41,9 @@ export default function Contact() {
 
               <div className="group flex items-center gap-5 text-text-primary">
                 <div className="flex size-12 items-center justify-center rounded-lg bg-bg-primary border border-border-subtle transition-colors group-hover:border-accent">
-                  <MapPin className="size-5 text-accent" />
+                  <span className="material-symbols-outlined text-accent">
+                    location_on
+                  </span>
                 </div>
                 <span className="text-xl font-medium">San Francisco, CA</span>
               </div>

@@ -1,11 +1,14 @@
-// src/App.jsx
-import Layout from "./components/layout/Layout";
-import Home from "./pages/Home";
+import React from 'react';
+import BugIntro from './components/BugIntro';
+import WorkDetail from './pages/WorkDetail';
 
-export default function App() {
+function App() {
   return (
-    <Layout>
-      <Home />
-    </Layout>
+    <>
+      <BugIntro />
+      <WorkDetail />
+    </>
   );
 }
+
+export default App;

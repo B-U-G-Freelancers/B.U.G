@@ -6,7 +6,9 @@
 @theme {
   /* Backgrounds */
   --color-bg-primary: #0B0D10;
+  --color-bg-primary: #0B0D10;
   --color-bg-secondary: #10131A;
+  --color-bg-dark: #0B0D10;
 
   /* Text */
   --color-text-primary: #E6E6E6;
@@ -15,6 +17,7 @@
 
   /* Accent — Aladdin Blue */
   --color-accent: #3A7CFF;
+  --color-primary: #3A7CFF;
   --color-accent-soft: #6FA0FF;
   --color-accent-muted: #243A6E;
 

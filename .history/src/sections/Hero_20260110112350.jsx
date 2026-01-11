@@ -11,8 +11,8 @@ export default function Hero() {
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    // Wait for intro animation to complete (roughly 5s)
-    const delay = 5;
+    // Wait for intro animation to complete (roughly 4s)
+    const delay = 3.5;
 
     const tl = gsap.timeline({ delay });
 

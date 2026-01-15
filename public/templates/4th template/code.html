@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Green Nook</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#f18c27",
+              "background-light": "#f8f7f6",
+              "background-dark": "#221910",
+              "pastel-green": "#e8f5e9", // Soft pastel green for pricing
+              "pastel-green-dark": "#2e3b2f", // Dark mode equivalent
+            },
+            fontFamily: {
+              "display": ["Space Grotesk", "sans-serif"],
+              "serif": ["Playfair Display", "serif"],
+            },
+            borderRadius: {
+              "DEFAULT": "0.5rem", 
+              "lg": "1rem", 
+              "xl": "1.5rem", 
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .serif-text {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Hand-drawn border effect for map */
+        .hand-drawn-border {
+            border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
+            box-shadow: 20px 38px 34px -26px rgba(0,0,0,0.2);
+            transition: all 0.3s ease-in-out;
+            border: 3px solid #f18c27;
+        }
+        .hand-drawn-border:hover {
+            border-radius: 10% 20% 40% 20% / 50% 10% 30% 20%;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#1c140d] dark:text-[#f3ede7] antialiased overflow-x-hidden transition-colors duration-300">
+<!-- Navbar: Floating Pill Style -->
+<div class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
+<nav class="bg-white/90 dark:bg-[#32281e]/90 backdrop-blur-md shadow-lg rounded-full px-6 py-3 flex items-center justify-between gap-8 max-w-4xl w-full border border-gray-100 dark:border-gray-800">
+<!-- Logo -->
+<div class="flex items-center gap-2">
+<span class="bg-primary text-white rounded-full p-1.5">
+<span class="material-symbols-outlined text-xl leading-none">potted_plant</span>
+</span>
+<span class="font-bold text-lg tracking-tight hidden sm:block">The Green Nook</span>
+</div>
+<!-- Links -->
+<div class="hidden md:flex items-center gap-8 font-medium text-sm">
+<a class="hover:text-primary transition-colors" href="#">Shop</a>
+<a class="hover:text-primary transition-colors" href="#services">Services</a>
+<a class="hover:text-primary transition-colors" href="#care-menu">Care Menu</a>
+<a class="hover:text-primary transition-colors" href="#contact">Contact</a>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-3">
+<button class="text-current hover:text-primary transition-colors p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/5">
+<span class="material-symbols-outlined block">search</span>
+</button>
+<button class="relative bg-primary text-white rounded-full p-2 pr-4 pl-3 flex items-center gap-2 hover:bg-primary/90 transition-transform active:scale-95 shadow-md">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+<span class="text-xs font-bold">2</span>
+</button>
+</div>
+</nav>
+</div>
+<!-- Hero Section: Asymmetrical Grid -->
+<section class="relative pt-32 pb-20 px-6 sm:px-12 lg:px-24 min-h-screen flex items-center overflow-hidden">
+<!-- Background decorative blob -->
+<div class="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl -z-10"></div>
+<div class="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[400px] h-[400px] bg-green-200/20 dark:bg-green-900/10 rounded-full blur-3xl -z-10"></div>
+<div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<!-- Text Content -->
+<div class="lg:col-span-5 flex flex-col gap-6 z-10">
+<div class="flex items-center gap-2 text-primary font-medium uppercase tracking-wider text-xs">
+<span class="w-8 h-[2px] bg-primary"></span>
+<span>Est. 2024</span>
+</div>
+<h1 class="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight text-balance">
+                    Bring the <span class="text-primary italic font-serif">Wild</span> Home.
+                </h1>
+<p class="text-lg text-gray-600 dark:text-gray-300 max-w-md leading-relaxed">
+                    Curated greenery for your urban sanctuary. We bring the jungle to your doorstep with hand-picked plants and expert care guides.
+                </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-sm tracking-wide shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2">
+                        Shop Collection
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+<button class="px-8 py-4 rounded-xl font-bold text-sm tracking-wide border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-white/5 transition-all duration-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">play_circle</span>
+                        Watch Video
+                    </button>
+</div>
+</div>
+<!-- Asymmetrical Image Grid -->
+<div class="lg:col-span-7 relative h-[500px] sm:h-[600px] w-full mt-10 lg:mt-0">
+<!-- Large Vertical Image -->
+<div class="absolute top-0 right-0 w-[55%] h-[85%] rounded-[2rem] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-700 ease-out z-10 group">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 scale-100 group-hover:scale-110" data-alt="Large lush monstera plant in a terracotta pot in a sunlit room" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuACyd7NIVwr1-PyjnnDuLiUcY5pe6O8kMGZdRSyqkfNalgYzq6dKfX3n3SWkTO3bAiaRlQWCc-S2Is5WbHrvtUZIpu17D-mEfvxZjvuNXYpEcPNQZnszOxS7drg0qnCR1EQBs8ku0HfwKEfCccw_lPf64dVpLf24YBzNrzEqtmEZ-nxAYEOm8Vuyr-jFk1WFQJ5eG7ECN7b-LkNxT16ypPJP1mcnESSbOwe4mRUL-5qVppqFqcuLWtpD0JimP1RneqKOLqPd7bToi0');"></div>
+</div>
+<!-- Square Offset Image -->
+<div class="absolute bottom-0 left-[10%] w-[45%] aspect-square rounded-[2rem] overflow-hidden shadow-xl -rotate-6 hover:rotate-0 transition-transform duration-700 ease-out z-20 border-4 border-white dark:border-[#221910] group">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 scale-100 group-hover:scale-110" data-alt="Close up of succulent leaves with water droplets" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAe5K7aiwlWWdR4g3_W4M0BnYoy3PDGn2dWF_BfxoRaMlXCwXnHesI9gDDvHry7eZ8iGDeVG2t1RiiMnOkngkkD8k8-qzKoIeLexzL4arfhyhcvAaV2widd_LvlKvYyNSvHRmSky1sn4ulrrMKxkia-e0ypft_Nz1ttc7GV7lV7yb6BeGe7cMUoft4Vg0jtUy_sODnG87aF997Kfa6Fhu3b-Seq52rBDA8m_70HMxvVsTOy-s95XvsisR9pvlUBoCH8W7OxO614pPU');"></div>
+</div>
+<!-- Small Floating Detail -->
+<div class="absolute top-[20%] left-0 w-[25%] aspect-[3/4] rounded-2xl overflow-hidden shadow-lg rotate-12 z-0 opacity-80 lg:opacity-100">
+<div class="w-full h-full bg-cover bg-center" data-alt="Hand holding a small potted plant" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAFpHpE84hRxQIG4O7bO7FQi9yMQi_-UtCNdVKRxhK4acjMB2BrTTvdbJRm9syKIhs6948-5hye6fE7K5Y9bmh_DN54ap6s0ybjEzAObQDqPuUUXWqYYOCmC5iM_5t3kbNNB9yEPgGDU4Yq7-tOpCXelWMKCw06XiwfVbGZip3VJS3JS4lKcxu_lI-v8xLTtAmUlomlbQc0iJq-a_p_-ehIeLs_BRQj1KnQVYBIl9ctZR74UXw0axajO8HBvjudCZyzhVrFLduWXdE');"></div>
+</div>
+<!-- Organic Decor Element -->
+<svg class="absolute -bottom-10 -right-10 w-32 h-32 text-primary opacity-20 animate-spin-slow" style="animation-duration: 20s;" viewbox="0 0 100 100">
+<path d="M44.1,2.6C50.6,0.5,56.9,4.2,61.1,9.4c5.1,6.4,8.5,14.6,15.6,18.9c6.9,4.1,16.2,3.3,21.8,9.2 c5.6,5.9,6.7,15.4,5.4,23.4c-1.3,8.4-5.3,16.4-11,22.6c-5.7,6.3-13.4,10.6-21.6,11.8c-8.4,1.3-17.2-1.7-24.5-6.1 c-7.3-4.4-13.4-10.9-20.1-15.3c-6.8-4.5-15.6-5.8-19.8-12.8c-4-6.8-2.6-16.1,1.8-23.1c4.5-7.1,12.2-11.8,18.6-17.4 C33.3,15.3,37.8,4.7,44.1,2.6z" fill="currentColor"></path>
+</svg>
+</div>
+</div>
+</section>
+<!-- Services Section: Circular Cards -->
+<section class="py-24 bg-white dark:bg-white/5 relative" id="services">
+<div class="max-w-7xl mx-auto px-6">
+<div class="text-center mb-16">
+<span class="text-primary font-bold uppercase tracking-widest text-xs mb-2 block">What We Do</span>
+<h2 class="text-4xl font-bold mb-4">Our Green Services</h2>
+<div class="h-1 w-20 bg-primary mx-auto rounded-full"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+<!-- Service 1 -->
+<div class="group flex flex-col items-center text-center">
+<div class="relative w-64 h-64 mb-8">
+<div class="absolute inset-0 rounded-full border-2 border-primary/30 border-dashed animate-[spin_10s_linear_infinite]"></div>
+<div class="absolute inset-2 rounded-full overflow-hidden shadow-xl group-hover:scale-95 transition-transform duration-500">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Top view of various plants arranged artistically on a table" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDp7qsQSbdEWgiGB0GD5c-V0mhGcmby9M7Ra04u5kbF8WfZ8_Lm9f9FBPGD1uUwO0QNBf7N5VLT0ftcSoiGh5rdLqN_pq58EKatxtXuHy3m3niPg57tGfWIIAbv2zF1_RWcFWZKHCqK1YyctVHJQIuO2Rlf_M926LBsf3VScwB_YSj9WeRN-lDqXtrrTDkMVlk71ph-seDFyseSiGe_i8eiCTLrKc15zYn5sDXkS3pfpXqMnna6S7OlncdK3aeRGr2ltunOpn0Ohc0');"></div>
+</div>
+<button class="absolute bottom-0 right-4 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg group-hover:-translate-y-2 transition-transform duration-300">
+<span class="material-symbols-outlined">stylus</span>
+</button>
+</div>
+<h3 class="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">Plant Styling</h3>
+<p class="text-gray-500 dark:text-gray-400 max-w-xs">Transform your space with a custom greenery plan tailored to your light and lifestyle.</p>
+</div>
+<!-- Service 2 -->
+<div class="group flex flex-col items-center text-center mt-12 md:mt-0">
+<div class="relative w-64 h-64 mb-8">
+<div class="absolute inset-0 rounded-full border-2 border-primary/30 border-dashed animate-[spin_12s_linear_infinite_reverse]"></div>
+<div class="absolute inset-2 rounded-full overflow-hidden shadow-xl group-hover:scale-95 transition-transform duration-500">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Hands gently repotting a plant into fresh soil" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDKDtIH1exJsotHoYYm2hCiGZMJqCRH9S8jwojJleYD6Ec0T3xWO4_5L4FdU7t93TiwnppsS-i1X7xhZ-0G6BFGA7zMYdnVi8HJEz_4ZYkGqCmVHaEJbfZQqzymt-9159rT2Jdfj4CTwzRFU4ukDEwGbjwuCMA9idjxiJEIB1a0T2HYbDPnXGFeGqbC2XgyLxdv4zCSN6xEDwdCeBPGL_pv-7hlZzIasEGDxNYxK_dCsFgtQhjnHs8Ui19CVmBAYJrfJG2mljIHeJw');"></div>
+</div>
+<button class="absolute bottom-0 right-4 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg group-hover:-translate-y-2 transition-transform duration-300">
+<span class="material-symbols-outlined">potted_plant</span>
+</button>
+</div>
+<h3 class="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">Repotting</h3>
+<p class="text-gray-500 dark:text-gray-400 max-w-xs">Give your roots room to grow. We provide the soil, the pots, and the muscle.</p>
+</div>
+<!-- Service 3 -->
+<div class="group flex flex-col items-center text-center">
+<div class="relative w-64 h-64 mb-8">
+<div class="absolute inset-0 rounded-full border-2 border-primary/30 border-dashed animate-[spin_10s_linear_infinite]"></div>
+<div class="absolute inset-2 rounded-full overflow-hidden shadow-xl group-hover:scale-95 transition-transform duration-500">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Person examining a plant leaf with a magnifying glass" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBRJ_nxiCU97AT6KGwjUCH7oyiqxVwB_A6p-AwzUIVMk0CQMSwtsE-f7I0Zv5PpYydAcZuPJilII6x-9P5uQwxG8TSljTR_OrzMFSWTd5CXdlXE1_3ow1IdP2G4tn8zyrweDn6mbYOP69AM2pFf6aIAfqcfAq1gGvq9ZeY0u3c6zta074FSgV_Sj797BYSwlF5I8Nghu_K8oahXqTpgGfUy0kHqYR3GtRMMsrsinhFpvQRo2yH835xsfNzq-sQF9fnPMypr8VpTxAU');"></div>
+</div>
+<button class="absolute bottom-0 right-4 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg group-hover:-translate-y-2 transition-transform duration-300">
+<span class="material-symbols-outlined">medical_services</span>
+</button>
+</div>
+<h3 class="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">Plant Doctor</h3>
+<p class="text-gray-500 dark:text-gray-400 max-w-xs">Yellow leaves? Droopy stems? Our experts diagnose and prescribe the cure.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing Section: Care Menu -->
+<section class="py-24 px-6 bg-background-light dark:bg-background-dark" id="care-menu">
+<div class="max-w-6xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+<div>
+<h2 class="text-4xl lg:text-5xl font-bold mb-2">The Care Menu</h2>
+<p class="text-lg text-gray-500 dark:text-gray-400 font-serif italic">Choose the level of love your jungle needs.</p>
+</div>
+<!-- Toggle Switch (Visual Only) -->
+<div class="bg-white dark:bg-[#32281e] p-1 rounded-full border border-gray-200 dark:border-gray-700 flex items-center">
+<button class="bg-primary text-white px-4 py-2 rounded-full text-sm font-bold shadow-sm">Monthly</button>
+<button class="px-4 py-2 rounded-full text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-primary">Yearly</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Basic Tier -->
+<div class="relative bg-pastel-green dark:bg-pastel-green-dark rounded-3xl p-8 flex flex-col gap-6 hover:shadow-xl transition-shadow duration-300 border border-transparent hover:border-primary/20">
+<div class="absolute -top-4 -right-4 bg-white dark:bg-[#32281e] rounded-full p-3 shadow-md">
+<span class="material-symbols-outlined text-primary text-2xl">grass</span>
+</div>
+<div>
+<h3 class="text-2xl font-bold">Seedling</h3>
+<div class="text-sm text-gray-600 dark:text-gray-300 mt-1">For new plant parents</div>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-black text-primary">$29</span>
+<span class="text-gray-500 dark:text-gray-400">/mo</span>
+</div>
+<ul class="flex-1 flex flex-col gap-3 text-sm font-medium text-gray-700 dark:text-gray-200">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            1 Virtual Consultation
+                        </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            Monthly Care Guide
+                        </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            5% Shop Discount
+                        </li>
+</ul>
+<button class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-colors">Select Plan</button>
+</div>
+<!-- Standard Tier -->
+<div class="relative bg-white dark:bg-[#2a2218] rounded-3xl p-8 flex flex-col gap-6 shadow-2xl border-2 border-primary transform md:-translate-y-4">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-white px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase">
+                        Most Popular
+                    </div>
+<div>
+<h3 class="text-2xl font-bold">Sapling</h3>
+<div class="text-sm text-gray-600 dark:text-gray-300 mt-1">For growing collections</div>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-black text-primary">$59</span>
+<span class="text-gray-500 dark:text-gray-400">/mo</span>
+</div>
+<ul class="flex-1 flex flex-col gap-3 text-sm font-medium text-gray-700 dark:text-gray-200">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            2 Virtual Consultations
+                        </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            1 Repotting Session
+                        </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            Seasonal Fertilizer Kit
+                        </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            10% Shop Discount
+                        </li>
+</ul>
+<button class="w-full py-3 rounded-xl bg-primary text-white font-bold shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all">Select Plan</button>
+</div>
+<!-- Premium Tier -->
+<div class="relative bg-pastel-green dark:bg-pastel-green-dark rounded-3xl p-8 flex flex-col gap-6 hover:shadow-xl transition-shadow duration-300 border border-transparent hover:border-primary/20">
+<div class="absolute -top-4 -right-4 bg-white dark:bg-[#32281e] rounded-full p-3 shadow-md">
+<span class="material-symbols-outlined text-primary text-2xl">forest</span>
+</div>
+<div>
+<h3 class="text-2xl font-bold">Canopy</h3>
+<div class="text-sm text-gray-600 dark:text-gray-300 mt-1">Full jungle maintenance</div>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-black text-primary">$99</span>
+<span class="text-gray-500 dark:text-gray-400">/mo</span>
+</div>
+<ul class="flex-1 flex flex-col gap-3 text-sm font-medium text-gray-700 dark:text-gray-200">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            Unlimited Consultations
+                        </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            Quarterly Home Visits
+                        </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            Pest Control Treatment
+                        </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            20% Shop Discount
+                        </li>
+</ul>
+<button class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-colors">Select Plan</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact & Footer Section -->
+<section class="bg-[#1c140d] text-[#f8f7f6] pt-24 pb-12 rounded-t-[3rem] mt-12 relative overflow-hidden" id="contact">
+<!-- Abstract overlay -->
+<div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+<div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+<!-- Info Side -->
+<div class="flex flex-col gap-8">
+<div>
+<h2 class="font-serif text-5xl lg:text-6xl mb-6 leading-tight">Find Your Nook</h2>
+<p class="text-gray-400 text-lg max-w-sm">
+                            Come visit our little urban jungle. We have coffee, fresh air, and more chlorophyll than you can handle.
+                        </p>
+</div>
+<div class="space-y-6">
+<div class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-primary mt-1">location_on</span>
+<div>
+<h4 class="font-serif text-xl mb-1">The Greenhouse</h4>
+<p class="text-gray-400">124 Maple Avenue, Suite B<br/>Portland, OR 97204</p>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-primary mt-1">schedule</span>
+<div>
+<h4 class="font-serif text-xl mb-1">Open Hours</h4>
+<p class="text-gray-400">Tue - Sun: 10am - 7pm<br/>Mon: Closed for watering</p>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-primary mt-1">mail</span>
+<div>
+<h4 class="font-serif text-xl mb-1">Say Hello</h4>
+<p class="text-gray-400 hover:text-white cursor-pointer underline decoration-primary underline-offset-4">hello@thegreennook.com</p>
+</div>
+</div>
+</div>
+<!-- Newsletter -->
+<div class="mt-8 bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
+<h5 class="font-bold mb-3">Join the club</h5>
+<form class="flex gap-2">
+<input class="bg-transparent border border-gray-600 rounded-lg px-4 py-2 w-full text-sm focus:border-primary focus:ring-0 text-white placeholder-gray-500" placeholder="Your email..." type="email"/>
+<button class="bg-primary hover:bg-primary/90 text-white px-4 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">send</span>
+</button>
+</form>
+</div>
+</div>
+<!-- Map Side -->
+<div class="relative h-[400px] lg:h-[500px] w-full">
+<!-- Hand-drawn border effect div wrapper -->
+<div class="hand-drawn-border w-full h-full overflow-hidden bg-gray-800 relative group">
+<!-- Actual Map Image Placeholder -->
+<div class="w-full h-full bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity duration-300 grayscale group-hover:grayscale-0" data-alt="Map showing the location of the shop in Portland Oregon" data-location="Portland, Oregon" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC5TKyHkkfuE1H90PetA48Md2umzHkYw8Ay0Sq2HMPB-EZSfY8mobsaIhZOEbiISzlZgJvTnVYCX5f13qMROtYsv9wXJqlOvi8mw4VLsGKqfCxF0CaTuT9jAB8O0pMKMICnXZj5VahfTHdlMxqxqh0asR_d3JJWzb311O_q2ZDdDmk2hFStua4hlC6rmnmVklgLfJ1u7_WJxaDF5UU00ALoGqkPPBfOJr73GQfWbeE7qakQuUyX5ev9RflBv7fSxZNgMBP-KuGpeFw');">
+</div>
+<!-- Custom Pin -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform transition-transform group-hover:-translate-y-3 duration-300">
+<span class="material-symbols-outlined text-5xl text-primary drop-shadow-xl">location_on</span>
+</div>
+<div class="absolute bottom-4 left-4 bg-white text-black px-4 py-2 rounded-lg shadow-lg text-xs font-bold pointer-events-none">
+                            Get Directions
+                        </div>
+</div>
+<!-- Decorative hand-drawn arrow -->
+<svg class="absolute -bottom-8 -left-8 w-24 h-24 text-primary rotate-12 hidden lg:block" viewbox="0 0 100 100">
+<path d="M20,80 C40,70 60,90 80,40 M70,45 L80,40 L85,50" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<!-- Footer Bottom -->
+<div class="mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 gap-4">
+<p>© 2024 The Green Nook. Roots and all.</p>
+<div class="flex gap-6">
+<a class="hover:text-primary" href="#">Instagram</a>
+<a class="hover:text-primary" href="#">Pinterest</a>
+<a class="hover:text-primary" href="#">TikTok</a>
+</div>
+</div>
+</div>
+</section>
+</body></html>

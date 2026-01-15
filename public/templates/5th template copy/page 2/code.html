@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Immersive Portfolio Gallery</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1337ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#0a0a0c",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                    backgroundImage: {
+                        'grain': "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.8\" numOctaves=\"3\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\" opacity=\"0.15\"/%3E%3C/svg%3E')"
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }.text-outline {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+            color: transparent;
+            transition: all 0.5s ease;
+        }
+        .group:hover .text-outline {
+            -webkit-text-stroke: 0px;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+        }.glitch-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+        .glitch-layer {
+            background-image: var(--bg-image);
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .group:hover .glitch-layer:nth-child(2) {
+            animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+            opacity: 0.5;
+            mix-blend-mode: hard-light;
+            display: block;
+        }
+        .group:hover .glitch-layer:nth-child(3) {
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+            opacity: 0.5;
+            mix-blend-mode: hard-light;
+            display: block;
+        }
+        @keyframes glitch-anim-1 {
+            0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, 1px); }
+            20% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -1px); }
+            40% { clip-path: inset(40% 0 50% 0); transform: translate(-2px, 2px); }
+            60% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -2px); }
+            80% { clip-path: inset(10% 0 70% 0); transform: translate(-1px, 1px); }
+            100% { clip-path: inset(30% 0 20% 0); transform: translate(1px, -1px); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip-path: inset(10% 0 60% 0); transform: translate(2px, -1px); }
+            20% { clip-path: inset(30% 0 20% 0); transform: translate(-2px, 1px); }
+            40% { clip-path: inset(70% 0 10% 0); transform: translate(2px, -2px); }
+            60% { clip-path: inset(20% 0 50% 0); transform: translate(-2px, 2px); }
+            80% { clip-path: inset(50% 0 30% 0); transform: translate(1px, -1px); }
+            100% { clip-path: inset(0% 0 80% 0); transform: translate(-1px, 1px); }
+        }.logo-hover-transition {
+            transition: filter 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+        }
+        .logo-hover-transition:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden min-h-screen flex flex-col">
+<header class="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-[#282b39] bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md transition-colors duration-300">
+<div class="max-w-[1440px] mx-auto px-4 md:px-10 h-16 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="size-6 text-primary dark:text-white">
+<svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_535)">
+<path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fill-rule="evenodd"></path>
+</g>
+<defs>
+<clipPath id="clip0_6_535"><rect fill="white" height="48" width="48"></rect></clipPath>
+</defs>
+</svg>
+</div>
+<h2 class="text-lg font-bold tracking-tight">AGENCY</h2>
+</div>
+<nav class="hidden md:flex flex-1 justify-end items-center gap-8">
+<div class="flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Work</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Expertise</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Studio</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white text-sm font-bold px-5 py-2.5 rounded-lg transition-all shadow-lg shadow-primary/25">
+                    Start Project
+                </button>
+</nav>
+<button class="md:hidden text-slate-900 dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="flex-grow flex flex-col w-full">
+<section class="w-full max-w-[1440px] mx-auto px-4 md:px-10 py-20 flex flex-col items-start">
+<div class="w-full flex flex-col md:flex-row justify-between items-end gap-6 mb-12">
+<h1 class="text-5xl md:text-8xl font-black tracking-tighter leading-[0.9] uppercase">
+                    Selected<br/>
+<span class="text-outline text-slate-900 dark:text-white" style="-webkit-text-stroke: 1px currentColor; color: transparent;">Works</span>
+</h1>
+<div class="flex items-center gap-4 text-slate-500 dark:text-gray-400">
+<span class="text-sm font-mono uppercase tracking-widest">Scroll to explore</span>
+<span class="material-symbols-outlined animate-pulse">arrow_forward</span>
+</div>
+</div>
+</section>
+<section class="w-full pb-20 overflow-hidden relative">
+<div class="flex overflow-x-auto no-scrollbar snap-x snap-mandatory px-4 md:px-10 gap-8 md:gap-16 pb-12 items-center" style="scroll-padding-inline: 2.5rem;">
+<article class="snap-center shrink-0 relative group w-[85vw] md:w-[500px] h-[60vh] md:h-[700px] bg-gray-900 overflow-hidden rounded-sm transition-transform duration-500" style="--bg-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBZnUjBn8KDrXBZyfqH7ICDQ4rqrJFtLm1bZBZeEgXsvpCcFPk15KcmxSRT21n9drDcStmgH9FxgNOPesinBNMdw9-vUdGad4b2GqhYvOvEsL7vE61kOZ0akrUPC42hOlWEmA3dDmKrt7nbExHFXEPMKhcZ8BbrPZk_KUez8U_bBZPp0ELenKel9uyzTybC8YgOQPmOoKRm1rIDJqOJTFtvdygExnHqi8BqSkhfYduM-hmuLKGxzDGhtJqzNcZN_151J8Xz5YLGb63c');">
+<div class="glitch-wrapper w-full h-full transform transition-transform duration-700 group-hover:scale-105">
+<div class="glitch-layer z-0"></div>
+<div class="glitch-layer z-0 hidden"></div>
+<div class="glitch-layer z-0 hidden"></div>
+<div class="absolute inset-0 bg-grain mix-blend-overlay opacity-40 pointer-events-none z-10"></div>
+</div>
+<div class="absolute inset-0 z-20 flex flex-col justify-end p-8 md:p-12 bg-gradient-to-t from-black via-transparent to-transparent opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+<span class="text-primary font-mono text-xs tracking-[0.2em] uppercase mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Fashion</span>
+<h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter text-outline group-hover:text-white transition-all duration-500 translate-y-4 group-hover:translate-y-0 delay-100">Vogue</h2>
+<div class="h-px w-12 bg-white mt-6 mb-4 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-150"></div>
+<p class="text-white/80 text-sm font-light max-w-xs translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-200">
+                           High contrast lighting vogue style cover shoot tailored for the modern aesthetic.
+                        </p>
+</div>
+</article>
+<article class="snap-center shrink-0 relative group w-[85vw] md:w-[900px] h-[60vh] md:h-[700px] bg-gray-900 overflow-hidden rounded-sm transition-transform duration-500" style="--bg-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAOU271-ViBTEMjC_61fVxMjCZhqbTxaMwV6vBfcU0deLRyR2H4Zhh02Rt85ZkOO8z5M4cLKIuz-jXHkZX6XEuNupTgjnkscR84WtzpzAIbxU4uwLE6lo3DTKDJ_ExyTQ3_tIe4bFA-9gaLz334E0ofBWVzv1XtxFQauJdlbBl3DfPBRNvNvMltTYdKCFbTy4878tFP8mog9hv4A-QM7tn3fz6SWwBl0PgFBQlxTy5JJT1Y-7IddM3q1oBPO_4zZhQOzZY01sVbAERv');">
+<div class="glitch-wrapper w-full h-full transform transition-transform duration-700 group-hover:scale-105">
+<div class="glitch-layer z-0"></div>
+<div class="glitch-layer z-0 hidden"></div>
+<div class="glitch-layer z-0 hidden"></div>
+<div class="absolute inset-0 bg-grain mix-blend-overlay opacity-40 pointer-events-none z-10"></div>
+</div>
+<div class="absolute inset-0 z-20 flex flex-col justify-end p-8 md:p-12 bg-gradient-to-t from-black via-transparent to-transparent opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+<span class="text-primary font-mono text-xs tracking-[0.2em] uppercase mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Campaign</span>
+<h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter text-outline group-hover:text-white transition-all duration-500 translate-y-4 group-hover:translate-y-0 delay-100">Just Do It</h2>
+<div class="h-px w-12 bg-white mt-6 mb-4 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-150"></div>
+<p class="text-white/80 text-sm font-light max-w-xs translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-200">
+                           Global Nike campaign featuring floating elements on bold red backgrounds.
+                        </p>
+</div>
+</article>
+<article class="snap-center shrink-0 relative group w-[85vw] md:w-[700px] h-[60vh] md:h-[700px] bg-gray-900 overflow-hidden rounded-sm transition-transform duration-500" style="--bg-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBOITmsFSsEne1mtNFrfZp_1TxcITwj02sbjmX4Tqh2AqLrLHT-mVGxGK3gOE5C7wcfZ498OI4wsmydJB-M0mHxcyLHLs5E-aKwlDfgOmM5Ei7UGN0V45GFK9B3lnqSgGw-QcX16nLeXOwmGRLl-ZKJIJ0sOQ2m4nFdd1fxCwZsq8CIzHwcgI22pjO4TM-0XR7gpjl0k0vTxidxRmRpylcPXX9de8wxafxcY1QPssqjZ-irtS9jexWAnPxG7EAPAyI7EHkkVKsVg53R');">
+<div class="glitch-wrapper w-full h-full transform transition-transform duration-700 group-hover:scale-105">
+<div class="glitch-layer z-0"></div>
+<div class="glitch-layer z-0 hidden"></div>
+<div class="glitch-layer z-0 hidden"></div>
+<div class="absolute inset-0 bg-grain mix-blend-overlay opacity-40 pointer-events-none z-10"></div>
+</div>
+<div class="absolute inset-0 z-20 flex flex-col justify-end p-8 md:p-12 bg-gradient-to-t from-black via-transparent to-transparent opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+<span class="text-primary font-mono text-xs tracking-[0.2em] uppercase mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Architecture</span>
+<h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter text-outline group-hover:text-white transition-all duration-500 translate-y-4 group-hover:translate-y-0 delay-100">Modern<br/>Living</h2>
+</div>
+</article>
+<article class="snap-center shrink-0 relative group w-[85vw] md:w-[400px] h-[60vh] md:h-[700px] bg-gray-900 overflow-hidden rounded-sm transition-transform duration-500" style="--bg-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuABhDBPF0K1YnUA5DDgozNDko8xkMKSTN_IScTM7ge14AmyO5-G1o5U0Vsf0LaefW9OzIyFf2BNLgHtfYxJKrATqaRY0DCQVPFHuZapgqjkylraZNrMjhjhVSY_yVlxZZUGJVPq1uR_h9c_776NWGFEsZ1UPsH3Z7pIjdTlFeeKLZVKmGZ4eYdoP1ezRNyM606G1S4knV7RWsq7T-XlSVRwP3GM54nz55X5BsKXmjH9pYusPpOeuKFDbIRix6R_LkFySQKG4OUArE87');">
+<div class="glitch-wrapper w-full h-full transform transition-transform duration-700 group-hover:scale-105">
+<div class="glitch-layer z-0"></div>
+<div class="glitch-layer z-0 hidden"></div>
+<div class="glitch-layer z-0 hidden"></div>
+<div class="absolute inset-0 bg-grain mix-blend-overlay opacity-40 pointer-events-none z-10"></div>
+</div>
+<div class="absolute inset-0 z-20 flex flex-col justify-end p-8 md:p-12 bg-gradient-to-t from-black via-transparent to-transparent opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+<span class="text-primary font-mono text-xs tracking-[0.2em] uppercase mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Branding</span>
+<h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter text-outline group-hover:text-white transition-all duration-500 translate-y-4 group-hover:translate-y-0 delay-100">Tech<br/>Rebrand</h2>
+</div>
+</article>
+<article class="snap-center shrink-0 relative group w-[85vw] md:w-[800px] h-[60vh] md:h-[700px] bg-gray-900 overflow-hidden rounded-sm transition-transform duration-500" style="--bg-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCqCTJGkKKeRuvCXVjVZ51uyUonXMSF1Nn1OMhThAQhaocMi9jNJ0qWuUZiHnmBMmue6L7pG-wk3TDwJpbNE_dx9ttXx3qpunTAnUxLll0KHRMSc8tVrNIGJgSQtQCP4Rgpu3vcfJUSkbUECDbpjm2v6erfeDf37T9jzlIXL2F2xZuaD7yuQUvtbixR0kAiQak8li85yWG7jgQW7zqJZvwgPFocKWKbE6EMppwj19ygcu0dnC3z-P7otVyVM74TkLZ2tK2nNhtagrNF');">
+<div class="glitch-wrapper w-full h-full transform transition-transform duration-700 group-hover:scale-105">
+<div class="glitch-layer z-0"></div>
+<div class="glitch-layer z-0 hidden"></div>
+<div class="glitch-layer z-0 hidden"></div>
+<div class="absolute inset-0 bg-grain mix-blend-overlay opacity-40 pointer-events-none z-10"></div>
+</div>
+<div class="absolute inset-0 z-20 flex flex-col justify-end p-8 md:p-12 bg-gradient-to-t from-black via-transparent to-transparent opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+<span class="text-primary font-mono text-xs tracking-[0.2em] uppercase mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">CGI</span>
+<h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter text-outline group-hover:text-white transition-all duration-500 translate-y-4 group-hover:translate-y-0 delay-100">Future<br/>Auto</h2>
+<div class="h-px w-12 bg-white mt-6 mb-4 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-150"></div>
+<p class="text-white/80 text-sm font-light max-w-xs translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-200">
+                           Futuristic automotive concepts rendered in high fidelity environments.
+                        </p>
+</div>
+</article>
+<article class="snap-center shrink-0 relative group w-[85vw] md:w-[500px] h-[60vh] md:h-[700px] bg-gray-900 overflow-hidden rounded-sm transition-transform duration-500" style="--bg-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBSJYkVmLqK5iXIEPhNeYNvQhlU3M5zAi7yvNhfcfBpRVpUUsX7bRXbczxqy2TKUcDHjKyxNvpBPDID0JL42bbqg_0ycIaXWIJqFPc533BgacXadRBQsQAL-Wh5IKY2EQbKYLhGLTxAHpb3O18mAg-L7bkxlHZliAfiTK01D_FLg463BQpA5j84Qq2f1NhZ9B_MQyTcW_u39e-Hb1aFcHJs0g6tvmcm1YUiAL3cJXOqAT8iMUN269nQujoIWiBRDfkOz9uSH_KXtQ06');">
+<div class="glitch-wrapper w-full h-full transform transition-transform duration-700 group-hover:scale-105">
+<div class="glitch-layer z-0"></div>
+<div class="glitch-layer z-0 hidden"></div>
+<div class="glitch-layer z-0 hidden"></div>
+<div class="absolute inset-0 bg-grain mix-blend-overlay opacity-40 pointer-events-none z-10"></div>
+</div>
+<div class="absolute inset-0 z-20 flex flex-col justify-end p-8 md:p-12 bg-gradient-to-t from-black via-transparent to-transparent opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+<span class="text-primary font-mono text-xs tracking-[0.2em] uppercase mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Web Design</span>
+<h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter text-outline group-hover:text-white transition-all duration-500 translate-y-4 group-hover:translate-y-0 delay-100">Retro<br/>Hub</h2>
+</div>
+</article>
+<div class="shrink-0 w-4 md:w-12"></div>
+</div>
+</section>
+<div class="w-full h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-[#282b39] to-transparent mb-20"></div>
+<section class="w-full max-w-[1440px] px-4 md:px-10 pb-28 flex flex-col items-center mx-auto">
+<span class="text-primary text-xs font-bold tracking-[0.2em] uppercase mb-10 opacity-80">Trusted By</span>
+<div class="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 md:gap-12 lg:gap-16 items-center justify-items-center opacity-90">
+<div class="w-32 h-16 flex items-center justify-center logo-hover-transition grayscale opacity-50 cursor-pointer" title="Spherule">
+<svg class="h-8 w-auto fill-current dark:text-white text-slate-900" viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
+<path d="M15,15c0,8.3-6.7,15-15,15V0C8.3,0,15,6.7,15,15z M35,0h10v30H35V0z M60,0h15v5h-10v7.5h10v5h-10V30H60V0z M90,0l10,30h-6l-2-7H88l-2,7h-6L90,0z M90,8l-3,10h6L90,8z"></path>
+</svg>
+</div>
+<div class="w-32 h-16 flex items-center justify-center logo-hover-transition grayscale opacity-50 cursor-pointer" title="Nide">
+<svg class="h-8 w-auto fill-current dark:text-white text-slate-900" viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
+<path d="M10,0l15,30h-6L9,10v20H0V0h9l10,20V0H10z M40,0h5v30h-5V0z M60,0h10c5.5,0,10,4.5,10,10v10c0,5.5-4.5,10-10,10H60V0z M70,25c2.8,0,5-2.2,5-5V10c0-2.8-2.2-5-5-5h-5v20H70z M90,0h15v5h-10v7.5h10v5h-10V30H90V0z"></path>
+</svg>
+</div>
+<div class="w-32 h-16 flex items-center justify-center logo-hover-transition grayscale opacity-50 cursor-pointer" title="Aven">
+<svg class="h-8 w-auto fill-current dark:text-white text-slate-900" viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
+<path d="M10,30L0,0h6l7,22L20,0h6l-10,30H10z M40,0h15v5h-10v7.5h10v5h-10V30H40V0z M70,0l15,30h-6L69,10v20H60V0h9l10,20V0H70z"></path>
+</svg>
+</div>
+<div class="w-32 h-16 flex items-center justify-center logo-hover-transition grayscale opacity-50 cursor-pointer" title="Hexa">
+<svg class="h-9 w-auto fill-current dark:text-white text-slate-900" viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
+<path d="M0,0h5v12.5h15V0h5v30h-5V17.5H5V30H0V0z M40,0h15v5h-10v7.5h10v5h-10V30H40V0z M70,0l10,15L70,30h6l7-10.5L90,30h6L86,15l10-15h-6l-7,10.5L76,0H70z"></path>
+</svg>
+</div>
+<div class="w-32 h-16 flex items-center justify-center logo-hover-transition grayscale opacity-50 cursor-pointer" title="Trese">
+<svg class="h-7 w-auto fill-current dark:text-white text-slate-900" viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.5,0v5H5v25H0V5h-7.5V0H12.5z M30,0h10c5.5,0,10,2.2,10,7.5c0,3.5-2,6.5-5,7l5,15.5h-5.5L40,15h-5v15h-5V0z M40,10h5c2.8,0,5-1.2,5-3.8S47.8,2.5,45,2.5h-5V10z M60,0h15v5h-10v7.5h10v5h-10V30H60V0z M90,0h15v5h-10v7.5h10v5h-10V30H90V0z"></path>
+</svg>
+</div>
+<div class="w-32 h-16 flex items-center justify-center logo-hover-transition grayscale opacity-50 cursor-pointer" title="Circle">
+<svg class="h-8 w-auto fill-current dark:text-white text-slate-900" viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
+<circle cx="15" cy="15" r="15"></circle>
+<path d="M50,0h5v30h-5V0z M70,0h15v5h-10v7.5h10v5h-10V30H70V0z"></path>
+</svg>
+</div>
+<div class="w-32 h-16 flex items-center justify-center logo-hover-transition grayscale opacity-50 cursor-pointer md:hidden lg:flex" title="Fox">
+<svg class="h-8 w-auto fill-current dark:text-white text-slate-900" viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
+<path d="M0,0h15v5h-10v7.5h10v5H5V30H0V0z M30,0h15v5h-10v25h-5V5h-10V0h10z M60,0l10,30h-6l-2-7H58l-2,7h-6L60,0z M60,8l-3,10h6L60,8z M90,0l10,15L90,30h-6l7-10.5L84,30h-6l7-10.5L78,0h6l7,10.5L96,0H90z"></path>
+</svg>
+</div>
+<div class="w-32 h-16 flex items-center justify-center logo-hover-transition grayscale opacity-50 cursor-pointer md:hidden lg:flex" title="Bolt">
+<svg class="h-8 w-auto fill-current dark:text-white text-slate-900" viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
+<path d="M10,0h15c5.5,0,10,4.5,10,10v5c0,5.5-4.5,10-10,10H10V0z M25,20c2.8,0,5-2.2,5-5v-5c0-2.8-2.2-5-5-5h-5v15H25z M50,0h15v5h-10v25h-5V5h-10V0h10z M80,0l10,30h-6l-2-7H78l-2,7h-6L80,0z M80,8l-3,10h6L80,8z"></path>
+</svg>
+</div>
+</div>
+</section>
+</main>
+<footer class="w-full bg-slate-100 dark:bg-[#0c0e1a] border-t border-gray-200 dark:border-[#282b39] py-12 px-4 md:px-10">
+<div class="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-500 dark:text-slate-400">
+<p>© 2024 Agency Inc. All rights reserved.</p>
+<div class="flex items-center gap-8">
+<a class="hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms</a>
+<a class="hover:text-primary transition-colors" href="#">Instagram</a>
+<a class="hover:text-primary transition-colors" href="#">LinkedIn</a>
+</div>
+</div>
+</footer>
+
+</body></html>

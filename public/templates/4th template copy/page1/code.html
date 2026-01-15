@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lumière - Gourmet Menu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Noto+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#d45211",
+              "background-light": "#f8f6f6",
+              "background-dark": "#181311", 
+              "gold": "#D4AF37",
+            },
+            fontFamily: {
+              "display": ["Newsreader", "serif"],
+              "sans": ["Noto Sans", "sans-serif"],
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-[#392e28] bg-[#181311]/90 backdrop-blur-md px-6 py-4 lg:px-10">
+<div class="flex items-center gap-4 text-white">
+<div class="size-6 text-primary">
+<span class="material-symbols-outlined text-2xl">restaurant</span>
+</div>
+<h2 class="text-white text-xl font-bold font-display tracking-tight">LUMIÈRE</h2>
+</div>
+<div class="hidden lg:flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9">
+<a class="text-white/80 hover:text-white text-sm font-medium transition-colors font-sans" href="#">Menu</a>
+<a class="text-white/80 hover:text-white text-sm font-medium transition-colors font-sans" href="#">Reservations</a>
+<a class="text-white/80 hover:text-white text-sm font-medium transition-colors font-sans" href="#">Private Dining</a>
+<a class="text-white/80 hover:text-white text-sm font-medium transition-colors font-sans" href="#">Events</a>
+</div>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary hover:bg-primary/90 transition-colors text-white text-sm font-bold tracking-wide font-sans">
+<span class="truncate">Book a Table</span>
+</button>
+</div>
+<!-- Mobile Menu Icon -->
+<div class="lg:hidden text-white">
+<span class="material-symbols-outlined">menu</span>
+</div>
+</header>
+<div class="layout-container flex h-full grow flex-col">
+<!-- Hero Section -->
+<div class="relative w-full">
+<div class="flex min-h-[500px] flex-col gap-6 bg-cover bg-center bg-no-repeat items-center justify-center p-4 relative" data-alt="Close up of a gourmet dark plated dish with steam" style='background-image: linear-gradient(rgba(24, 19, 17, 0.4) 0%, rgba(24, 19, 17, 1) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuBhbkDBKp98T55Hgzic8xZxbLjh441LgsyS-XC8df_HdEqx4MyacQobu_dbMqMjvHJx7_mD1oUAEmhzbnCY0f3hb5aQ0W3NN2IEHXk5mh23yn8mgFr5RGccT4l_dk2-FvIxtVAfudHJVnQdiCLqI6bKQzWsnXcs0AWDGG7obwGmMbqZU8iSEeSM2JgyseMmoByKEJtVI07iG9in9ayc5cLT6Wfb-0Jfr8I79IFk1nPBLLt_kaLMm4r3NQntZnO5fj6KbIuTJULxrIw");'>
+<div class="flex flex-col gap-3 text-center z-10 max-w-2xl animate-fade-in-up">
+<span class="text-primary font-sans text-sm font-bold tracking-widest uppercase">October - December</span>
+<h1 class="text-white text-5xl md:text-6xl font-display font-medium leading-tight tracking-tight">
+                            Autumn Harvest Menu
+                        </h1>
+<h2 class="text-white/80 text-lg font-sans font-light leading-relaxed">
+                            Celebrating the finest local produce with warm, earthy flavors.
+                        </h2>
+</div>
+</div>
+</div>
+<div class="flex flex-1 justify-center pb-20 px-4 md:px-10 lg:px-40">
+<div class="layout-content-container flex flex-col max-w-[1024px] flex-1 gap-16">
+<!-- Chef's Tasting Menu Section (Special Offer) -->
+<section class="flex flex-col gap-6">
+<div class="flex items-center gap-4">
+<span class="h-px bg-[#392e28] flex-1"></span>
+<h2 class="text-gold text-2xl font-display italic">Chef's Signature</h2>
+<span class="h-px bg-[#392e28] flex-1"></span>
+</div>
+<div class="@container">
+<div class="relative flex flex-col items-stretch justify-start rounded-xl @xl:flex-row @xl:items-stretch shadow-2xl bg-[#221a16] border border-gold/40 overflow-hidden group hover:border-gold/70 transition-colors duration-300">
+<!-- Badge -->
+<div class="absolute top-4 left-4 z-20 bg-gold text-[#181311] text-xs font-bold px-3 py-1 rounded-full font-sans tracking-wider uppercase">
+                                    Limited Availability
+                                </div>
+<div class="w-full @xl:w-2/5 bg-center bg-no-repeat bg-cover min-h-[300px]" data-alt="Chef plating a complex fine dining dish with tweezers" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDDB91WMUZ35u5SyklW_0Z9aBWPDQTI7zhtz4JIuRgosw6TBgXSrUSK1YQInmpahR7suWI1_mNmQxtwnNxKf2iR4C1az65UiyaxN4bc0l2Sz8X5iiU10q8GQK_Vcewsw9W4deNDQbNESy8hBABhHlu_wE9gA2xwZPvaKb03fcPDoj8lZapr0C8JYQvc4MVRjrcokFUEQkEiFvg7RqGuzD79AtJ95VMoF4ZmTi8VxDKHOMOYm2uKvGl2c67-1iukkIbY7zHHtGjeBwA");'>
+</div>
+<div class="flex w-full @xl:w-3/5 flex-col items-start justify-center p-8 gap-6">
+<div>
+<h3 class="text-white text-3xl font-display font-medium mb-2">The 7-Course Journey</h3>
+<p class="text-white/60 text-base font-sans font-light leading-relaxed">
+                                            A curated selection of our chef's finest creations for the season, featuring freshly foraged truffles, A5 Wagyu, and heirloom vegetables.
+                                        </p>
+</div>
+<div class="w-full h-px bg-[#392e28]"></div>
+<div class="flex flex-col @sm:flex-row @sm:items-end justify-between w-full gap-4">
+<div class="flex flex-col gap-1">
+<p class="text-gold text-xl font-display italic">$145 pp</p>
+<p class="text-white/40 text-sm font-sans">+ $60 Wine Pairing</p>
+</div>
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary hover:bg-primary/90 text-white text-sm font-bold font-sans transition-colors">
+                                            Reserve Experience
+                                        </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Main A La Carte Menu Grid -->
+<section class="flex flex-col gap-10">
+<div class="flex flex-col text-center gap-2">
+<h2 class="text-white text-4xl font-display font-medium">A La Carte</h2>
+<p class="text-white/50 font-sans text-sm">Served daily from 5:00 PM</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+<!-- Column 1: Starters -->
+<div class="flex flex-col gap-6">
+<h3 class="text-primary text-xl font-display font-semibold tracking-wide border-b border-[#392e28] pb-3 mb-2">Appetizers</h3>
+<!-- Item -->
+<div class="group">
+<div class="flex justify-between items-baseline mb-1">
+<h4 class="text-white text-lg font-display font-medium group-hover:text-primary transition-colors">Scallop Crudo</h4>
+<span class="text-white/80 font-sans text-sm font-medium">$24</span>
+</div>
+<p class="text-white/50 text-sm font-sans font-light leading-relaxed">Yuzu pearls, cucumber granitée, dill oil.</p>
+</div>
+<!-- Item -->
+<div class="group">
+<div class="flex justify-between items-baseline mb-1">
+<h4 class="text-white text-lg font-display font-medium group-hover:text-primary transition-colors">Wagyu Beef Tartare</h4>
+<span class="text-white/80 font-sans text-sm font-medium">$28</span>
+</div>
+<p class="text-white/50 text-sm font-sans font-light leading-relaxed">Smoked egg yolk, caperberries, toasted brioche.</p>
+</div>
+<!-- Item -->
+<div class="group">
+<div class="flex justify-between items-baseline mb-1">
+<div class="flex items-center gap-2">
+<h4 class="text-white text-lg font-display font-medium group-hover:text-primary transition-colors">Burrata &amp; Figs</h4>
+<span class="material-symbols-outlined text-green-500 text-[16px]" title="Vegetarian">eco</span>
+</div>
+<span class="text-white/80 font-sans text-sm font-medium">$22</span>
+</div>
+<p class="text-white/50 text-sm font-sans font-light leading-relaxed">Aged balsamic, crushed pistachios, sourdough crisp.</p>
+</div>
+<!-- Item -->
+<div class="group">
+<div class="flex justify-between items-baseline mb-1">
+<h4 class="text-white text-lg font-display font-medium group-hover:text-primary transition-colors">Roasted Bone Marrow</h4>
+<span class="text-white/80 font-sans text-sm font-medium">$26</span>
+</div>
+<p class="text-white/50 text-sm font-sans font-light leading-relaxed">Parsley salad, onion jam, grilled baguette.</p>
+</div>
+</div>
+<!-- Column 2: Mains -->
+<div class="flex flex-col gap-6">
+<h3 class="text-primary text-xl font-display font-semibold tracking-wide border-b border-[#392e28] pb-3 mb-2">Mains</h3>
+<!-- Item -->
+<div class="group">
+<div class="flex justify-between items-baseline mb-1">
+<h4 class="text-white text-lg font-display font-medium group-hover:text-primary transition-colors">Pan-Seared Duck Breast</h4>
+<span class="text-white/80 font-sans text-sm font-medium">$42</span>
+</div>
+<p class="text-white/50 text-sm font-sans font-light leading-relaxed">Parsnip purée, blackberry gastrique, kale crisps.</p>
+</div>
+<!-- Item -->
+<div class="group">
+<div class="flex justify-between items-baseline mb-1">
+<div class="flex items-center gap-2">
+<h4 class="text-white text-lg font-display font-medium group-hover:text-primary transition-colors">Wild Mushroom Risotto</h4>
+<span class="material-symbols-outlined text-green-500 text-[16px]" title="Vegetarian">eco</span>
+</div>
+<span class="text-white/80 font-sans text-sm font-medium">$34</span>
+</div>
+<p class="text-white/50 text-sm font-sans font-light leading-relaxed">Arborio rice, black truffle shavings, parmesan crisp.</p>
+</div>
+<!-- Item -->
+<div class="group">
+<div class="flex justify-between items-baseline mb-1">
+<h4 class="text-white text-lg font-display font-medium group-hover:text-primary transition-colors">Market Fish</h4>
+<span class="text-white/80 font-sans text-sm font-medium">MP</span>
+</div>
+<p class="text-white/50 text-sm font-sans font-light leading-relaxed">Saffron broth, fennel confit, charred lemon.</p>
+</div>
+<!-- Item -->
+<div class="group">
+<div class="flex justify-between items-baseline mb-1">
+<h4 class="text-white text-lg font-display font-medium group-hover:text-primary transition-colors">Heritage Pork Chop</h4>
+<span class="text-white/80 font-sans text-sm font-medium">$38</span>
+</div>
+<p class="text-white/50 text-sm font-sans font-light leading-relaxed">Apple mustard glaze, braised red cabbage.</p>
+</div>
+</div>
+<!-- Column 3: Desserts -->
+<div class="flex flex-col gap-6">
+<h3 class="text-primary text-xl font-display font-semibold tracking-wide border-b border-[#392e28] pb-3 mb-2">Desserts</h3>
+<!-- Item -->
+<div class="group">
+<div class="flex justify-between items-baseline mb-1">
+<h4 class="text-white text-lg font-display font-medium group-hover:text-primary transition-colors">Dark Chocolate Fondant</h4>
+<span class="text-white/80 font-sans text-sm font-medium">$16</span>
+</div>
+<p class="text-white/50 text-sm font-sans font-light leading-relaxed">Salted caramel core, vanilla bean ice cream.</p>
+</div>
+<!-- Item -->
+<div class="group">
+<div class="flex justify-between items-baseline mb-1">
+<h4 class="text-white text-lg font-display font-medium group-hover:text-primary transition-colors">Lemon Basil Tart</h4>
+<span class="text-white/80 font-sans text-sm font-medium">$14</span>
+</div>
+<p class="text-white/50 text-sm font-sans font-light leading-relaxed">Italian meringue, fresh berries, mint gel.</p>
+</div>
+<!-- Item -->
+<div class="group">
+<div class="flex justify-between items-baseline mb-1">
+<h4 class="text-white text-lg font-display font-medium group-hover:text-primary transition-colors">Artisan Cheese Board</h4>
+<span class="text-white/80 font-sans text-sm font-medium">$22</span>
+</div>
+<p class="text-white/50 text-sm font-sans font-light leading-relaxed">Selection of 3 cheeses, honeycomb, crackers.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Info -->
+<div class="mt-10 pt-10 border-t border-[#392e28] flex flex-col items-center gap-6 text-center">
+<p class="text-white/40 text-sm font-sans max-w-lg">
+<span class="material-symbols-outlined align-bottom text-base mr-1">info</span>
+                            Please inform your server of any allergies or dietary restrictions. 
+                            A discretionary service charge of 12.5% will be added to your bill.
+                        </p>
+<div class="flex gap-4">
+<a class="text-white/60 hover:text-primary transition-colors font-display italic" href="#">Gift Cards</a>
+<span class="text-white/20">|</span>
+<a class="text-white/60 hover:text-primary transition-colors font-display italic" href="#">Private Events</a>
+<span class="text-white/20">|</span>
+<a class="text-white/60 hover:text-primary transition-colors font-display italic" href="#">Careers</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

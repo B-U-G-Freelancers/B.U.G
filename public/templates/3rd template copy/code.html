@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cinematic Narrative Corporate Hub</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec1313",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#050505",
+                        "surface-dark": "#121212",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    transitionTimingFunction: {
+                        'cinematic': 'cubic-bezier(0.25, 1, 0.5, 1)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom Scrollbar hiding for cinematic feel */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Kinetic Typography Animation Logic */
+        .panel:hover .kinetic-text {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .panel .kinetic-text {
+            transform: translateX(-20px);
+            transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        /* Background Zoom on Hover */
+        .panel:hover .panel-bg {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-white font-display overflow-x-hidden antialiased">
+<!-- Minimal Overlay Navigation -->
+<nav class="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center mix-blend-difference pointer-events-none">
+<div class="pointer-events-auto">
+<span class="text-xl font-bold tracking-tighter text-white">NARRATIVE HUB</span>
+</div>
+<div class="flex gap-8 pointer-events-auto">
+<a class="text-sm font-medium text-white hover:text-primary transition-colors uppercase tracking-widest" href="#">Values</a>
+<a class="text-sm font-medium text-white hover:text-primary transition-colors uppercase tracking-widest" href="#">Case Studies</a>
+<a class="text-sm font-medium text-white hover:text-primary transition-colors uppercase tracking-widest" href="#">Contact</a>
+</div>
+</nav>
+<!-- Hero Section: Interactive Vertical Accordion Panels -->
+<div class="relative w-full h-screen flex flex-col md:flex-row overflow-hidden bg-black">
+<!-- Central Portal Navigation (Floating 'O' Ring) -->
+<div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+<a class="group pointer-events-auto relative flex items-center justify-center w-24 h-24 md:w-32 md:h-32 rounded-full border border-white/30 bg-black/20 backdrop-blur-sm transition-all duration-700 ease-cinematic hover:scale-110 hover:border-primary hover:bg-black/40 shadow-2xl shadow-black" href="#selected-works">
+<div class="absolute inset-0 rounded-full border border-primary/0 group-hover:border-primary/50 group-hover:animate-ping opacity-20"></div>
+<span class="text-[10px] md:text-xs font-bold tracking-[0.2em] group-hover:text-primary transition-colors">ENTER</span>
+</a>
+</div>
+<!-- Panel 1: Innovation -->
+<div class="panel group relative flex-1 hover:flex-[3] h-1/4 md:h-full transition-all duration-1000 ease-cinematic border-b md:border-b-0 md:border-r border-white/10 overflow-hidden cursor-none">
+<div class="panel-bg absolute inset-0 bg-cover bg-center transition-transform duration-[2s] ease-out opacity-50 group-hover:opacity-100 grayscale group-hover:grayscale-0" data-alt="Abstract server room with glowing lights representing future technology" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBtm5YYtaDyhGpfMmOj_3HMKTFI6f6HiqT33l1EH34JbfnR3toYrzJOfHpL-TpIeI4Jz_cdyiVUVumkoWLHUPdRzdsSK8TxV03MlACeN6bOeTNeFH-Ayj2umttcJAGrtupKMA6O-ihrZMb6PnbdtRKXQ6d2k2fgPIS4jXCSe_4B-PJNHHzwMFPPkFeiMdu6AkWPg4zzTgIFPM7-1H57BzyvUnOShdC7upxDO5jIi0aSpxp68CGx9LARfY7moNhHAmpJKQ26HKqn3Y4');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 group-hover:opacity-40 transition-opacity duration-700"></div>
+<div class="absolute bottom-0 left-0 w-full p-6 md:p-12 flex flex-col justify-end h-full md:h-auto">
+<span class="text-primary text-xs font-bold tracking-widest mb-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">01</span>
+<h2 class="kinetic-text text-3xl md:text-7xl font-bold leading-none uppercase tracking-tighter whitespace-nowrap opacity-100 md:opacity-70 group-hover:opacity-100">
+                    Future<br class="hidden md:block"/>Forged
+                </h2>
+<p class="hidden md:block mt-4 max-w-md text-sm text-gray-300 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-200 translate-y-4 group-hover:translate-y-0">
+                    Redefining the boundaries of technological advancement through rigorous innovation and code.
+                </p>
+</div>
+</div>
+<!-- Panel 2: Strategy -->
+<div class="panel group relative flex-1 hover:flex-[3] h-1/4 md:h-full transition-all duration-1000 ease-cinematic border-b md:border-b-0 md:border-r border-white/10 overflow-hidden cursor-none">
+<div class="panel-bg absolute inset-0 bg-cover bg-center transition-transform duration-[2s] ease-out opacity-50 group-hover:opacity-100 grayscale group-hover:grayscale-0" data-alt="Modern architectural structure perspective looking up at sky" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrWgfZPZG8HnWdkassRGZ5P-bePtAoWA3XkmrnQ9tootoqnU62gQhO3eumWhzj-eTUOn4zfh8Ys1PQTFiTekQCzivV9KwKUrZY1XlMa0x6Wxx57uGRNpGAZleqbuJE-33nzAbURL0kC3HfFUq7r25cDbyAmNmhEmZ3DxeHDwujXQJNg9RhieriaTJrAaH-XKNM-mV6xvS7cdil4KKyN3PJIeMlgMZ_Y01vh5ld02b8KchJlfIL9BoSp1XnMSADQmHQSA3sskMJTyk');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 group-hover:opacity-40 transition-opacity duration-700"></div>
+<div class="absolute bottom-0 left-0 w-full p-6 md:p-12 flex flex-col justify-end h-full md:h-auto">
+<span class="text-primary text-xs font-bold tracking-widest mb-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">02</span>
+<h2 class="kinetic-text text-3xl md:text-7xl font-bold leading-none uppercase tracking-tighter whitespace-nowrap opacity-100 md:opacity-70 group-hover:opacity-100">
+                    Deep<br class="hidden md:block"/>Tactics
+                </h2>
+<p class="hidden md:block mt-4 max-w-md text-sm text-gray-300 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-200 translate-y-4 group-hover:translate-y-0">
+                    Strategic foresight that navigates complex markets with precision and deliberate action.
+                </p>
+</div>
+</div>
+<!-- Panel 3: Creativity -->
+<div class="panel group relative flex-1 hover:flex-[3] h-1/4 md:h-full transition-all duration-1000 ease-cinematic border-b md:border-b-0 md:border-r border-white/10 overflow-hidden cursor-none">
+<div class="panel-bg absolute inset-0 bg-cover bg-center transition-transform duration-[2s] ease-out opacity-50 group-hover:opacity-100 grayscale group-hover:grayscale-0" data-alt="Abstract colorful paint mixing in water creating chaotic patterns" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB_kd27nrJubcvscyu6PyqRxqvOWwmHTTAhXud43KDGyvSTp6R_J7lRDgQv_KHXHyFWekiWAbOsqB-QP8aS8fB_u8IO5GQDmGtKybRyhhWga28MvhuWxaChISQhwxAy6tPHwggAbr3FAJzCasDTjn_lbtKRK7tz2UviWrAKYTBFZdBNh0oqjZ54a4m6VA-L5liQvZgJmfjviOyGACV0uzKhoz-gIPAKQDtYSGi5TBwHukVdFVYoKJKt7me21XUReEp3XIqWTefJhhA');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 group-hover:opacity-40 transition-opacity duration-700"></div>
+<div class="absolute bottom-0 left-0 w-full p-6 md:p-12 flex flex-col justify-end h-full md:h-auto">
+<span class="text-primary text-xs font-bold tracking-widest mb-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">03</span>
+<h2 class="kinetic-text text-3xl md:text-7xl font-bold leading-none uppercase tracking-tighter whitespace-nowrap opacity-100 md:opacity-70 group-hover:opacity-100">
+                    Pure<br class="hidden md:block"/>Chaos
+                </h2>
+<p class="hidden md:block mt-4 max-w-md text-sm text-gray-300 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-200 translate-y-4 group-hover:translate-y-0">
+                    Embracing entropy to fuel creativity and discover unexpected solutions in the noise.
+                </p>
+</div>
+</div>
+<!-- Panel 4: Impact -->
+<div class="panel group relative flex-1 hover:flex-[3] h-1/4 md:h-full transition-all duration-1000 ease-cinematic overflow-hidden cursor-none">
+<div class="panel-bg absolute inset-0 bg-cover bg-center transition-transform duration-[2s] ease-out opacity-50 group-hover:opacity-100 grayscale group-hover:grayscale-0" data-alt="Aerial view of a city at night with glowing streets" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDD_gqhpr-xUFGp_Cn_7OBClG3uQ7IOAGz2nmPVnwH4tDgSF6jFbhj6K0X38sM76J5ruex0eVV0ZHKR-YUjlNp98ormcXVU9_bDQVfU-1-MWaBRXZAS_ngbafbb-FCtyrXAVbn5VUFp21e5A4fuuLevvi2q4x6N7FizTRcAIszs9ZAM-yk0s8B9O-2RDROqjmPEUOgBkirxwZzX_-lO_wak2fhlqnOpdUiXz-01EK_asGYHgdvXJqSOxvggr007MFbSO6TbU7OO56k');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 group-hover:opacity-40 transition-opacity duration-700"></div>
+<div class="absolute bottom-0 left-0 w-full p-6 md:p-12 flex flex-col justify-end h-full md:h-auto">
+<span class="text-primary text-xs font-bold tracking-widest mb-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">04</span>
+<h2 class="kinetic-text text-3xl md:text-7xl font-bold leading-none uppercase tracking-tighter whitespace-nowrap opacity-100 md:opacity-70 group-hover:opacity-100">
+                    Global<br class="hidden md:block"/>Reach
+                </h2>
+<p class="hidden md:block mt-4 max-w-md text-sm text-gray-300 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-200 translate-y-4 group-hover:translate-y-0">
+                    Connecting human experiences across borders to create lasting, universal impact.
+                </p>
+</div>
+</div>
+</div>
+<!-- Case Studies Section (Endless Gallery Simulation) -->
+<div class="relative w-full bg-surface-dark py-24 pl-8 md:pl-24 overflow-hidden min-h-screen flex flex-col justify-center" id="selected-works">
+<div class="flex items-center gap-4 mb-12">
+<div class="h-px w-12 bg-primary"></div>
+<h3 class="text-primary text-sm font-bold tracking-[0.2em] uppercase">Selected Works</h3>
+</div>
+<h2 class="text-5xl md:text-8xl font-bold text-white mb-16 tracking-tighter leading-none">
+            Digital<br/><span class="text-white/20">Monuments</span>
+</h2>
+<!-- Horizontal Scroll Container -->
+<div class="w-full overflow-x-auto hide-scrollbar pb-12 cursor-ew-resize">
+<div class="flex gap-8 w-max pr-24 items-center">
+<!-- Card 1 -->
+<div class="group relative w-[300px] md:w-[450px] aspect-[3/4] rounded-sm overflow-hidden bg-[#1a1a1a] transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-primary/10">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" data-alt="Dark abstract monolith geometric 3d shape" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDIRto3GOzc-MNalQsMCfIj8Udto75nEfQBcRebItKvwNiLI4JinpgR-z8NEyYfKmV-xsjkvpSG9_Gzknfo9TSRVFA_lI5TEtHymQLMh6pf5A8Yp5DF_MF-l9qVlaTVaSD5L48gFxrLF21QXjJqGcR02QPqH7eTNvSnei26oWS7ecR3YuagvC-zlrMWn4fmeVzJXWc9oLFUBUMa0DOGDHJG50Ibf_tPRfCsANjE_tPRhQ3QlyjnMPHCk4lg9m6jkB_J1WhCjbQm7lI');"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-xs text-primary font-bold tracking-widest mb-2">CASE 01</p>
+<h4 class="text-3xl font-bold leading-tight">The Monolith</h4>
+</div>
+<span class="material-symbols-outlined text-3xl opacity-0 group-hover:opacity-100 transition-opacity -rotate-45 group-hover:rotate-0 duration-500 text-primary">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative w-[300px] md:w-[450px] aspect-[3/4] rounded-sm overflow-hidden bg-[#1a1a1a] transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-primary/10">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" data-alt="Futuristic neon horizon cyber aesthetic" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCRK5IQ9mJMgMu_x6t-HugcZxxYpZc1ATzWwI8ONJbt3mVOXccli-t7hx-VMO4J7BqDfkxtFxpHQHzQbMST7xHGyYui65imS3oJLf1Gb4g0zNnLnsOGCJTkeKUZGzYKMIPMI1vIfT4DUYoPTF3VW-1OrcTuHqx4DtemIaQ30pwGDRT8DrLqz5ELEqHv6duO9LeGkY_amHXtDuKCMHUZ5xp36wYNSvh5GiPG1R8EPVpqiRkEJZbDMD224PtlPpbu5z_8fYsAq2MisZ0');"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-xs text-primary font-bold tracking-widest mb-2">CASE 02</p>
+<h4 class="text-3xl font-bold leading-tight">Neon Horizon</h4>
+</div>
+<span class="material-symbols-outlined text-3xl opacity-0 group-hover:opacity-100 transition-opacity -rotate-45 group-hover:rotate-0 duration-500 text-primary">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative w-[300px] md:w-[450px] aspect-[3/4] rounded-sm overflow-hidden bg-[#1a1a1a] transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-primary/10">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" data-alt="Red and black abstract metallic texture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDbbvlrQfixJo5FiCoaY6iZjEjSYKOHpB8At51HIlln6XQlKQZ8lKu5zskwbuG-4uHoYoLWaREDSerRYHPXyDxfkEn2mI6_HtnPt8CkwrovjicMSK1MfTWVMa0s81r0j92zawRc3x2VMXr74_Z8fseX9MbfXftawPE6CHqMs0zxotZ5dD__lwenHeFFGkPuOD2LlBf_iP5omr780EQsimghB6pL9K_vSW_fhiQsm3Gc-CjkdiyAKlsbYeQnMl9VBu4eOs5gSjtIFhE');"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-xs text-primary font-bold tracking-widest mb-2">CASE 03</p>
+<h4 class="text-3xl font-bold leading-tight">Omega Point</h4>
+</div>
+<span class="material-symbols-outlined text-3xl opacity-0 group-hover:opacity-100 transition-opacity -rotate-45 group-hover:rotate-0 duration-500 text-primary">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group relative w-[300px] md:w-[450px] aspect-[3/4] rounded-sm overflow-hidden bg-[#1a1a1a] transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-primary/10">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" data-alt="Man standing in industrial gym dark aesthetic" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCJGqrwr12EoGTtyJgHIeNrhjN4g1jgq50dTFJmNsDVsMoABgHLxdHkDzhycjt2PPWHYoTsuQKbpO7blNslZKThw7jTdbE3At8iTm3GCGaNlAziv3JdLZLIqC13IONfSTaD76-D77Kl2FNeBdeXqoenmdfesnG6t4Y1Ii6FYI6iCLLtLG_rnmU1HNPQQN1o1xezv7q5eycPN-KZAN5Jszvwbs4QDRYBENWugoorq0Vo5-8IQOB-YNUJuOWZR3FU4a9Y8lF3JEqXpXI');"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-xs text-primary font-bold tracking-widest mb-2">CASE 04</p>
+<h4 class="text-3xl font-bold leading-tight">Project Alpha</h4>
+</div>
+<span class="material-symbols-outlined text-3xl opacity-0 group-hover:opacity-100 transition-opacity -rotate-45 group-hover:rotate-0 duration-500 text-primary">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Minimalist Footer -->
+<footer class="bg-black py-20 border-t border-white/5 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-full md:w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none"></div>
+<div class="container mx-auto px-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+<div class="z-10">
+<h2 class="text-6xl md:text-7xl font-bold tracking-tighter mb-8 leading-none">Let's build<br/>the future.</h2>
+<a class="inline-flex items-center gap-2 text-primary font-bold text-lg hover:text-white transition-colors group" href="#">
+                    START A PROJECT
+                    <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_outward</span>
+</a>
+</div>
+<div class="flex flex-col md:flex-row gap-8 text-sm text-gray-500 z-10">
+<a class="hover:text-white transition-colors" href="#">Instagram</a>
+<a class="hover:text-white transition-colors" href="#">LinkedIn</a>
+<a class="hover:text-white transition-colors" href="#">Twitter</a>
+</div>
+</div>
+</footer>
+<!-- Floating Action Button -->
+<button class="fixed bottom-8 right-8 z-50 bg-primary text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-primary/30 hover:scale-110 hover:bg-white hover:text-primary transition-all duration-300 group">
+<span class="material-symbols-outlined group-hover:animate-bounce">mail</span>
+</button>
+</body></html>

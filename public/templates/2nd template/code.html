@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Creative Business Landing - Variant 3</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f44725",
+                        "background-light": "#f8f6f5", // Soft pastel/warm gray
+                        "background-dark": "#221310",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "sans": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom styles for overlap effects if tailwind utilities aren't enough */
+        .text-outline-stroke {
+            -webkit-text-stroke: 1px #f44725;
+            color: transparent;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .dark .glass-panel {
+            background: rgba(34, 19, 16, 0.7);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-white overflow-x-hidden selection:bg-primary selection:text-white">
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-800/50">
+<div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+<div class="flex items-center gap-2 group cursor-pointer">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white transform group-hover:rotate-12 transition-transform">
+<span class="material-symbols-outlined text-xl">draw</span>
+</div>
+<span class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">CreativeCo</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#work">Work</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#about">Philosophy</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#services">Services</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#contact">Contact</a>
+</div>
+<button class="bg-primary text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-red-600 transition-colors shadow-lg hover:shadow-primary/30 flex items-center gap-2">
+<span>Let's Talk</span>
+<span class="material-symbols-outlined text-sm">arrow_outward</span>
+</button>
+</div>
+</nav>
+<main class="pt-24 flex flex-col gap-24 lg:gap-32">
+<!-- 1. Hero Section: Asymmetric & Overlapping -->
+<section class="relative w-full px-6 max-w-7xl mx-auto min-h-[85vh] flex flex-col lg:flex-row items-center justify-center" id="work">
+<!-- Background Decorative Blob -->
+<div class="absolute top-10 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+<div class="w-full lg:grid lg:grid-cols-12 lg:gap-8 items-center">
+<!-- Text Content (Z-index high to overlap) -->
+<div class="lg:col-span-7 z-20 flex flex-col gap-6 relative">
+<h1 class="text-6xl md:text-7xl lg:text-[7rem] font-bold leading-[0.9] tracking-tighter text-gray-900 dark:text-white">
+                        Elevating Brands <br/>
+<span class="italic font-light text-primary">Beyond</span> the <br/>
+                        Ordinary.
+                    </h1>
+<p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-md mt-4 ml-2 border-l-2 border-primary pl-6">
+                        We create digital experiences that defy expectations and rewrite the rules of engagement.
+                    </p>
+<div class="mt-8 ml-2">
+<button class="group relative inline-flex items-center justify-center gap-3 bg-gray-900 dark:bg-white dark:text-gray-900 text-white px-8 py-4 rounded-full text-base font-bold shadow-2xl hover:-translate-y-1 transition-transform duration-300">
+                            Explore Our Work
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+<!-- Floating effect shadow -->
+<div class="absolute inset-0 rounded-full bg-gray-900 dark:bg-white blur-lg opacity-40 group-hover:opacity-60 transition-opacity -z-10 translate-y-2"></div>
+</button>
+</div>
+</div>
+<!-- Hero Image (Overlapped by text) -->
+<div class="lg:col-span-6 lg:col-start-6 lg:-ml-12 mt-12 lg:mt-0 relative z-10">
+<div class="relative rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl group">
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10"></div>
+<img alt="Modern minimalist office space representing creative work environment" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Modern office architecture with concrete walls and glass" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjn7jq7nYUbPmM___7GB-SRuXT0qNMlNMUHHATI-ENt9n1VtN5uLvg3w0l3CC19-8413tJfBjlcJS8S2Q5A_xdA3NRJbr1oVWegXqeOI6Uv0pFNpr_AetpMNiyistPdcZHWwebTjmTntXMH9C48riew2CN61eD5DbCXSXhITX4gJ-jfRBPoaN6X4a7UVpbpkAM9OQMfNRS5eSwMGhKwaV3qJPDzq1QAPLB3-mk4mD030dpNBummm61V2Az2l5b5-HQHrHfS18XUsM"/>
+<!-- Floating Badge -->
+<div class="absolute bottom-8 right-8 z-20 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md p-4 rounded-xl shadow-lg border border-white/20">
+<div class="flex items-center gap-3">
+<span class="flex h-3 w-3 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+<span class="text-sm font-bold uppercase tracking-wider">Accepting New Projects</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. About Us: Broken Grid -->
+<section class="w-full px-6 max-w-7xl mx-auto py-20" id="about">
+<div class="flex flex-col gap-12">
+<div class="max-w-3xl">
+<h2 class="text-primary text-sm font-bold uppercase tracking-widest mb-4">Our Philosophy</h2>
+<h3 class="text-4xl md:text-5xl font-bold leading-tight">We believe in breaking grids and challenging norms.</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-0 mt-10 relative">
+<!-- Image 1 -->
+<div class="md:col-span-5 md:col-start-1 relative z-10">
+<div class="rounded-2xl overflow-hidden aspect-[3/4] shadow-xl">
+<img alt="Abstract minimalist art piece" class="w-full h-full object-cover" data-alt="Abstract geometric paper art with soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeeADwWu-7WDf90wmAEAGYtPazKsUS-jN38DaEgUWsUycwmZmCEZjYtM2VMOXb-faD8nTnLQeMg4TgujBJu-Onup0XWXaQRCpSFQupiDRkAO4V7A0iORO1SU5Q1kse71TPEYfOSq4IA3S5Xh5y_daJJNE6x3Le94Eg11yldIDBvN6VIwJ47O1zXvlC_xxvT6xCamNYh7MzAeCLEykTGLvAxksxWG_rg1fxOQFzeTW1DKg75PMKo9spkEFcF8nGxYq7Ee5cM2I7l_E"/>
+</div>
+</div>
+<!-- Text Content Block (Overlapping) -->
+<div class="md:col-span-5 md:col-start-5 md:row-start-1 md:mt-32 md:-ml-12 z-20">
+<div class="bg-white dark:bg-gray-800 p-8 md:p-10 rounded-2xl shadow-glass border border-gray-100 dark:border-gray-700 h-full flex flex-col justify-center">
+<span class="material-symbols-outlined text-4xl text-primary mb-6">layers</span>
+<h4 class="text-2xl font-bold mb-4">Depth &amp; Context</h4>
+<p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+                                Design isn't just about how it looks, but how it feels. We layer meaning, function, and aesthetics to create brands that have a pulse.
+                            </p>
+<a class="text-primary font-bold hover:underline decoration-2 underline-offset-4 inline-flex items-center gap-1" href="#">
+                                Read our story
+                                <span class="material-symbols-outlined text-sm">arrow_right_alt</span>
+</a>
+</div>
+</div>
+<!-- Image 2 (Small offset) -->
+<div class="md:col-span-3 md:col-start-10 md:mt-12 hidden md:block">
+<div class="rounded-2xl overflow-hidden aspect-square shadow-lg">
+<img alt="Designer focused on work" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="Man working on a laptop in a modern studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxcmernhZ8NiBBt5tkwS2UU5srxM7RDqid3ZoP09v9mT3SjXnJwkYpS4pgsv5aXQG9797VpX2mlpEtGFOU5e2Xa9mvlmyiI9fbb-jd_kWwys-P9HmESTLhvBg96CscGt_wuVPzf4LczF6XIl5g-jJQusVno2cKazUw1lYeC1c_qXRNFdsPF6lEwMSBQ-ymUS1VkiKR9IGfB_9bW1g-b17WILvEnVEDsGgmMqKZPL5MSpqV1NqI5DlXPZolMYaSEbgvZfZzfv0VAME"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Services: Glassmorphism & Gradient Borders -->
+<section class="w-full bg-white dark:bg-black/20 py-24 relative overflow-hidden" id="services">
+<!-- Decorative gradient background -->
+<div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-400/10 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="max-w-7xl mx-auto px-6 relative z-10">
+<div class="flex justify-between items-end mb-16">
+<h2 class="text-4xl md:text-5xl font-bold tracking-tight max-w-xl">
+                        Expertise tailored for <br/> modern brands.
+                    </h2>
+<div class="hidden md:block">
+<span class="material-symbols-outlined text-6xl text-primary/20 rotate-45">auto_awesome</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Service 01 -->
+<div class="group relative rounded-2xl p-[2px] bg-gradient-to-br from-primary via-orange-300 to-transparent hover:to-primary transition-all duration-500 h-full">
+<div class="glass-panel h-full rounded-[14px] p-8 flex flex-col justify-between relative overflow-hidden">
+<!-- Background Number -->
+<div class="absolute -right-4 -top-6 text-[180px] font-bold text-gray-900/5 dark:text-white/5 select-none leading-none z-0 group-hover:text-primary/10 transition-colors">01</div>
+<div class="relative z-10">
+<h3 class="text-8xl font-bold text-primary/20 mb-6 group-hover:text-primary transition-colors">01</h3>
+<h4 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">Strategic Planning</h4>
+<p class="text-gray-600 dark:text-gray-300">Defining the path forward with data-driven insights and market analysis that cuts through the noise.</p>
+</div>
+<div class="mt-8 relative z-10">
+<ul class="flex flex-col gap-2 text-sm text-gray-500 dark:text-gray-400">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span>Brand Positioning</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span>Market Research</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span>Campaign Strategy</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Service 02 -->
+<div class="group relative rounded-2xl p-[2px] bg-gradient-to-br from-blue-400 via-purple-300 to-transparent hover:to-blue-400 transition-all duration-500 h-full mt-0 md:mt-8">
+<div class="glass-panel h-full rounded-[14px] p-8 flex flex-col justify-between relative overflow-hidden">
+<div class="absolute -right-4 -top-6 text-[180px] font-bold text-gray-900/5 dark:text-white/5 select-none leading-none z-0 group-hover:text-blue-500/10 transition-colors">02</div>
+<div class="relative z-10">
+<h3 class="text-8xl font-bold text-blue-500/20 mb-6 group-hover:text-blue-500 transition-colors">02</h3>
+<h4 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">Digital Design</h4>
+<p class="text-gray-600 dark:text-gray-300">Crafting visual languages and interfaces that speak louder than words. We design for impact and usability.</p>
+</div>
+<div class="mt-8 relative z-10">
+<ul class="flex flex-col gap-2 text-sm text-gray-500 dark:text-gray-400">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>UI/UX Design</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>Design Systems</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>Motion Graphics</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Service 03 -->
+<div class="group relative rounded-2xl p-[2px] bg-gradient-to-br from-purple-500 via-pink-300 to-transparent hover:to-purple-500 transition-all duration-500 h-full mt-0 md:mt-16">
+<div class="glass-panel h-full rounded-[14px] p-8 flex flex-col justify-between relative overflow-hidden">
+<div class="absolute -right-4 -top-6 text-[180px] font-bold text-gray-900/5 dark:text-white/5 select-none leading-none z-0 group-hover:text-purple-500/10 transition-colors">03</div>
+<div class="relative z-10">
+<h3 class="text-8xl font-bold text-purple-500/20 mb-6 group-hover:text-purple-500 transition-colors">03</h3>
+<h4 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">Growth Marketing</h4>
+<p class="text-gray-600 dark:text-gray-300">Accelerating brand presence in a crowded digital space through optimized funnels and creative outreach.</p>
+</div>
+<div class="mt-8 relative z-10">
+<ul class="flex flex-col gap-2 text-sm text-gray-500 dark:text-gray-400">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-purple-500 rounded-full"></span>Social Media</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-purple-500 rounded-full"></span>Content Creation</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-purple-500 rounded-full"></span>Analytics &amp; SEO</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Testimonials: Non-linear Organic Layout -->
+<section class="w-full px-6 max-w-7xl mx-auto py-20 pb-32">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-bold mb-4">Voices of Impact</h2>
+<p class="text-gray-500">What industry leaders are saying</p>
+</div>
+<div class="flex flex-wrap justify-center gap-6 relative">
+<!-- Quote 1 (Top Left) -->
+<div class="w-full md:w-[350px] bg-white dark:bg-gray-800 p-8 rounded-[2rem] rounded-bl-none shadow-xl border border-gray-100 dark:border-gray-700 transform md:-rotate-1 hover:rotate-0 transition-transform duration-300">
+<div class="flex text-primary mb-4">
+<span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span>
+</div>
+<p class="text-lg font-medium leading-relaxed mb-6">"Truly innovative approach. They didn't just redesign our site, they redefined our entire digital identity."</p>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-gray-200 bg-cover bg-center" data-alt="Portrait of Alice M." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCjVVKttKYHe3FUtFy8l6VneoNTWUWXA7XwuiVDlVq9salUCoBdqKskdb-yapNAE91aDfh5TcN_dsUKfo9FBhQTjD4gTVcHWsabfG7mrtobfhDI_UVz8bSVF1g0I3ttPutGVRXDEMnrToR32xTq2OrdUAS0LhmNuhgY224uVKYrAEpr43fG-Icr1PtGWyUqIA0EksQ0sbC47zEMBElwYOUccIyVv79RNHxJl700YltnAw6H0OP8lm_74lO6thO4Xc4aXa8tdMQd0CI')"></div>
+<div>
+<p class="text-sm font-bold">Alice M.</p>
+<p class="text-xs text-gray-500">CEO, TechStart</p>
+</div>
+</div>
+</div>
+<!-- Quote 2 (Offset Down) -->
+<div class="w-full md:w-[400px] bg-gray-900 dark:bg-white text-white dark:text-gray-900 p-10 rounded-[2rem] rounded-br-none shadow-2xl transform md:translate-y-12 md:rotate-2 hover:rotate-0 transition-transform duration-300">
+<span class="material-symbols-outlined text-4xl text-primary mb-4 block">format_quote</span>
+<p class="text-xl font-bold leading-relaxed mb-6">"The design broke all the rules in the best way possible. Our conversion rates have doubled since the launch."</p>
+<div class="flex items-center gap-3 border-t border-gray-700 dark:border-gray-200 pt-4">
+<div class="w-10 h-10 rounded-full bg-gray-700 bg-cover bg-center" data-alt="Portrait of David K." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBlvZgV-hDHoLcVRbYjDkwr9OXV9rtba6j_jUVhQGjpVDxKC91q-MijefOBND5D0knR0QLfiwPt02JYd9JUhIcmqimRu4Q1_Cj-666YQaUY3jzAPr9HWgdG5t7R632m8qpdhOzU_JmZnU8rcTWO5gGM83atP0LBjXeYJi0uBuR22e9sp5dXPr-OkZCHs34OKXlOMMXmh65cc4mH6-dJd4IXwM4kthZpMCpt_ALfRkigi5BklJb6iHupInrgzPBS4m0ooh1wnNiAAmo')"></div>
+<div>
+<p class="text-sm font-bold">David K.</p>
+<p class="text-xs text-gray-400 dark:text-gray-500">Director, FutureFlow</p>
+</div>
+</div>
+</div>
+<!-- Quote 3 (Top Right) -->
+<div class="w-full md:w-[320px] bg-white dark:bg-gray-800 p-8 rounded-[2rem] rounded-tr-none shadow-xl border border-gray-100 dark:border-gray-700 transform md:-translate-y-6 md:-rotate-2 hover:rotate-0 transition-transform duration-300">
+<div class="flex text-primary mb-4">
+<span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star_half</span>
+</div>
+<p class="text-lg font-medium leading-relaxed mb-6">"Professional, creative, and undeniably bold. A partner that pushes you further."</p>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-gray-200 bg-cover bg-center" data-alt="Portrait of Sarah L." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBN_PPaRMLLAwN-VeT8hWFTa4huMXe9Rk-BgBmmNGVEvAA_zxBZgyrx07icdl_e6lwFCLGb1zz7Z7R5CsEfdLenin6IkG-MA72ILJaPN7Xeb6LuntJGg6rMDM4sudNCkMbY-C-0hzhghB_baK8Tl4SQdRNyd4XU6AQ-z2jccWQiV9xp5_yVW5qgs-AyzHgxxLdOh80PTF8aXKb-qMR1iIs3odkKHwqsr3Yx9FCFQ9-GPDjKg_lz_lG5U03vfsk6M8kS38s1aSgqEKU')"></div>
+<div>
+<p class="text-sm font-bold">Sarah L.</p>
+<p class="text-xs text-gray-500">Founder, Artistry</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Contact Section: Bold Color Block -->
+<section class="w-full bg-primary text-white py-24 px-6" id="contact">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+<div class="flex flex-col gap-6">
+<h2 class="text-5xl md:text-7xl font-bold tracking-tight">Let's create <br/> something <br/> iconic.</h2>
+<p class="text-white/80 text-xl max-w-md">Ready to break the grid? Drop us a line and let's start the conversation.</p>
+<div class="flex gap-4 mt-8">
+<a class="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-primary transition-colors" href="#">
+<span class="text-lg font-bold">In</span>
+</a>
+<a class="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-primary transition-colors" href="#">
+<span class="text-lg font-bold">Tw</span>
+</a>
+<a class="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-primary transition-colors" href="#">
+<span class="text-lg font-bold">Be</span>
+</a>
+</div>
+</div>
+<div class="bg-white text-gray-900 p-8 md:p-12 rounded-3xl shadow-2xl">
+<form class="flex flex-col gap-8">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-bold uppercase tracking-wider text-gray-500" for="email">Email Address</label>
+<input class="w-full border-0 border-b-2 border-gray-200 focus:border-primary focus:ring-0 px-0 py-3 text-xl bg-transparent transition-colors placeholder:text-gray-300" id="email" placeholder="hello@yourbrand.com" type="email"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-bold uppercase tracking-wider text-gray-500" for="message">How can we help?</label>
+<textarea class="w-full border-0 border-b-2 border-gray-200 focus:border-primary focus:ring-0 px-0 py-3 text-xl bg-transparent transition-colors placeholder:text-gray-300 resize-none" id="message" placeholder="Tell us about your project..." rows="3"></textarea>
+</div>
+<button class="mt-4 self-start bg-black text-white px-10 py-4 rounded-xl text-lg font-bold hover:bg-primary transition-colors flex items-center gap-3 group w-full justify-center md:w-auto" type="button">
+                            Send Inquiry
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">send</span>
+</button>
+</form>
+</div>
+</div>
+<div class="max-w-7xl mx-auto pt-20 mt-20 border-t border-white/20 flex flex-col md:flex-row justify-between items-center text-white/60 text-sm">
+<p>© 2024 CreativeCo. All rights reserved.</p>
+<div class="flex gap-8 mt-4 md:mt-0">
+<a class="hover:text-white" href="#">Privacy Policy</a>
+<a class="hover:text-white" href="#">Terms of Service</a>
+</div>
+</div>
+</section>
+</main>
+</body></html>

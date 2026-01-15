@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Agency - Digital Emotions</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b82f6", 
+                        "background-light": "#f8f8fa",
+                        "background-dark": "#0a0a0c",
+                        "surface-dark": "#16161a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 12s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'liquid': 'liquid 8s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        liquid: {
+                            '0%, 100%': { transform: 'scale(1) skew(0deg)' },
+                            '33%': { transform: 'scale(1.1) skew(2deg) translate(10px, -10px)' },
+                            '66%': { transform: 'scale(0.95) skew(-2deg) translate(-5px, 5px)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0c;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        .liquid-text {
+            background: linear-gradient(45deg, #fff, #888, #fff);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 5s linear infinite;
+        }
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+        .variable-font-animate {
+            font-variation-settings: 'wght' 700;
+            transition: font-variation-settings 0.5s ease;
+        }
+        .variable-font-animate:hover {
+            font-variation-settings: 'wght' 900;
+        }.distortion-bg {
+            filter: url(#noiseFilter) blur(40px);
+            opacity: 0.6;
+        }.sidebar {
+            transform: translateX(100%);
+            transition: transform 0.6s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+        #nav-toggle:checked ~ .sidebar {
+            transform: translateX(0);
+        }
+        #nav-toggle:checked ~ .overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }.circular-text {
+            animation: spin 20s linear infinite;
+        }
+        .circular-text text {
+            font-size: 11px;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 2px;
+            fill: currentColor;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111218] dark:text-white transition-colors duration-300 overflow-x-hidden">
+<svg class="hidden">
+<filter id="noiseFilter">
+<feTurbulence baseFrequency="0.015" numOctaves="3" stitchTiles="stitch" type="fractalNoise"></feTurbulence>
+<feDisplacementMap in="SourceGraphic" scale="180"></feDisplacementMap>
+</filter>
+</svg>
+<input class="peer hidden" id="nav-toggle" type="checkbox"/>
+<div class="overlay fixed inset-0 z-40 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-500"></div>
+<div class="sidebar fixed top-0 right-0 z-50 h-full w-full sm:w-[400px] bg-white dark:bg-surface-dark border-l border-white/10 shadow-2xl flex flex-col p-12 justify-between">
+<label class="absolute top-8 right-8 cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full transition-colors" for="nav-toggle">
+<span class="material-symbols-outlined text-3xl">close</span>
+</label>
+<div class="mt-20 flex flex-col gap-8">
+<span class="text-xs font-bold tracking-widest text-gray-400 uppercase">Menu</span>
+<nav class="flex flex-col gap-6">
+<a class="text-4xl font-light hover:italic hover:pl-4 transition-all duration-300" href="#">Work</a>
+<a class="text-4xl font-light hover:italic hover:pl-4 transition-all duration-300" href="#">Agency</a>
+<a class="text-4xl font-light hover:italic hover:pl-4 transition-all duration-300" href="#">Services</a>
+<a class="text-4xl font-light hover:italic hover:pl-4 transition-all duration-300" href="#">Insights</a>
+<a class="text-4xl font-light hover:italic hover:pl-4 transition-all duration-300" href="#">Contact</a>
+</nav>
+</div>
+<div class="space-y-4">
+<div class="h-px w-full bg-gray-200 dark:bg-white/10"></div>
+<div class="flex justify-between text-sm text-gray-500">
+<span>hello@agency.com</span>
+<span>Los Angeles, CA</span>
+</div>
+</div>
+</div>
+<div class="relative flex min-h-screen w-full flex-col">
+<header class="fixed top-0 z-30 w-full transition-all duration-300 mix-blend-difference text-white">
+<div class="mx-auto flex h-24 max-w-[1440px] items-center justify-between px-6 lg:px-12">
+<div class="flex items-center gap-2">
+<span class="text-xl font-bold tracking-tighter">AGENCY®</span>
+</div>
+<label class="cursor-pointer group flex items-center gap-3 hover:opacity-70 transition-opacity" for="nav-toggle">
+<span class="text-sm font-medium tracking-widest hidden sm:block">MENU</span>
+<div class="flex flex-col gap-1.5 items-end">
+<span class="h-0.5 w-8 bg-current transition-all group-hover:w-6"></span>
+<span class="h-0.5 w-5 bg-current transition-all group-hover:w-8"></span>
+</div>
+</label>
+</div>
+</header>
+<main class="flex-1">
+<section class="relative h-screen w-full overflow-hidden bg-background-dark flex flex-col items-center justify-center">
+<div class="absolute inset-0 z-0 flex items-center justify-center overflow-hidden pointer-events-none opacity-20">
+<div class="w-[150%] h-[150%] absolute animate-liquid bg-gradient-to-r from-blue-900 via-purple-900 to-black rounded-[40%] blur-[100px] mix-blend-screen opacity-60"></div>
+<div class="w-[120%] h-[120%] absolute animate-liquid delay-700 bg-gradient-to-tr from-cyan-900 via-indigo-900 to-transparent rounded-[45%] blur-[80px] mix-blend-screen opacity-40"></div>
+</div>
+<div class="absolute inset-0 z-0 mix-blend-overlay opacity-30 bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuBT8wzQQCFN1P1OjSWwIbnoT7lP2IHgTxDGGRd9t2hSVvKh1KC3LALimFg0TIOFyybUVbMDcqF2rr_G2Sk1sLBRrL_Z1Zxb4K8ZsgOpRIpUOZDNO1V1GCOdr3yeD5QPsqG9LKGHesV67qUFZatoePnmKcP2qv34GNznTSyOuB3dkv_TylwpUdlPQzQQjacjlo0-jF0SajrbpxYlBHgX-1X01OTkKUNYX-FnDAvJRMMxDAJEAEVX6ITNrijka8VXPNXvVB4zQriXAlPz')] bg-cover bg-center"></div>
+<div class="relative z-10 flex w-full max-w-[1440px] flex-col items-center justify-center px-6 lg:px-12 h-full pt-20">
+<div class="flex flex-col items-center text-center space-y-6 md:space-y-10">
+<div class="overflow-hidden">
+<span class="inline-block animate-float text-xs md:text-sm font-bold tracking-[0.3em] text-blue-400/80 uppercase mb-4">
+                                Future • Focused • Digital
+                            </span>
+</div>
+<h1 class="variable-font-animate text-7xl md:text-9xl lg:text-[11rem] leading-[0.8] tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-500 drop-shadow-2xl font-black mix-blend-screen select-none">
+                            BEYOND<br/>
+<span class="italic font-serif text-6xl md:text-8xl lg:text-[10rem] text-white/90">Digital</span>
+</h1>
+<p class="max-w-xl text-center text-base md:text-lg text-gray-400 font-light leading-relaxed mt-8">
+                            We craft ethereal digital experiences that exist at the intersection of technology, design, and human emotion.
+                        </p>
+</div>
+<div class="absolute bottom-12 right-6 lg:right-12 z-20 hidden md:block">
+<a class="group relative flex items-center justify-center h-32 w-32 cursor-pointer transition-transform duration-500 hover:scale-110" href="#services">
+<div class="absolute inset-0 animate-spin-slow">
+<svg class="circular-text" height="100%" viewBox="0 0 100 100" width="100%">
+<defs>
+<path d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" id="circle"></path>
+</defs>
+<text class="text-white fill-white dark:fill-white" width="500">
+<textPath xlink:href="#circle">
+                                            Scroll to Explore • Scroll to Explore •
+                                        </textPath>
+</text>
+</svg>
+</div>
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-white text-black transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white">
+<span class="material-symbols-outlined text-2xl animate-bounce">arrow_downward</span>
+</div>
+</a>
+</div>
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 md:hidden animate-bounce text-white/50">
+<span class="material-symbols-outlined">arrow_downward</span>
+</div>
+</div>
+</section>
+<section class="relative z-10 w-full bg-background-light dark:bg-background-dark px-6 py-24 lg:px-12" id="services">
+<div class="mx-auto max-w-[1280px]">
+<div class="mb-20 flex flex-col md:flex-row items-end justify-between border-b border-gray-200 dark:border-white/10 pb-8 gap-6">
+<div class="max-w-xl">
+<h2 class="text-4xl md:text-5xl font-bold tracking-tight dark:text-white mb-4">Our Expertise</h2>
+<p class="text-gray-500 dark:text-gray-400">Precision-engineered solutions for the modern web.</p>
+</div>
+<span class="hidden text-sm font-mono text-gray-400 dark:text-gray-500 sm:block">EST. 2024</span>
+</div>
+<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+<div class="group relative flex min-h-[480px] flex-col justify-between overflow-hidden rounded-sm bg-white dark:bg-[#121215] p-10 transition-all duration-700 hover:z-10 hover:shadow-2xl dark:hover:shadow-blue-900/10">
+<div class="absolute inset-0 bg-blue-600 transition-transform duration-500 translate-y-full group-hover:translate-y-0 opacity-90 z-0"></div>
+<div class="relative z-10 h-full flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="text-4xl font-light text-gray-300 group-hover:text-white/40 transition-colors">01</span>
+<span class="material-symbols-outlined text-3xl dark:text-white group-hover:text-white transition-colors">diamond</span>
+</div>
+<div>
+<h3 class="mb-4 text-3xl font-serif italic text-gray-900 dark:text-white group-hover:text-white transition-colors">Branding</h3>
+<div class="relative overflow-hidden h-24">
+<p class="absolute top-0 left-0 w-full text-sm leading-relaxed text-gray-500 dark:text-gray-400 transition-all duration-500 group-hover:-translate-y-full group-hover:opacity-0">
+                                            Crafting visual languages that speak louder than words. We define the soul of your business through meticulous design.
+                                        </p>
+<ul class="absolute top-0 left-0 w-full space-y-2 translate-y-full opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 text-white">
+<li class="flex items-center gap-2 text-sm border-b border-white/20 pb-1">
+                                                Identity Systems
+                                            </li>
+<li class="flex items-center gap-2 text-sm border-b border-white/20 pb-1">
+                                                Visual Strategy
+                                            </li>
+<li class="flex items-center gap-2 text-sm border-b border-white/20 pb-1">
+                                                Art Direction
+                                            </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="group relative flex min-h-[480px] flex-col justify-between overflow-hidden rounded-sm bg-white dark:bg-[#121215] p-10 transition-all duration-700 hover:z-10 hover:shadow-2xl dark:hover:shadow-blue-900/10">
+<div class="absolute inset-0 bg-blue-600 transition-transform duration-500 translate-y-full group-hover:translate-y-0 opacity-90 z-0"></div>
+<div class="relative z-10 h-full flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="text-4xl font-light text-gray-300 group-hover:text-white/40 transition-colors">02</span>
+<span class="material-symbols-outlined text-3xl dark:text-white group-hover:text-white transition-colors">trending_up</span>
+</div>
+<div>
+<h3 class="mb-4 text-3xl font-serif italic text-gray-900 dark:text-white group-hover:text-white transition-colors">Strategy</h3>
+<div class="relative overflow-hidden h-24">
+<p class="absolute top-0 left-0 w-full text-sm leading-relaxed text-gray-500 dark:text-gray-400 transition-all duration-500 group-hover:-translate-y-full group-hover:opacity-0">
+                                            Data-driven insights tailored to position your brand at the forefront. We build roadmaps for sustainable growth.
+                                        </p>
+<ul class="absolute top-0 left-0 w-full space-y-2 translate-y-full opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 text-white">
+<li class="flex items-center gap-2 text-sm border-b border-white/20 pb-1">
+                                                User Experience
+                                            </li>
+<li class="flex items-center gap-2 text-sm border-b border-white/20 pb-1">
+                                                Market Analysis
+                                            </li>
+<li class="flex items-center gap-2 text-sm border-b border-white/20 pb-1">
+                                                Product Design
+                                            </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="group relative flex min-h-[480px] flex-col justify-between overflow-hidden rounded-sm bg-white dark:bg-[#121215] p-10 transition-all duration-700 hover:z-10 hover:shadow-2xl dark:hover:shadow-blue-900/10">
+<div class="absolute inset-0 bg-blue-600 transition-transform duration-500 translate-y-full group-hover:translate-y-0 opacity-90 z-0"></div>
+<div class="relative z-10 h-full flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="text-4xl font-light text-gray-300 group-hover:text-white/40 transition-colors">03</span>
+<span class="material-symbols-outlined text-3xl dark:text-white group-hover:text-white transition-colors">movie</span>
+</div>
+<div>
+<h3 class="mb-4 text-3xl font-serif italic text-gray-900 dark:text-white group-hover:text-white transition-colors">Content</h3>
+<div class="relative overflow-hidden h-24">
+<p class="absolute top-0 left-0 w-full text-sm leading-relaxed text-gray-500 dark:text-gray-400 transition-all duration-500 group-hover:-translate-y-full group-hover:opacity-0">
+                                            Compelling narratives and stunning visuals that capture attention. We turn passive viewers into active participants.
+                                        </p>
+<ul class="absolute top-0 left-0 w-full space-y-2 translate-y-full opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 text-white">
+<li class="flex items-center gap-2 text-sm border-b border-white/20 pb-1">
+                                                3D Motion
+                                            </li>
+<li class="flex items-center gap-2 text-sm border-b border-white/20 pb-1">
+                                                Copywriting
+                                            </li>
+<li class="flex items-center gap-2 text-sm border-b border-white/20 pb-1">
+                                                Cinematography
+                                            </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="border-t border-gray-200 dark:border-white/10 bg-background-light dark:bg-background-dark py-20">
+<div class="mx-auto flex max-w-[1280px] flex-col items-center justify-center gap-12 px-6 text-center lg:px-12">
+<div class="flex flex-col items-center gap-4">
+<span class="text-4xl font-black dark:text-white tracking-tighter">AGENCY®</span>
+<p class="text-sm text-gray-500 dark:text-gray-400 max-w-md">Creating the unexpected through digital innovation.</p>
+</div>
+<nav class="flex flex-wrap justify-center gap-12">
+<a class="text-xs font-bold tracking-widest uppercase text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors" href="#">Work</a>
+<a class="text-xs font-bold tracking-widest uppercase text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors" href="#">About</a>
+<a class="text-xs font-bold tracking-widest uppercase text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors" href="#">Careers</a>
+<a class="text-xs font-bold tracking-widest uppercase text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors" href="#">Contact</a>
+</nav>
+<div class="flex gap-8">
+<a class="text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">flutter_dash</span>
+</a>
+<a class="text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">photo_camera</span>
+</a>
+<a class="text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">business_center</span>
+</a>
+</div>
+<p class="text-[10px] text-gray-400 dark:text-gray-600 uppercase tracking-widest mt-8">
+                    © 2024 Agency Name. All rights reserved.
+                </p>
+</div>
+</footer>
+</div>
+
+</body></html>

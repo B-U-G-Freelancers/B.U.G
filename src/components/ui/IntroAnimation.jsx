@@ -8,6 +8,7 @@ export default function IntroAnimation({ onComplete }) {
   const logoRef = useRef(null);
   const textRef = useRef(null);
   const taglineRef = useRef(null);
+  const shimmerRef = useRef(null);
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
@@ -18,17 +19,25 @@ export default function IntroAnimation({ onComplete }) {
       },
     });
 
-    // Initial state - logo and text are centered and large
+    // Initial state
     gsap.set([logoRef.current, textRef.current, taglineRef.current], {
       opacity: 0,
-      scale: 0.8,
+      scale: 0.9,
+      y: 20
+    });
+
+    // Shimmer initial position
+    gsap.set(shimmerRef.current, {
+      xPercent: -150,
+      rotate: 20
     });
 
     // Entrance animation
     tl.to(logoRef.current, {
       opacity: 1,
       scale: 1,
-      duration: 0.8,
+      y: 0,
+      duration: 1,
       ease: "power3.out",
     })
       .to(
@@ -36,60 +45,61 @@ export default function IntroAnimation({ onComplete }) {
         {
           opacity: 1,
           scale: 1,
-          duration: 0.6,
+          y: 0,
+          duration: 0.8,
           ease: "power3.out",
         },
-        "-=0.4"
+        "-=0.6"
       )
       .to(
         taglineRef.current,
         {
           opacity: 1,
           scale: 1,
-          duration: 0.5,
+          y: 0,
+          duration: 0.8,
           ease: "power3.out",
         },
-        "-=0.3"
+        "-=0.6"
       )
 
-      // Hold for a moment
-      .to({}, { duration: 1 })
+      // Shimmer Effect Pass
+      .to(shimmerRef.current, {
+        xPercent: 150,
+        duration: 1.2,
+        ease: "power2.inOut",
+      }, "-=1.0") // Overlap with entrance
 
-      // Exit animation - shrink and move to header
-      .to(logoRef.current, {
-        scale: 0.25,
-        x: () => {
-          const headerX = 40; // Approximate header logo position
-          const currentX = window.innerWidth / 2;
-          return headerX - currentX + 16;
-        },
-        y: () => {
-          const headerY = 28; // Approximate header logo position
-          const currentY = window.innerHeight / 2;
-          return headerY - currentY - 40;
-        },
-        duration: 1,
-        ease: "power3.inOut",
+      // Hold
+      .to({}, { duration: 0.5 })
+
+      // Exit - Diagonal Movement (Left-Up) then Fade
+      // We move the logo towards the header position, then fade everything out
+      .to([logoRef.current], {
+        x: -window.innerWidth / 3, // Move left
+        y: -window.innerHeight / 3, // Move up
+        scale: 0.5,
+        rotation: -10,
+        opacity: 0, // Fade out during movement
+        duration: 1.2,
+        ease: "power3.in",
       })
-      .to(
-        [textRef.current, taglineRef.current],
-        {
-          opacity: 0,
-          scale: 0.5,
-          y: -50,
-          duration: 0.6,
-          ease: "power3.in",
-        },
-        "-=0.8"
-      )
+      .to([textRef.current, taglineRef.current], {
+        x: -50,
+        y: -50,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.in"
+      }, "<") // Start with logo movement
+
       .to(
         containerRef.current,
         {
           opacity: 0,
-          duration: 0.5,
-          ease: "power2.out",
+          duration: 0.8,
+          ease: "power2.inOut",
         },
-        "-=0.3"
+        "-=0.5"
       );
 
     return () => {
@@ -102,31 +112,41 @@ export default function IntroAnimation({ onComplete }) {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-bg-primary"
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-bg-primary overflow-hidden"
     >
-      {/* Logo */}
-      <div
-        ref={logoRef}
-        className="flex size-32 items-center justify-center rounded-2xl bg-text-primary mb-8"
-      >
-        <img src={logoWhite} alt="BUG Logo" className="size-20 invert" />
+      {/* Content wrapper with shimmer mask */}
+      <div className="relative flex flex-col items-center justify-center p-10">
+
+        {/* Shimmer Overlay */}
+        <div
+          ref={shimmerRef}
+          className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-transparent via-white/10 to-transparent w-full h-full blur-md"
+        ></div>
+
+        {/* Logo */}
+        <div
+          ref={logoRef}
+          className="flex flex-col items-center justify-center mb-8 relative z-0"
+        >
+          <img src={logoWhite} alt="BUG Logo" className="size-24" />
+        </div>
+
+        {/* Company Name */}
+        <h1
+          ref={textRef}
+          className="font-display text-6xl sm:text-8xl font-black tracking-tighter text-white relative z-0"
+        >
+          BUG
+        </h1>
+
+        {/* Tagline */}
+        <p
+          ref={taglineRef}
+          className="mt-4 text-lg sm:text-xl font-medium text-text-secondary uppercase tracking-[0.3em] relative z-0"
+        >
+          Build Your Genie
+        </p>
       </div>
-
-      {/* Company Name */}
-      <h1
-        ref={textRef}
-        className="font-display text-6xl sm:text-8xl font-black tracking-tighter text-text-primary"
-      >
-        BUG
-      </h1>
-
-      {/* Tagline */}
-      <p
-        ref={taglineRef}
-        className="mt-4 text-lg sm:text-xl font-medium text-text-secondary uppercase tracking-[0.3em]"
-      >
-        Build Your Genie
-      </p>
     </div>
   );
 }

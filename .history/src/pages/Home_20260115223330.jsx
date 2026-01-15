@@ -10,7 +10,7 @@ import AIConsultant from "../components/ui/AIConsultant";
 export default function Home() {
   return (
     <>
-      <GalaxyHero />
+      <Hero />
       <About />
       <Services />
       <Works />

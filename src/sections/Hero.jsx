@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ChevronDown } from "lucide-react";
 
+
 export default function Hero() {
   const headlineRef = useRef(null);
   const subtitleRef = useRef(null);
@@ -77,13 +78,14 @@ export default function Hero() {
       id="hero"
       className="relative flex min-h-screen flex-col items-center justify-center px-6 pt-20 pb-32 lg:px-8 text-center"
     >
-      {/* Decorative Gradients */}
-      <div className="absolute inset-0 -z-10 h-full w-full overflow-hidden">
-        <div className="absolute -top-[10%] left-[15%] h-[600px] w-[600px] rounded-full bg-accent/5 blur-[140px]"></div>
-        <div className="absolute bottom-[20%] right-[10%] h-[500px] w-[500px] rounded-full bg-accent/5 blur-[120px]"></div>
+      {/* Decorative Gradients & Grid Scan */}
+      <div className="absolute inset-0 -z-0 h-full w-full overflow-hidden">
+
+        <div className="absolute -top-[10%] left-[15%] h-[600px] w-[600px] rounded-full bg-accent/5 blur-[140px] pointer-events-none z-[-1]"></div>
+        <div className="absolute bottom-[20%] right-[10%] h-[500px] w-[500px] rounded-full bg-accent/5 blur-[120px] pointer-events-none z-[-1]"></div>
       </div>
 
-      <div className="max-w-5xl">
+      <div className="max-w-5xl relative z-10">
         <h1
           ref={headlineRef}
           className="font-display text-5xl font-black leading-[1.05] tracking-tighter text-text-primary sm:text-7xl lg:text-9xl"

@@ -1,6 +1,6 @@
 // src/components/layout/Layout.jsx
 import { useState, useEffect } from "react";
-import Header from "./Header";
+import Menu from "./Menu";
 import Footer from "./Footer";
 import IntroAnimation from "../ui/IntroAnimation";
 
@@ -21,13 +21,12 @@ export default function Layout({ children }) {
         <IntroAnimation onComplete={() => setIntroComplete(true)} />
       )}
 
-      {/* Header - only visible after intro */}
+      {/* Header / Menu - absolute to avoid taking space in flow */}
       <div
-        className={`transition-opacity duration-500 ${
-          introComplete ? "opacity-100" : "opacity-0"
-        }`}
+        className={`fixed top-0 left-0 w-full z-[100] transition-opacity duration-500 ${introComplete ? "opacity-100" : "opacity-0"
+          }`}
       >
-        <Header scrolled={scrolled} />
+        <Menu isFixed />
       </div>
 
       <main className="flex-1">{children}</main>

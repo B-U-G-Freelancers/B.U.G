@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 /* ------------------------------
@@ -28,14 +29,53 @@
   /* Spacing rhythm (optional, but clean) */
   --spacing-section: 5rem;
 }
+
 html,
 body {
-  background-color: var(--color-bg-primary);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden !important;
+  width: 100% !important;
+  position: relative;
+  background-color: #040506;
   color: var(--color-text-primary);
   font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 🛡️ Extended Object Cleanup */
+[id*="spline"],
+[class*="spline"],
+[aria-label*="Spline"],
+a[href*="spline.design"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  font-size: 0 !important;
 }
 
 ::selection {
   background-color: var(--color-accent);
   color: var(--color-bg-primary);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

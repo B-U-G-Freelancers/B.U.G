@@ -1,6 +1,5 @@
 // src/pages/WorkDetail.jsx
 // Works page using the new GenieWorld experience
-import { useState } from "react";
 import GenieWorld from "../components/gallery/GenieWorld";
 import { Header } from "../components/layout/Header";
 
@@ -92,42 +91,13 @@ const PROJECTS = [
     ],
     type: "internal",
   },
-  {
-    id: "5",
-    year: "2025",
-    category: "WEB APP",
-    subcategory: "INTERNAL",
-    title: "B.U.G Portfolio",
-    description:
-      "The very website you're browsing — an immersive showcase of B.U.G's capabilities, featuring 3D animations, WebGL effects, and cutting-edge React patterns.",
-    image: "/portfolio/bug-portfolio/cover.png",
-    role: "Full-Stack Development",
-    timeline: "4 weeks",
-    tech: "React, Vite, GSAP, Three.js, OGL, Tailwind CSS",
-    challenge:
-      "Building an Awwwards-worthy portfolio that demonstrates our technical prowess while remaining performant and accessible.",
-    solution:
-      "Created an experiential website with particle systems, infinite scrolling galleries, cinematic page transitions, and premium micro-interactions.",
-    features: [
-      "3D Animations",
-      "Infinite Gallery",
-      "Particle Effects",
-      "Dark Mode",
-    ],
-    type: "internal",
-  },
 ];
 
 export default function WorkDetail() {
-  const [galleryState, setGalleryState] = useState("intro");
-
-  // Hide header when viewing project details (focused state)
-  const showHeader = galleryState !== "focused";
-
   return (
     <>
-      {showHeader && <Header isFixed />}
-      <GenieWorld projects={PROJECTS} onStateChange={setGalleryState} />
+      <Header isFixed />
+      <GenieWorld projects={PROJECTS} />
     </>
   );
 }

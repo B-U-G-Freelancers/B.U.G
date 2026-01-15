@@ -883,9 +883,9 @@ export default function GenieWorld({ projects = [], onStateChange }) {
                 onItemClick={handleProjectClick}
               />
 
-              {/* Text Overlays - Only Navigation Hints */}
+              {/* Text Overlays to fill empty space */}
               <motion.div
-                className="absolute inset-0 pointer-events-none z-20"
+                className="absolute inset-0 pointer-events-none flex flex-col justify-between py-12 px-6 z-20"
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: 1,
@@ -893,36 +893,25 @@ export default function GenieWorld({ projects = [], onStateChange }) {
                 }}
                 exit={{ opacity: 0 }}
               >
+                {/* Top Label */}
+                <div className="w-full text-center mt-20 sm:mt-24">
+                  <h3 className="text-white/40 text-xs tracking-[0.3em] font-medium uppercase font-sans">
+                    Boundless Creativity
+                  </h3>
+                  <h2 className="text-white/5 text-5xl sm:text-7xl font-black uppercase tracking-tighter mt-2 select-none">
+                    Selected Works
+                  </h2>
+                </div>
+
                 {/* Bottom Navigation Hint */}
-                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-full text-center flex flex-col items-center gap-4">
+                <div className="w-full text-center flex flex-col items-center gap-3 mb-8">
                   <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
-
-                  <div className="flex items-center gap-6 text-white/40">
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="flex gap-2">
-                        <span className="w-8 h-8 rounded border border-white/10 flex items-center justify-center text-xs bg-white/5 font-mono">
-                          ←
-                        </span>
-                        <span className="w-8 h-8 rounded border border-white/10 flex items-center justify-center text-xs bg-white/5 font-mono">
-                          →
-                        </span>
-                      </div>
-                      <span className="text-[9px] tracking-widest uppercase opacity-50">
-                        Navigate
-                      </span>
-                    </div>
-
-                    <div className="h-8 w-px bg-white/10"></div>
-
-                    <div className="flex flex-col items-center gap-2">
-                      <span className="h-8 px-3 rounded border border-white/10 flex items-center justify-center text-[10px] bg-white/5 font-mono tracking-widest uppercase">
-                        Enter
-                      </span>
-                      <span className="text-[9px] tracking-widest uppercase opacity-50">
-                        View Details
-                      </span>
-                    </div>
-                  </div>
+                  <p className="text-white/30 text-[10px] tracking-[0.4em] uppercase font-sans animate-pulse">
+                    Drag or Use Arrow Keys
+                  </p>
+                  <p className="text-white/20 text-[9px] tracking-widest uppercase mt-1">
+                    Press Enter to View
+                  </p>
                 </div>
               </motion.div>
             </motion.div>

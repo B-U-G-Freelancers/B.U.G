@@ -1,6 +1,5 @@
 // src/pages/WorkDetail.jsx
 // Works page using the new GenieWorld experience
-import { useState } from "react";
 import GenieWorld from "../components/gallery/GenieWorld";
 import { Header } from "../components/layout/Header";
 
@@ -119,15 +118,10 @@ const PROJECTS = [
 ];
 
 export default function WorkDetail() {
-  const [galleryState, setGalleryState] = useState("intro");
-
-  // Hide header when viewing project details (focused state)
-  const showHeader = galleryState !== "focused";
-
   return (
     <>
-      {showHeader && <Header isFixed />}
-      <GenieWorld projects={PROJECTS} onStateChange={setGalleryState} />
+      <Header isFixed />
+      <GenieWorld projects={PROJECTS} />
     </>
   );
 }

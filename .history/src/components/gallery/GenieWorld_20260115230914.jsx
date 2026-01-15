@@ -11,7 +11,6 @@ import FloatingElement, {
   FloatingFragments,
   SceneParallax,
 } from "../ui/FloatingElement";
-import CircularGallery from "./CircularGallery";
 
 // States
 const STATES = {
@@ -327,10 +326,7 @@ function ProjectCarousel({
       const direction = e.deltaY > 0 ? 1 : -1;
       setCurrentIndex((prev) => {
         const next = prev + direction;
-        // Circular: wrap around
-        if (next < 0) return projects.length - 1;
-        if (next >= projects.length) return 0;
-        return next;
+        return Math.max(0, Math.min(projects.length - 1, next));
       });
 
       // Block further scrolls for 150ms
@@ -366,10 +362,7 @@ function ProjectCarousel({
       const direction = diff > 0 ? 1 : -1;
       setCurrentIndex((prev) => {
         const next = prev + direction;
-        // Circular: wrap around
-        if (next < 0) return projects.length - 1;
-        if (next >= projects.length) return 0;
-        return next;
+        return Math.max(0, Math.min(projects.length - 1, next));
       });
     }
   };
@@ -639,7 +632,7 @@ function ProjectFocus({ project, onClose }) {
 }
 
 // Main component
-export default function GenieWorld({ projects = [], onStateChange }) {
+export default function GenieWorld({ projects = [] }) {
   const [currentState, setCurrentState] = useState(STATES.INTRO);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedProject, setSelectedProject] = useState(null);
@@ -651,13 +644,6 @@ export default function GenieWorld({ projects = [], onStateChange }) {
     const timer = setTimeout(() => setIsReady(true), 300);
     return () => clearTimeout(timer);
   }, []);
-
-  // Notify parent of state changes
-  useEffect(() => {
-    if (onStateChange) {
-      onStateChange(currentState);
-    }
-  }, [currentState, onStateChange]);
 
   const handleEnter = useCallback((e) => {
     // Capture click position for particle burst origin
@@ -691,7 +677,7 @@ export default function GenieWorld({ projects = [], onStateChange }) {
     setCurrentIndex(0);
   }, []);
 
-  // Keyboard navigation for gallery
+  // Keyboard navigation for gallery - at component level for reliability
   useEffect(() => {
     if (currentState !== STATES.GALLERY) return;
 
@@ -725,21 +711,6 @@ export default function GenieWorld({ projects = [], onStateChange }) {
     handleBackToIntro,
     projects,
   ]);
-
-  // Keyboard/Click outside handler for FOCUSED state
-  useEffect(() => {
-    if (currentState !== STATES.FOCUSED) return;
-
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
-        e.preventDefault();
-        handleClose();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentState, handleClose]);
 
   return (
     <div
@@ -872,59 +843,37 @@ export default function GenieWorld({ projects = [], onStateChange }) {
               transition={{ duration: 0.6 }}
               className="absolute inset-0"
             >
-              <CircularGallery
-                items={projects}
-                bend={2}
-                textColor="#ffffff"
-                borderRadius={0.03}
-                font="bold 20px Inter, sans-serif"
-                scrollSpeed={2}
-                scrollEase={0.06}
-                onItemClick={handleProjectClick}
+              <ProjectCarousel
+                projects={projects}
+                onProjectClick={handleProjectClick}
+                currentIndex={currentIndex}
+                setCurrentIndex={setCurrentIndex}
               />
 
-              {/* Text Overlays - Only Navigation Hints */}
-              <motion.div
-                className="absolute inset-0 pointer-events-none z-20"
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                  transition: { delay: 0.5, duration: 0.8 },
-                }}
-                exit={{ opacity: 0 }}
+              {/* Current project info - with subtle floating */}
+              <FloatingElement
+                preset="hero"
+                index={currentIndex}
+                depth={2}
+                reduceOnHover={true}
+                className="absolute top-1/2 left-28 -translate-y-1/2 max-w-xs pointer-events-none"
               >
-                {/* Bottom Navigation Hint */}
-                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-full text-center flex flex-col items-center gap-4">
-                  <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
-
-                  <div className="flex items-center gap-6 text-white/40">
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="flex gap-2">
-                        <span className="w-8 h-8 rounded border border-white/10 flex items-center justify-center text-xs bg-white/5 font-mono">
-                          ←
-                        </span>
-                        <span className="w-8 h-8 rounded border border-white/10 flex items-center justify-center text-xs bg-white/5 font-mono">
-                          →
-                        </span>
-                      </div>
-                      <span className="text-[9px] tracking-widest uppercase opacity-50">
-                        Navigate
-                      </span>
-                    </div>
-
-                    <div className="h-8 w-px bg-white/10"></div>
-
-                    <div className="flex flex-col items-center gap-2">
-                      <span className="h-8 px-3 rounded border border-white/10 flex items-center justify-center text-[10px] bg-white/5 font-mono tracking-widest uppercase">
-                        Enter
-                      </span>
-                      <span className="text-[9px] tracking-widest uppercase opacity-50">
-                        View Details
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 }}
+                  className="text-white"
+                >
+                  <p className="text-blue-400 text-xs font-mono mb-2">
+                    {projects[currentIndex]?.category}
+                  </p>
+                  <h2 className="text-2xl font-bold mb-2">
+                    {projects[currentIndex]?.title}
+                  </h2>
+                  <p className="text-white/50 text-sm">Click to explore</p>
+                </motion.div>
+              </FloatingElement>
             </motion.div>
           </SceneParallax>
         )}

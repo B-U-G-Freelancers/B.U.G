@@ -3,12 +3,12 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { gsap } from "gsap";
 import logoWhite from "../../assets/bug_logo_white.svg";
 
-export const Header = ({
+export const Menu = ({
   position = "right",
   // Using light grays and white for shimmer to transition smoothly to the white panel
   colors = ["#f3f4f6", "#ffffff"],
   items = [
-    { label: "Genie World", link: "/works", isRoute: true },
+    { label: "Works", link: "/works", isRoute: true },
     { label: "Genie Lab", link: "/templates", isRoute: true },
     { label: "About", link: "/about", isRoute: true },
     { label: "Contact", link: "/contact", isRoute: true },
@@ -467,8 +467,8 @@ export const Header = ({
             className="sm-logo flex items-center select-none pointer-events-auto cursor-pointer"
             aria-label="Logo - Go to home"
             onClick={() => {
-              if (open) closeMenu();
-              setTimeout(() => navigate("/"), open ? 350 : 0);
+              if (openRef.current) closeMenu();
+              setTimeout(() => navigate("/"), openRef.current ? 350 : 0);
             }}
           >
             <img
@@ -568,14 +568,11 @@ export const Header = ({
                           if (it.isRoute) {
                             navigate(it.link);
                           } else if (it.link.startsWith("/#")) {
-                            // Hash link on home page
                             const hash = it.link.substring(1);
                             if (location.pathname === "/") {
-                              // Already on home, just scroll
                               const el = document.querySelector(hash);
                               if (el) el.scrollIntoView({ behavior: "smooth" });
                             } else {
-                              // Navigate to home with hash
                               navigate("/" + hash);
                             }
                           } else {
@@ -703,4 +700,4 @@ export const Header = ({
   );
 };
 
-export default Header;
+export default Menu;

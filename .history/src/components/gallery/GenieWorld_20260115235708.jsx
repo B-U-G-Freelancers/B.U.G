@@ -883,9 +883,9 @@ export default function GenieWorld({ projects = [], onStateChange }) {
                 onItemClick={handleProjectClick}
               />
 
-              {/* Text Overlays - Only Navigation Hints */}
+              {/* Text Overlays to fill empty space */}
               <motion.div
-                className="absolute inset-0 pointer-events-none z-20"
+                className="absolute inset-0 pointer-events-none flex flex-col justify-between py-12 px-6 z-20"
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: 1,
@@ -893,8 +893,18 @@ export default function GenieWorld({ projects = [], onStateChange }) {
                 }}
                 exit={{ opacity: 0 }}
               >
+                {/* Top Label */}
+                <div className="w-full text-center mt-20 sm:mt-24">
+                  <h3 className="text-white/40 text-xs tracking-[0.3em] font-medium uppercase font-sans">
+                    Boundless Creativity
+                  </h3>
+                  <h2 className="text-white/5 text-5xl sm:text-7xl font-black uppercase tracking-tighter mt-2 select-none">
+                    Selected Works
+                  </h2>
+                </div>
+
                 {/* Bottom Navigation Hint */}
-                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-full text-center flex flex-col items-center gap-4">
+                <div className="w-full text-center flex flex-col items-center gap-4 mb-10">
                   <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
 
                   <div className="flex items-center gap-6 text-white/40">

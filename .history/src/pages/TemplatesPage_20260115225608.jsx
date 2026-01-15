@@ -3,7 +3,15 @@
 // Uses CSS animations for reliability
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Eye, X, Monitor, Tablet, Smartphone } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Eye,
+  X,
+  Monitor,
+  Tablet,
+  Smartphone,
+} from "lucide-react";
 import {
   FloatingFragments,
   SceneParallax,

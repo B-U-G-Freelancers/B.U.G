@@ -691,7 +691,7 @@ export default function GenieWorld({ projects = [], onStateChange }) {
     setCurrentIndex(0);
   }, []);
 
-  // Keyboard navigation for gallery
+  // Keyboard navigation for gallery - at component level for reliability
   useEffect(() => {
     if (currentState !== STATES.GALLERY) return;
 
@@ -725,21 +725,6 @@ export default function GenieWorld({ projects = [], onStateChange }) {
     handleBackToIntro,
     projects,
   ]);
-
-  // Keyboard/Click outside handler for FOCUSED state
-  useEffect(() => {
-    if (currentState !== STATES.FOCUSED) return;
-
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
-        e.preventDefault();
-        handleClose();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentState, handleClose]);
 
   return (
     <div
@@ -882,49 +867,7 @@ export default function GenieWorld({ projects = [], onStateChange }) {
                 scrollEase={0.06}
                 onItemClick={handleProjectClick}
               />
-
-              {/* Text Overlays - Only Navigation Hints */}
-              <motion.div
-                className="absolute inset-0 pointer-events-none z-20"
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                  transition: { delay: 0.5, duration: 0.8 },
-                }}
-                exit={{ opacity: 0 }}
-              >
-                {/* Bottom Navigation Hint */}
-                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-full text-center flex flex-col items-center gap-4">
-                  <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
-
-                  <div className="flex items-center gap-6 text-white/40">
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="flex gap-2">
-                        <span className="w-8 h-8 rounded border border-white/10 flex items-center justify-center text-xs bg-white/5 font-mono">
-                          ←
-                        </span>
-                        <span className="w-8 h-8 rounded border border-white/10 flex items-center justify-center text-xs bg-white/5 font-mono">
-                          →
-                        </span>
-                      </div>
-                      <span className="text-[9px] tracking-widest uppercase opacity-50">
-                        Navigate
-                      </span>
-                    </div>
-
-                    <div className="h-8 w-px bg-white/10"></div>
-
-                    <div className="flex flex-col items-center gap-2">
-                      <span className="h-8 px-3 rounded border border-white/10 flex items-center justify-center text-[10px] bg-white/5 font-mono tracking-widest uppercase">
-                        Enter
-                      </span>
-                      <span className="text-[9px] tracking-widest uppercase opacity-50">
-                        View Details
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+              {/* Project title now displayed on the cards via CircularGallery */}
             </motion.div>
           </SceneParallax>
         )}

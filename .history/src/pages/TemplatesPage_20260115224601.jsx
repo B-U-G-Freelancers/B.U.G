@@ -3,12 +3,19 @@
 // Uses CSS animations for reliability
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Eye, X, Monitor, Tablet, Smartphone } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Eye,
+  X,
+  Monitor,
+  Tablet,
+  Smartphone,
+} from "lucide-react";
 import {
   FloatingFragments,
   SceneParallax,
 } from "../components/ui/FloatingElement";
-import { Header } from "../components/layout/Header";
 
 // Template showcase data - B.U.G branded templates
 const TEMPLATES = [
@@ -598,8 +605,17 @@ export default function TemplatesPage() {
         />
       </div>
 
-      {/* Navigation - Header */}
-      {initialized && <Header isFixed />}
+      {/* Navigation */}
+      {initialized && (
+        <Link
+          to="/"
+          className="fixed top-6 left-6 z-40 flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-white/60 text-xs tracking-widest uppercase transition-all border border-white/10"
+          style={{ fontFamily: "'Space Grotesk', monospace" }}
+        >
+          <ArrowLeft className="w-3.5 h-3.5" />
+          HOME
+        </Link>
+      )}
 
       {/* Main content */}
       {contentVisible && (

@@ -8,9 +8,10 @@ export const Header = ({
   // Using light grays and white for shimmer to transition smoothly to the white panel
   colors = ["#f3f4f6", "#ffffff"],
   items = [
-    { label: "Genie World", link: "/works", isRoute: true },
-    { label: "Genie Lab", link: "/templates", isRoute: true },
-    { label: "About", link: "/about", isRoute: true },
+    { label: "Works", link: "/works", isRoute: true },
+    { label: "Templates", link: "/templates", isRoute: true },
+    { label: "Services", link: "/#services", isRoute: false },
+    { label: "About", link: "/#about", isRoute: false },
     { label: "Contact", link: "/contact", isRoute: true },
   ],
   socialItems = [
@@ -464,12 +465,8 @@ export const Header = ({
           aria-label="Main navigation header"
         >
           <div
-            className="sm-logo flex items-center select-none pointer-events-auto cursor-pointer"
-            aria-label="Logo - Go to home"
-            onClick={() => {
-              if (open) closeMenu();
-              setTimeout(() => navigate("/"), open ? 350 : 0);
-            }}
+            className="sm-logo flex items-center select-none pointer-events-auto"
+            aria-label="Logo"
           >
             <img
               src={logoUrl || logoWhite}
@@ -703,4 +700,4 @@ export const Header = ({
   );
 };
 
-export default Header;
+export default Menu;

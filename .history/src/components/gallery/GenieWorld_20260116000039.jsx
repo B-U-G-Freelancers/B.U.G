@@ -883,9 +883,9 @@ export default function GenieWorld({ projects = [], onStateChange }) {
                 onItemClick={handleProjectClick}
               />
 
-              {/* Text Overlays - Only Navigation Hints */}
+              {/* Text Overlays to fill empty space */}
               <motion.div
-                className="absolute inset-0 pointer-events-none z-20"
+                className="absolute inset-0 pointer-events-none flex flex-col justify-between py-12 px-6 z-20"
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: 1,
@@ -893,8 +893,25 @@ export default function GenieWorld({ projects = [], onStateChange }) {
                 }}
                 exit={{ opacity: 0 }}
               >
+                {/* Side Text - Vertical Layout to avoid card collision */}
+                <div className="absolute left-6 top-1/2 -translate-y-1/2 hidden sm:flex flex-col items-center gap-4">
+                  <div className="w-px h-24 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+                  <h2 className="text-white/10 text-4xl font-black uppercase tracking-tighter writing-vertical-lr rotate-180 select-none whitespace-nowrap">
+                    Selected Works
+                  </h2>
+                  <div className="w-px h-24 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+                </div>
+
+                <div className="absolute right-6 top-1/2 -translate-y-1/2 hidden sm:flex flex-col items-center gap-4">
+                  <div className="w-px h-24 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+                  <h2 className="text-white/10 text-4xl font-black uppercase tracking-tighter writing-vertical-lr select-none whitespace-nowrap">
+                    Premium Collection
+                  </h2>
+                  <div className="w-px h-24 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+                </div>
+
                 {/* Bottom Navigation Hint */}
-                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-full text-center flex flex-col items-center gap-4">
+                <div className="w-full text-center flex flex-col items-center gap-4 mb-10">
                   <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
 
                   <div className="flex items-center gap-6 text-white/40">

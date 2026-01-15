@@ -8,7 +8,7 @@ export const Header = ({
   // Using light grays and white for shimmer to transition smoothly to the white panel
   colors = ["#f3f4f6", "#ffffff"],
   items = [
-    { label: "Genie World", link: "/works", isRoute: true },
+    { label: "Works", link: "/works", isRoute: true },
     { label: "Genie Lab", link: "/templates", isRoute: true },
     { label: "About", link: "/about", isRoute: true },
     { label: "Contact", link: "/contact", isRoute: true },

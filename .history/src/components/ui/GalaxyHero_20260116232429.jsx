@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import { motion, useScroll, useTransform } from "motion/react";
 import {
   ChevronDown,
   BarChart3,
@@ -478,7 +479,7 @@ export function HeroContent() {
 
       <h1
         ref={headlineRef}
-        className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white leading-tight drop-shadow-2xl px-2"
+        className="font-display text-5xl md:text-8xl font-black tracking-tighter text-white leading-tight drop-shadow-2xl"
       >
         WE BUILD <br />
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3A7CFF] via-[#5c92ff] to-[#E947F5] animate-pulse-slow">
@@ -488,7 +489,7 @@ export function HeroContent() {
 
       <p
         ref={subtitleRef}
-        className="mt-6 md:mt-8 max-w-2xl text-base sm:text-lg md:text-xl text-gray-300 font-light leading-relaxed drop-shadow-md px-4"
+        className="mt-8 max-w-2xl text-lg md:text-xl text-gray-300 font-light leading-relaxed drop-shadow-md"
       >
         High-performance engineering meets elite cyberpunk aesthetics.
         <br />
@@ -532,22 +533,57 @@ export function HeroContent() {
 }
 
 export function HeroSection() {
+  const sectionRef = useRef(null);
+
+  // Track scroll progress within the hero section
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Parallax transforms - different speeds create depth
+  // Content moves faster (goes up more) = appears closer
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const contentOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [1, 0.8, 0]
+  );
+  const contentScale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
+
+  // Background elements move slower = appear further away
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+
+  // HUD panels move at medium speed
+  const hudY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const hudOpacity = useTransform(scrollYProgress, [0, 0.6, 1], [1, 0.5, 0]);
+
   return (
-    <div className="relative w-full h-screen overflow-hidden">
-      {/* Background Layer */}
-      <div className="absolute inset-0 bg-transparent z-0">
+    <div ref={sectionRef} className="relative w-full h-screen overflow-hidden">
+      {/* Background Layer - Slowest parallax (furthest) */}
+      <motion.div
+        className="absolute inset-0 bg-transparent z-0"
+        style={{ y: bgY, scale: bgScale }}
+      >
         <ParticleOverlay />
-      </div>
+      </motion.div>
 
-      {/* HUD/Command Center - Hidden on mobile for cleaner experience */}
-      <div className="absolute inset-0 z-10 hidden md:block">
+      {/* HUD/Command Center - Medium parallax */}
+      <motion.div
+        className="absolute inset-0 z-10"
+        style={{ y: hudY, opacity: hudOpacity }}
+      >
         <CommandCenter3D />
-      </div>
+      </motion.div>
 
-      {/* Content Layer */}
-      <div className="relative z-30">
+      {/* Content Layer - Fastest parallax (closest to viewer) */}
+      <motion.div
+        style={{ y: contentY, opacity: contentOpacity, scale: contentScale }}
+        className="relative z-30"
+      >
         <HeroContent />
-      </div>
+      </motion.div>
 
       {/* Bottom Fade Gradient to merge with next section */}
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black via-black/80 to-transparent z-20 pointer-events-none" />

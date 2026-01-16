@@ -1,4 +1,4 @@
-// Services section with CSS-based orbs
+import { useRef } from "react";
 
 /* =========================
    CYBER COLOR PALETTE
@@ -89,13 +89,13 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="relative min-h-screen py-16 md:py-28 bg-transparent text-white overflow-hidden pointer-events-none"
+      className="relative min-h-screen py-28 bg-transparent text-white overflow-hidden pointer-events-none"
     >
       <div className="container mx-auto px-6 relative z-10 pointer-events-auto">
         {/* =========================
             HEADER
         ========================= */}
-        <div className="mb-16 md:mb-28 flex flex-col items-center text-center">
+        <div className="mb-28 flex flex-col items-center text-center">
           {/* SYSTEM LABEL */}
           <div className="mb-8 inline-flex items-center gap-2 px-4 py-1 rounded-full border border-white/15 bg-black/40 backdrop-blur-md">
             <span className="text-[#0066ff] text-xs font-mono font-bold tracking-[0.28em] uppercase drop-shadow-[0_0_14px_#0066ff]">
@@ -105,17 +105,17 @@ export default function Services() {
 
           {/* TITLE */}
           <div className="relative">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black tracking-tighter text-white relative z-10">
+            <h2 className="text-6xl md:text-8xl font-black tracking-tighter text-white relative z-10">
               OUR SERVICES
             </h2>
 
             {/* CYBER GLOW */}
-            <h2 className="absolute inset-0 text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-linear-to-r from-[#0066ff] via-[#00f6ff] to-[#E947F5] blur-xs opacity-60">
+            <h2 className="absolute inset-0 text-6xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-linear-to-r from-[#0066ff] via-[#00f6ff] to-[#E947F5] blur-[4px] opacity-60">
               OUR SERVICES
             </h2>
           </div>
 
-          <p className="mt-6 md:mt-10 max-w-2xl text-base md:text-lg text-gray-300 font-light leading-relaxed px-4">
+          <p className="mt-10 max-w-2xl text-lg text-gray-300 font-light leading-relaxed">
             Modular digital systems engineered with
             <span className="text-[#0066ff] font-semibold">
               {" "}
@@ -128,20 +128,20 @@ export default function Services() {
         {/* =========================
             SERVICES GRID
         ========================= */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-14">
           {services.map((service, index) => {
             const color = NEON_PALETTE[index % NEON_PALETTE.length];
 
             return (
               <div
                 key={index}
-                className="group relative p-6 sm:p-8 md:p-12 rounded-2xl md:rounded-3xl border border-white/10 bg-[#050a14]/60 backdrop-blur-md overflow-hidden transition-all duration-500 hover:-translate-y-2"
+                className="group relative p-12 rounded-3xl border border-white/10 bg-[#050a14]/60 backdrop-blur-md overflow-hidden transition-all duration-500 hover:-translate-y-2"
               >
                 {/* TEXT */}
                 <div className="relative z-10">
                   {/* TITLE */}
                   <h3
-                    className="relative text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-5 tracking-tight text-white group-hover:text-transparent bg-clip-text transition-all duration-500"
+                    className="relative text-4xl font-bold mb-5 tracking-tight text-white group-hover:text-transparent bg-clip-text transition-all duration-500"
                     style={{
                       backgroundImage: `linear-gradient(to right, #ffffff, ${color})`,
                     }}

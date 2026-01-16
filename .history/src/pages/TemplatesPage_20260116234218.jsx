@@ -12,18 +12,13 @@ import {
 import { Header } from "../components/layout/Header";
 
 // Template showcase data with device configurations
-// MOBILE LAYOUT (2-column grid):
-// Row 1: laptop (full width)
-// Row 2: phone | phone
-// Row 3: tablet (full width)
-// Row 4: phone | phone
-// ... repeat pattern
-
-// DESKTOP LAYOUT (5-column grid):
-// Maintains original bento visual hierarchy
-
+// Visual Hierarchy Layout (5-column grid):
+// Row 1-2: laptop(2) + phone(1) + browser(2) = 5  [Hero row]
+// Row 3-4: tablet(2) + phone(1) + tablet(2) = 5   [Tablets flanking phone]
+// Row 5-6: phone(1) + laptop(2) + browser(2) = 5  [Inverted pattern]
+// Row 7-8: browser(3) + phone(2) = 5              [Featured finale]
 const TEMPLATES = [
-  // === LAPTOP 1 (full width on mobile) ===
+  // === ROW 1-2: Hero Row - laptop + phone + browser ===
   {
     id: "genie-starter",
     name: "Genie Starter",
@@ -34,13 +29,12 @@ const TEMPLATES = [
     tier: "Essential",
     device: "laptop",
     gridClass:
-      "col-span-2 md:col-span-2 lg:col-span-2 row-span-1 md:row-span-2",
+      "col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-2 row-span-2",
     rotation: { x: 8, y: -5 },
     parallaxSpeed: 0.3,
     floatDelay: 0,
     floatDuration: 6,
   },
-  // === PHONES 1 & 2 (side by side on mobile) ===
   {
     id: "genie-studio",
     name: "Genie Studio",
@@ -50,28 +44,30 @@ const TEMPLATES = [
     codeUrl: "/templates/2nd template/code.html",
     tier: "Essential",
     device: "phone",
-    gridClass: "col-span-1 row-span-1 md:row-span-2",
+    gridClass: "col-span-1 row-span-1 sm:row-span-2",
     rotation: { x: 5, y: 10 },
     parallaxSpeed: 0.5,
     floatDelay: 1,
     floatDuration: 5,
   },
   {
-    id: "genie-commerce",
-    name: "Genie Commerce",
-    category: "E-COMMERCE",
-    description: "Full-featured online store.",
-    image: "/templates/3rd template/screen.png",
-    codeUrl: "/templates/3rd template/code.html",
+    id: "genie-new",
+    name: "Genie New",
+    category: "CREATIVE",
+    description: "Fresh new creative template.",
+    image: "/templates/new template/screen.png",
+    codeUrl: "/templates/new template/code.html",
     tier: "Professional",
-    device: "phone",
-    gridClass: "col-span-1 row-span-1 md:row-span-2",
-    rotation: { x: -5, y: -8 },
-    parallaxSpeed: 0.7,
-    floatDelay: 2,
-    floatDuration: 7,
+    device: "browser",
+    gridClass:
+      "col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-2 row-span-2",
+    rotation: { x: 4, y: -6 },
+    parallaxSpeed: 0.4,
+    floatDelay: 1.5,
+    floatDuration: 6,
   },
-  // === TABLET 1 (full width on mobile) ===
+
+  // === ROW 3-4: Tablets flanking phone ===
   {
     id: "genie-corporate",
     name: "Genie Corporate",
@@ -82,61 +78,27 @@ const TEMPLATES = [
     tier: "Professional",
     device: "tablet",
     gridClass:
-      "col-span-2 md:col-span-2 lg:col-span-2 row-span-1 md:row-span-2",
+      "col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-2 row-span-2",
     rotation: { x: 10, y: 5 },
     parallaxSpeed: 0.2,
     floatDelay: 0.5,
     floatDuration: 8,
   },
-  // === PHONES 3 & 4 (side by side on mobile) ===
   {
-    id: "genie-starter-pro",
-    name: "Genie Starter Pro",
-    category: "LANDING.PAGE",
-    description: "Enhanced landing page.",
-    image: "/templates/1st template copy/screen.png",
-    codeUrl: "/templates/1st template copy/code.html",
-    tier: "Essential",
-    device: "phone",
-    gridClass: "col-span-1 row-span-1 md:row-span-2",
-    rotation: { x: -8, y: 12 },
-    parallaxSpeed: 0.6,
-    floatDelay: 2.5,
-    floatDuration: 5.5,
-  },
-  {
-    id: "genie-new-phone",
-    name: "Genie New",
-    category: "CREATIVE",
-    description: "Fresh new creative template.",
-    image: "/templates/new template/screen.png",
-    codeUrl: "/templates/new template/code.html",
+    id: "genie-commerce",
+    name: "Genie Commerce",
+    category: "E-COMMERCE",
+    description: "Full-featured online store.",
+    image: "/templates/3rd template/screen.png",
+    codeUrl: "/templates/3rd template/code.html",
     tier: "Professional",
     device: "phone",
-    gridClass: "col-span-1 row-span-1 md:row-span-2",
-    rotation: { x: 4, y: -6 },
-    parallaxSpeed: 0.4,
-    floatDelay: 1.5,
-    floatDuration: 6,
+    gridClass: "col-span-1 row-span-1 sm:row-span-2",
+    rotation: { x: -5, y: -8 },
+    parallaxSpeed: 0.7,
+    floatDelay: 2,
+    floatDuration: 7,
   },
-  // === LAPTOP 2 (full width on mobile) ===
-  {
-    id: "genie-commerce-pro",
-    name: "Genie Commerce Pro",
-    category: "E-COMMERCE",
-    description: "Advanced e-commerce platform.",
-    image: "/templates/3rd template copy/screen.png",
-    codeUrl: "/templates/3rd template copy/code.html",
-    tier: "Enterprise",
-    device: "laptop",
-    gridClass:
-      "col-span-2 md:col-span-2 lg:col-span-2 row-span-1 md:row-span-2",
-    rotation: { x: -5, y: 8 },
-    parallaxSpeed: 0.35,
-    floatDelay: 1.2,
-    floatDuration: 6.5,
-  },
-  // === TABLET 2 (full width on mobile) ===
   {
     id: "genie-studio-pro",
     name: "Genie Studio Pro",
@@ -147,13 +109,45 @@ const TEMPLATES = [
     tier: "Professional",
     device: "tablet",
     gridClass:
-      "col-span-2 md:col-span-2 lg:col-span-2 row-span-1 md:row-span-2",
+      "col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-2 row-span-2",
     rotation: { x: 5, y: -10 },
     parallaxSpeed: 0.25,
     floatDelay: 0.8,
     floatDuration: 7,
   },
-  // === BROWSER (full width on mobile) ===
+
+  // === ROW 5-6: Inverted pattern - phone + laptop + browser ===
+  {
+    id: "genie-starter-pro",
+    name: "Genie Starter Pro",
+    category: "LANDING.PAGE",
+    description: "Enhanced landing page.",
+    image: "/templates/1st template copy/screen.png",
+    codeUrl: "/templates/1st template copy/code.html",
+    tier: "Essential",
+    device: "phone",
+    gridClass: "col-span-1 row-span-1 sm:row-span-2",
+    rotation: { x: -8, y: 12 },
+    parallaxSpeed: 0.6,
+    floatDelay: 2.5,
+    floatDuration: 5.5,
+  },
+  {
+    id: "genie-commerce-pro",
+    name: "Genie Commerce Pro",
+    category: "E-COMMERCE",
+    description: "Advanced e-commerce platform.",
+    image: "/templates/3rd template copy/screen.png",
+    codeUrl: "/templates/3rd template copy/code.html",
+    tier: "Enterprise",
+    device: "laptop",
+    gridClass:
+      "col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-2 row-span-2",
+    rotation: { x: -5, y: 8 },
+    parallaxSpeed: 0.35,
+    floatDelay: 1.2,
+    floatDuration: 6.5,
+  },
   {
     id: "genie-agency",
     name: "Genie Agency",
@@ -164,13 +158,30 @@ const TEMPLATES = [
     tier: "Enterprise",
     device: "browser",
     gridClass:
-      "col-span-2 md:col-span-3 lg:col-span-3 row-span-1 md:row-span-2",
+      "col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-2 row-span-2",
     rotation: { x: 3, y: -3 },
     parallaxSpeed: 0.4,
     floatDelay: 1.5,
     floatDuration: 6,
   },
-  // === TABLET 3 (full width on mobile) ===
+
+  // === ROW 7-8: Featured finale - wide browser + phone ===
+  {
+    id: "genie-agency-pro",
+    name: "Genie Agency Pro",
+    category: "AGENCY",
+    description: "Full agency suite.",
+    image: "/templates/5th template copy/page 2/screen.png",
+    codeUrl: "/templates/5th template copy/page 2/code.html",
+    tier: "Enterprise",
+    device: "browser",
+    gridClass:
+      "col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-3 row-span-2",
+    rotation: { x: 2, y: 2 },
+    parallaxSpeed: 0.45,
+    floatDelay: 1.8,
+    floatDuration: 7.5,
+  },
   {
     id: "genie-corporate-pro",
     name: "Genie Corporate Pro",
@@ -181,7 +192,7 @@ const TEMPLATES = [
     tier: "Enterprise",
     device: "tablet",
     gridClass:
-      "col-span-2 md:col-span-2 lg:col-span-2 row-span-1 md:row-span-2",
+      "col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-2 row-span-2",
     rotation: { x: 10, y: -5 },
     parallaxSpeed: 0.55,
     floatDelay: 3,
@@ -353,7 +364,7 @@ function DeviceCard({ template, index, onPreview, scrollY }) {
         {/* Device Mockup */}
         {renderDevice()}
 
-        {/* Hover Overlay - appears on hover (desktop) or touch (mobile) */}
+        {/* Hover Overlay */}
         <div
           className={`absolute inset-0 flex items-center justify-center rounded-2xl transition-all duration-300 ${
             isHovered ? "opacity-100 bg-black/40 backdrop-blur-sm" : "opacity-0"
@@ -365,15 +376,7 @@ function DeviceCard({ template, index, onPreview, scrollY }) {
           </button>
         </div>
 
-        {/* Mobile Tap Indicator - small icon badge visible only on mobile */}
-        <div className="absolute bottom-3 right-3 md:hidden flex items-center gap-1 px-2 py-1 rounded-full bg-white/90 text-black shadow-lg">
-          <Eye className="w-3 h-3" />
-          <span className="text-[8px] font-semibold uppercase tracking-wide">
-            Tap
-          </span>
-        </div>
-
-        {/* Floating Label - hover only */}
+        {/* Floating Label */}
         <div
           className={`absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full bg-[#0b0d10]/90 backdrop-blur-sm border border-white/10 transition-all duration-300 ${
             isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"

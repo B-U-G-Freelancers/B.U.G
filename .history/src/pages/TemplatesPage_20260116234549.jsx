@@ -33,8 +33,7 @@ const TEMPLATES = [
     codeUrl: "/templates/1st template/code.html",
     tier: "Essential",
     device: "laptop",
-    gridClass:
-      "col-span-2 md:col-span-2 lg:col-span-2 row-span-1 md:row-span-2",
+    gridClass: "col-span-2 md:col-span-2 lg:col-span-2 row-span-1 md:row-span-2",
     rotation: { x: 8, y: -5 },
     parallaxSpeed: 0.3,
     floatDelay: 0,
@@ -81,8 +80,7 @@ const TEMPLATES = [
     codeUrl: "/templates/4th template/code.html",
     tier: "Professional",
     device: "tablet",
-    gridClass:
-      "col-span-2 md:col-span-2 lg:col-span-2 row-span-1 md:row-span-2",
+    gridClass: "col-span-2 md:col-span-2 lg:col-span-2 row-span-1 md:row-span-2",
     rotation: { x: 10, y: 5 },
     parallaxSpeed: 0.2,
     floatDelay: 0.5,
@@ -129,8 +127,7 @@ const TEMPLATES = [
     codeUrl: "/templates/3rd template copy/code.html",
     tier: "Enterprise",
     device: "laptop",
-    gridClass:
-      "col-span-2 md:col-span-2 lg:col-span-2 row-span-1 md:row-span-2",
+    gridClass: "col-span-2 md:col-span-2 lg:col-span-2 row-span-1 md:row-span-2",
     rotation: { x: -5, y: 8 },
     parallaxSpeed: 0.35,
     floatDelay: 1.2,
@@ -146,8 +143,7 @@ const TEMPLATES = [
     codeUrl: "/templates/2nd template copy/code.html",
     tier: "Professional",
     device: "tablet",
-    gridClass:
-      "col-span-2 md:col-span-2 lg:col-span-2 row-span-1 md:row-span-2",
+    gridClass: "col-span-2 md:col-span-2 lg:col-span-2 row-span-1 md:row-span-2",
     rotation: { x: 5, y: -10 },
     parallaxSpeed: 0.25,
     floatDelay: 0.8,
@@ -163,8 +159,7 @@ const TEMPLATES = [
     codeUrl: "/templates/5th template/code.html",
     tier: "Enterprise",
     device: "browser",
-    gridClass:
-      "col-span-2 md:col-span-3 lg:col-span-3 row-span-1 md:row-span-2",
+    gridClass: "col-span-2 md:col-span-3 lg:col-span-3 row-span-1 md:row-span-2",
     rotation: { x: 3, y: -3 },
     parallaxSpeed: 0.4,
     floatDelay: 1.5,
@@ -180,8 +175,13 @@ const TEMPLATES = [
     codeUrl: "/templates/4th template copy/page1/code.html",
     tier: "Enterprise",
     device: "tablet",
-    gridClass:
-      "col-span-2 md:col-span-2 lg:col-span-2 row-span-1 md:row-span-2",
+    gridClass: "col-span-2 md:col-span-2 lg:col-span-2 row-span-1 md:row-span-2",
+    rotation: { x: 10, y: -5 },
+    parallaxSpeed: 0.55,
+    floatDelay: 3,
+    floatDuration: 5,
+  },
+];
     rotation: { x: 10, y: -5 },
     parallaxSpeed: 0.55,
     floatDelay: 3,
@@ -353,7 +353,7 @@ function DeviceCard({ template, index, onPreview, scrollY }) {
         {/* Device Mockup */}
         {renderDevice()}
 
-        {/* Hover Overlay - appears on hover (desktop) or touch (mobile) */}
+        {/* Hover Overlay */}
         <div
           className={`absolute inset-0 flex items-center justify-center rounded-2xl transition-all duration-300 ${
             isHovered ? "opacity-100 bg-black/40 backdrop-blur-sm" : "opacity-0"
@@ -365,15 +365,7 @@ function DeviceCard({ template, index, onPreview, scrollY }) {
           </button>
         </div>
 
-        {/* Mobile Tap Indicator - small icon badge visible only on mobile */}
-        <div className="absolute bottom-3 right-3 md:hidden flex items-center gap-1 px-2 py-1 rounded-full bg-white/90 text-black shadow-lg">
-          <Eye className="w-3 h-3" />
-          <span className="text-[8px] font-semibold uppercase tracking-wide">
-            Tap
-          </span>
-        </div>
-
-        {/* Floating Label - hover only */}
+        {/* Floating Label */}
         <div
           className={`absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full bg-[#0b0d10]/90 backdrop-blur-sm border border-white/10 transition-all duration-300 ${
             isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"

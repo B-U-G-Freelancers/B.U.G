@@ -29,8 +29,8 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Center - Circular Text (hidden on very small screens) */}
-          <div className="hidden sm:flex items-center justify-center">
+          {/* Center - Circular Text */}
+          <div className="flex items-center justify-center">
             <CircularText
               text="• BUILD YOUR GENIE • BUILD YOUR GENIE "
               spinDuration={15}

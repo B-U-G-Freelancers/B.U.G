@@ -353,7 +353,7 @@ function DeviceCard({ template, index, onPreview, scrollY }) {
         {/* Device Mockup */}
         {renderDevice()}
 
-        {/* Hover Overlay - appears on hover (desktop) or touch (mobile) */}
+        {/* Hover Overlay */}
         <div
           className={`absolute inset-0 flex items-center justify-center rounded-2xl transition-all duration-300 ${
             isHovered ? "opacity-100 bg-black/40 backdrop-blur-sm" : "opacity-0"
@@ -365,15 +365,7 @@ function DeviceCard({ template, index, onPreview, scrollY }) {
           </button>
         </div>
 
-        {/* Mobile Tap Indicator - small icon badge visible only on mobile */}
-        <div className="absolute bottom-3 right-3 md:hidden flex items-center gap-1 px-2 py-1 rounded-full bg-white/90 text-black shadow-lg">
-          <Eye className="w-3 h-3" />
-          <span className="text-[8px] font-semibold uppercase tracking-wide">
-            Tap
-          </span>
-        </div>
-
-        {/* Floating Label - hover only */}
+        {/* Floating Label */}
         <div
           className={`absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full bg-[#0b0d10]/90 backdrop-blur-sm border border-white/10 transition-all duration-300 ${
             isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"

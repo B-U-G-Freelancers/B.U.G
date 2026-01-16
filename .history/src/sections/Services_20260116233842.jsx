@@ -128,20 +128,20 @@ export default function Services() {
         {/* =========================
             SERVICES GRID
         ========================= */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-14">
           {services.map((service, index) => {
             const color = NEON_PALETTE[index % NEON_PALETTE.length];
 
             return (
               <div
                 key={index}
-                className="group relative p-6 sm:p-8 md:p-12 rounded-2xl md:rounded-3xl border border-white/10 bg-[#050a14]/60 backdrop-blur-md overflow-hidden transition-all duration-500 hover:-translate-y-2"
+                className="group relative p-12 rounded-3xl border border-white/10 bg-[#050a14]/60 backdrop-blur-md overflow-hidden transition-all duration-500 hover:-translate-y-2"
               >
                 {/* TEXT */}
                 <div className="relative z-10">
                   {/* TITLE */}
                   <h3
-                    className="relative text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-5 tracking-tight text-white group-hover:text-transparent bg-clip-text transition-all duration-500"
+                    className="relative text-4xl font-bold mb-5 tracking-tight text-white group-hover:text-transparent bg-clip-text transition-all duration-500"
                     style={{
                       backgroundImage: `linear-gradient(to right, #ffffff, ${color})`,
                     }}

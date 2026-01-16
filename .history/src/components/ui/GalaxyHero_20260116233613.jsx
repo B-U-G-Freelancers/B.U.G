@@ -478,7 +478,7 @@ export function HeroContent() {
 
       <h1
         ref={headlineRef}
-        className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white leading-tight drop-shadow-2xl px-2"
+        className="font-display text-5xl md:text-8xl font-black tracking-tighter text-white leading-tight drop-shadow-2xl"
       >
         WE BUILD <br />
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3A7CFF] via-[#5c92ff] to-[#E947F5] animate-pulse-slow">
@@ -488,7 +488,7 @@ export function HeroContent() {
 
       <p
         ref={subtitleRef}
-        className="mt-6 md:mt-8 max-w-2xl text-base sm:text-lg md:text-xl text-gray-300 font-light leading-relaxed drop-shadow-md px-4"
+        className="mt-8 max-w-2xl text-lg md:text-xl text-gray-300 font-light leading-relaxed drop-shadow-md"
       >
         High-performance engineering meets elite cyberpunk aesthetics.
         <br />
@@ -539,8 +539,8 @@ export function HeroSection() {
         <ParticleOverlay />
       </div>
 
-      {/* HUD/Command Center - Hidden on mobile for cleaner experience */}
-      <div className="absolute inset-0 z-10 hidden md:block">
+      {/* HUD/Command Center */}
+      <div className="absolute inset-0 z-10">
         <CommandCenter3D />
       </div>
 

@@ -488,7 +488,7 @@ export function HeroContent() {
 
       <p
         ref={subtitleRef}
-        className="mt-6 md:mt-8 max-w-2xl text-base sm:text-lg md:text-xl text-gray-300 font-light leading-relaxed drop-shadow-md px-4"
+        className="mt-8 max-w-2xl text-lg md:text-xl text-gray-300 font-light leading-relaxed drop-shadow-md"
       >
         High-performance engineering meets elite cyberpunk aesthetics.
         <br />

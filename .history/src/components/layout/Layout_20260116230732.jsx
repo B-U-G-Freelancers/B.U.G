@@ -1,12 +1,7 @@
 // src/components/layout/Layout.jsx
 import { useState } from "react";
 import Footer from "./Footer";
-import BugIntro from "../ui/BugIntro";
-import { Header } from "./Header";
-
-// Session storage key for tracking intro completion
-const INTRO_SHOWN_KEY = "bug_intro_shown";
-import GlobalBackground from "./GlobalBackground";
+import IntroAnimation from "../ui/IntroAnimation";
 
 export default function Layout({ children }) {
   // Check if intro was already shown this session

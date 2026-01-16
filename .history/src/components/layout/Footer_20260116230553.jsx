@@ -36,38 +36,25 @@ export default function Footer() {
           />
         </div>
 
-        <div className="flex gap-8">
-          <div className="flex flex-col gap-4">
-            <h3 className="font-semibold text-gray-500 uppercase tracking-widest text-xs">
-              Socials
-            </h3>
-            <a href="#" className="hover:text-blue-500 transition-colors">
-              Twitter
-            </a>
-            <a href="#" className="hover:text-blue-500 transition-colors">
-              LinkedIn
-            </a>
-            <a href="#" className="hover:text-blue-500 transition-colors">
-              Instagram
-            </a>
-          </div>
-          <div className="flex flex-col gap-4">
-            <h3 className="font-semibold text-gray-500 uppercase tracking-widest text-xs">
-              Legal
-            </h3>
-            <a href="#" className="hover:text-blue-500 transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-blue-500 transition-colors">
-              Terms of Service
-            </a>
-          </div>
-        </div>
+                    <div className="flex gap-8">
+                        <div className="flex flex-col gap-4">
+                            <h3 className="font-semibold text-gray-500 uppercase tracking-widest text-xs">Socials</h3>
+                            <a href="#" className="hover:text-blue-500 transition-colors">Twitter</a>
+                            <a href="#" className="hover:text-blue-500 transition-colors">LinkedIn</a>
+                            <a href="#" className="hover:text-blue-500 transition-colors">Instagram</a>
+                        </div>
+                        <div className="flex flex-col gap-4">
+                            <h3 className="font-semibold text-gray-500 uppercase tracking-widest text-xs">Legal</h3>
+                            <a href="#" className="hover:text-blue-500 transition-colors">Privacy Policy</a>
+                            <a href="#" className="hover:text-blue-500 transition-colors">Terms of Service</a>
+                        </div>
+                    </div>
+                </div>
 
-        <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
-          <p>&copy; {new Date().getFullYear()} B.U.G. All rights reserved.</p>
-          <p>Designed in the Void.</p>
-        </div>
+      <div className="mt-16 text-center">
+        <span className="text-[10rem] font-black text-text-primary/[0.02] select-none pointer-events-none leading-none">
+          Build Your Genie
+        </span>
       </div>
     </footer>
   );

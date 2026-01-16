@@ -1,5 +1,5 @@
 // src/components/layout/Layout.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "./Footer";
 import BugIntro from "../ui/BugIntro";
 import { Header } from "./Header";

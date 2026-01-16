@@ -1,6 +1,6 @@
 // src/components/ui/BugIntro.jsx
 // Performance-optimized intro animation
-import { useRef, useLayoutEffect } from "react";
+import { useEffect, useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 import BugLogo from "../../assets/brand_logo_white.svg?react";
 import "./BugIntro.css";

@@ -12,13 +12,7 @@ import {
 import { Header } from "../components/layout/Header";
 
 // Template showcase data with device configurations
-// Visual Hierarchy Layout (5-column grid):
-// Row 1-2: laptop(2) + phone(1) + browser(2) = 5  [Hero row]
-// Row 3-4: tablet(2) + phone(1) + tablet(2) = 5   [Tablets flanking phone]
-// Row 5-6: phone(1) + laptop(2) + browser(2) = 5  [Inverted pattern]
-// Row 7-8: browser(3) + phone(2) = 5              [Featured finale]
 const TEMPLATES = [
-  // === ROW 1-2: Hero Row - laptop + phone + browser ===
   {
     id: "genie-starter",
     name: "Genie Starter",
@@ -64,23 +58,6 @@ const TEMPLATES = [
     floatDelay: 1.5,
     floatDuration: 6,
   },
-
-  // === ROW 3-4: Tablets flanking phone ===
-  {
-    id: "genie-corporate",
-    name: "Genie Corporate",
-    category: "BUSINESS",
-    description: "Professional business website.",
-    image: "/templates/4th template/screen.png",
-    codeUrl: "/templates/4th template/code.html",
-    tier: "Professional",
-    device: "tablet",
-    gridClass: "col-span-2 row-span-2",
-    rotation: { x: 10, y: 5 },
-    parallaxSpeed: 0.2,
-    floatDelay: 0.5,
-    floatDuration: 8,
-  },
   {
     id: "genie-commerce",
     name: "Genie Commerce",
@@ -97,22 +74,35 @@ const TEMPLATES = [
     floatDuration: 7,
   },
   {
-    id: "genie-studio-pro",
-    name: "Genie Studio Pro",
-    category: "PORTFOLIO",
-    description: "Premium portfolio.",
-    image: "/templates/2nd template copy/screen.png",
-    codeUrl: "/templates/2nd template copy/code.html",
+    id: "genie-corporate",
+    name: "Genie Corporate",
+    category: "BUSINESS",
+    description: "Professional business website.",
+    image: "/templates/4th template/screen.png",
+    codeUrl: "/templates/4th template/code.html",
     tier: "Professional",
     device: "tablet",
     gridClass: "col-span-2 row-span-2",
-    rotation: { x: 5, y: -10 },
-    parallaxSpeed: 0.25,
-    floatDelay: 0.8,
-    floatDuration: 7,
+    rotation: { x: 10, y: 5 },
+    parallaxSpeed: 0.2,
+    floatDelay: 0.5,
+    floatDuration: 8,
   },
-
-  // === ROW 5-6: Inverted pattern - phone + laptop + browser ===
+  {
+    id: "genie-agency",
+    name: "Genie Agency",
+    category: "AGENCY",
+    description: "Premium agency template.",
+    image: "/templates/5th template/screen.png",
+    codeUrl: "/templates/5th template/code.html",
+    tier: "Enterprise",
+    device: "browser",
+    gridClass: "col-span-2 row-span-1",
+    rotation: { x: 3, y: -3 },
+    parallaxSpeed: 0.4,
+    floatDelay: 1.5,
+    floatDuration: 6,
+  },
   {
     id: "genie-starter-pro",
     name: "Genie Starter Pro",
@@ -127,6 +117,21 @@ const TEMPLATES = [
     parallaxSpeed: 0.6,
     floatDelay: 2.5,
     floatDuration: 5.5,
+  },
+  {
+    id: "genie-studio-pro",
+    name: "Genie Studio Pro",
+    category: "PORTFOLIO",
+    description: "Premium portfolio.",
+    image: "/templates/2nd template copy/screen.png",
+    codeUrl: "/templates/2nd template copy/code.html",
+    tier: "Professional",
+    device: "tablet",
+    gridClass: "col-span-2 row-span-2",
+    rotation: { x: 5, y: -10 },
+    parallaxSpeed: 0.25,
+    floatDelay: 0.8,
+    floatDuration: 7,
   },
   {
     id: "genie-commerce-pro",
@@ -144,22 +149,20 @@ const TEMPLATES = [
     floatDuration: 6.5,
   },
   {
-    id: "genie-agency",
-    name: "Genie Agency",
-    category: "AGENCY",
-    description: "Premium agency template.",
-    image: "/templates/5th template/screen.png",
-    codeUrl: "/templates/5th template/code.html",
+    id: "genie-corporate-pro",
+    name: "Genie Corporate Pro",
+    category: "BUSINESS",
+    description: "Enterprise business platform.",
+    image: "/templates/4th template copy/page 1/screen.png",
+    codeUrl: "/templates/4th template copy/page1/code.html",
     tier: "Enterprise",
-    device: "browser",
-    gridClass: "col-span-2 row-span-2",
-    rotation: { x: 3, y: -3 },
-    parallaxSpeed: 0.4,
-    floatDelay: 1.5,
-    floatDuration: 6,
+    device: "phone",
+    gridClass: "col-span-1 row-span-2",
+    rotation: { x: 10, y: -5 },
+    parallaxSpeed: 0.55,
+    floatDelay: 3,
+    floatDuration: 5,
   },
-
-  // === ROW 7-8: Featured finale - wide browser + phone ===
   {
     id: "genie-agency-pro",
     name: "Genie Agency Pro",
@@ -169,26 +172,11 @@ const TEMPLATES = [
     codeUrl: "/templates/5th template copy/page 2/code.html",
     tier: "Enterprise",
     device: "browser",
-    gridClass: "col-span-3 row-span-2",
+    gridClass: "col-span-2 row-span-1",
     rotation: { x: 2, y: 2 },
     parallaxSpeed: 0.45,
     floatDelay: 1.8,
     floatDuration: 7.5,
-  },
-  {
-    id: "genie-corporate-pro",
-    name: "Genie Corporate Pro",
-    category: "BUSINESS",
-    description: "Enterprise business platform.",
-    image: "/templates/4th template copy/page 1/screen.png",
-    codeUrl: "/templates/4th template copy/page1/code.html",
-    tier: "Enterprise",
-    device: "tablet",
-    gridClass: "col-span-2 row-span-2",
-    rotation: { x: 10, y: -5 },
-    parallaxSpeed: 0.55,
-    floatDelay: 3,
-    floatDuration: 5,
   },
 ];
 

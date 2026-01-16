@@ -12,13 +12,7 @@ import {
 import { Header } from "../components/layout/Header";
 
 // Template showcase data with device configurations
-// Visual Hierarchy Layout (5-column grid):
-// Row 1-2: laptop(2) + phone(1) + browser(2) = 5  [Hero row]
-// Row 3-4: tablet(2) + phone(1) + tablet(2) = 5   [Tablets flanking phone]
-// Row 5-6: phone(1) + laptop(2) + browser(2) = 5  [Inverted pattern]
-// Row 7-8: browser(3) + phone(2) = 5              [Featured finale]
 const TEMPLATES = [
-  // === ROW 1-2: Hero Row - laptop + phone + browser ===
   {
     id: "genie-starter",
     name: "Genie Starter",
@@ -50,22 +44,20 @@ const TEMPLATES = [
     floatDuration: 5,
   },
   {
-    id: "genie-new",
-    name: "Genie New",
-    category: "CREATIVE",
-    description: "Fresh new creative template.",
-    image: "/templates/new template/screen.png",
-    codeUrl: "/templates/new template/code.html",
+    id: "genie-commerce",
+    name: "Genie Commerce",
+    category: "E-COMMERCE",
+    description: "Full-featured online store.",
+    image: "/templates/3rd template/screen.png",
+    codeUrl: "/templates/3rd template/code.html",
     tier: "Professional",
-    device: "browser",
-    gridClass: "col-span-2 row-span-2",
-    rotation: { x: 4, y: -6 },
-    parallaxSpeed: 0.4,
-    floatDelay: 1.5,
-    floatDuration: 6,
+    device: "phone",
+    gridClass: "col-span-1 row-span-2",
+    rotation: { x: -5, y: -8 },
+    parallaxSpeed: 0.7,
+    floatDelay: 2,
+    floatDuration: 7,
   },
-
-  // === ROW 3-4: Tablets flanking phone ===
   {
     id: "genie-corporate",
     name: "Genie Corporate",
@@ -82,19 +74,34 @@ const TEMPLATES = [
     floatDuration: 8,
   },
   {
-    id: "genie-commerce",
-    name: "Genie Commerce",
-    category: "E-COMMERCE",
-    description: "Full-featured online store.",
-    image: "/templates/3rd template/screen.png",
-    codeUrl: "/templates/3rd template/code.html",
-    tier: "Professional",
+    id: "genie-agency",
+    name: "Genie Agency",
+    category: "AGENCY",
+    description: "Premium agency template.",
+    image: "/templates/5th template/screen.png",
+    codeUrl: "/templates/5th template/code.html",
+    tier: "Enterprise",
+    device: "browser",
+    gridClass: "col-span-2 row-span-1",
+    rotation: { x: 3, y: -3 },
+    parallaxSpeed: 0.4,
+    floatDelay: 1.5,
+    floatDuration: 6,
+  },
+  {
+    id: "genie-starter-pro",
+    name: "Genie Starter Pro",
+    category: "LANDING.PAGE",
+    description: "Enhanced landing page.",
+    image: "/templates/1st template copy/screen.png",
+    codeUrl: "/templates/1st template copy/code.html",
+    tier: "Essential",
     device: "phone",
     gridClass: "col-span-1 row-span-2",
-    rotation: { x: -5, y: -8 },
-    parallaxSpeed: 0.7,
-    floatDelay: 2,
-    floatDuration: 7,
+    rotation: { x: -8, y: 12 },
+    parallaxSpeed: 0.6,
+    floatDelay: 2.5,
+    floatDuration: 5.5,
   },
   {
     id: "genie-studio-pro",
@@ -110,23 +117,6 @@ const TEMPLATES = [
     parallaxSpeed: 0.25,
     floatDelay: 0.8,
     floatDuration: 7,
-  },
-
-  // === ROW 5-6: Inverted pattern - phone + laptop + browser ===
-  {
-    id: "genie-starter-pro",
-    name: "Genie Starter Pro",
-    category: "LANDING.PAGE",
-    description: "Enhanced landing page.",
-    image: "/templates/1st template copy/screen.png",
-    codeUrl: "/templates/1st template copy/code.html",
-    tier: "Essential",
-    device: "phone",
-    gridClass: "col-span-1 row-span-2",
-    rotation: { x: -8, y: 12 },
-    parallaxSpeed: 0.6,
-    floatDelay: 2.5,
-    floatDuration: 5.5,
   },
   {
     id: "genie-commerce-pro",
@@ -144,22 +134,20 @@ const TEMPLATES = [
     floatDuration: 6.5,
   },
   {
-    id: "genie-agency",
-    name: "Genie Agency",
-    category: "AGENCY",
-    description: "Premium agency template.",
-    image: "/templates/5th template/screen.png",
-    codeUrl: "/templates/5th template/code.html",
+    id: "genie-corporate-pro",
+    name: "Genie Corporate Pro",
+    category: "BUSINESS",
+    description: "Enterprise business platform.",
+    image: "/templates/4th template copy/page 1/screen.png",
+    codeUrl: "/templates/4th template copy/page1/code.html",
     tier: "Enterprise",
-    device: "browser",
-    gridClass: "col-span-2 row-span-2",
-    rotation: { x: 3, y: -3 },
-    parallaxSpeed: 0.4,
-    floatDelay: 1.5,
-    floatDuration: 6,
+    device: "phone",
+    gridClass: "col-span-1 row-span-2",
+    rotation: { x: 10, y: -5 },
+    parallaxSpeed: 0.55,
+    floatDelay: 3,
+    floatDuration: 5,
   },
-
-  // === ROW 7-8: Featured finale - wide browser + phone ===
   {
     id: "genie-agency-pro",
     name: "Genie Agency Pro",
@@ -169,26 +157,11 @@ const TEMPLATES = [
     codeUrl: "/templates/5th template copy/page 2/code.html",
     tier: "Enterprise",
     device: "browser",
-    gridClass: "col-span-3 row-span-2",
+    gridClass: "col-span-2 row-span-1",
     rotation: { x: 2, y: 2 },
     parallaxSpeed: 0.45,
     floatDelay: 1.8,
     floatDuration: 7.5,
-  },
-  {
-    id: "genie-corporate-pro",
-    name: "Genie Corporate Pro",
-    category: "BUSINESS",
-    description: "Enterprise business platform.",
-    image: "/templates/4th template copy/page 1/screen.png",
-    codeUrl: "/templates/4th template copy/page1/code.html",
-    tier: "Enterprise",
-    device: "tablet",
-    gridClass: "col-span-2 row-span-2",
-    rotation: { x: 10, y: -5 },
-    parallaxSpeed: 0.55,
-    floatDelay: 3,
-    floatDuration: 5,
   },
 ];
 
@@ -279,16 +252,16 @@ function TemplatePreviewModal({ template, onClose }) {
   );
 }
 
-// Device Card Component with Parallax and Floating Animation
+// Device Card Component with New Design (Reference-Style)
 function DeviceCard({ template, index, onPreview, scrollY }) {
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef(null);
   const [offsetY, setOffsetY] = useState(0);
 
   const tierColors = {
-    Essential: "bg-emerald-500/10 text-emerald-300 border-emerald-500/20",
-    Professional: "bg-[#3a7cff]/10 text-[#3a7cff] border-[#3a7cff]/20",
-    Enterprise: "bg-purple-500/10 text-purple-300 border-purple-500/20",
+    Essential: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
+    Professional: "bg-[#3a7cff]/20 text-[#3a7cff] border-[#3a7cff]/30",
+    Enterprise: "bg-purple-500/20 text-purple-300 border-purple-500/30",
   };
 
   // Calculate parallax offset based on scroll position
@@ -304,24 +277,33 @@ function DeviceCard({ template, index, onPreview, scrollY }) {
     }
   }, [scrollY, template.parallaxSpeed]);
 
-  const renderDevice = () => {
-    const commonProps = {
-      src: template.image,
-      alt: template.name,
-      className: "w-full h-auto max-h-full",
-    };
-
+  // Determine aspect ratio based on device type
+  const getAspectRatio = () => {
     switch (template.device) {
       case "phone":
-        return <PhoneMockup {...commonProps} />;
+        return "aspect-[9/16]";
       case "tablet":
-        return <TabletMockup {...commonProps} />;
+        return "aspect-[3/4]";
       case "laptop":
-        return <LaptopMockup {...commonProps} />;
       case "browser":
-        return <BrowserMockup {...commonProps} url={`${template.id}.genie`} />;
+        return "aspect-[16/10]";
       default:
-        return <PhoneMockup {...commonProps} />;
+        return "aspect-[9/16]";
+    }
+  };
+
+  // Get border radius based on device
+  const getBorderRadius = () => {
+    switch (template.device) {
+      case "phone":
+        return "rounded-[2rem]";
+      case "tablet":
+        return "rounded-[1.5rem]";
+      case "laptop":
+      case "browser":
+        return "rounded-xl";
+      default:
+        return "rounded-[2rem]";
     }
   };
 
@@ -336,12 +318,12 @@ function DeviceCard({ template, index, onPreview, scrollY }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Device Container with 3D Transform, Parallax & Floating */}
+      {/* Card Container with 3D Transform, Parallax & Floating */}
       <div
-        className="relative cursor-pointer"
+        className={`relative cursor-pointer w-full h-full overflow-hidden ${getBorderRadius()} shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]`}
         style={{
           transform: isHovered
-            ? `translateY(${offsetY}px) rotateX(0deg) rotateY(0deg) scale(1.05)`
+            ? `translateY(${offsetY}px) rotateX(0deg) rotateY(0deg) scale(1.03)`
             : `translateY(${offsetY}px) rotateX(${
                 template.rotation?.x || 0
               }deg) rotateY(${template.rotation?.y || 0}deg)`,
@@ -353,51 +335,126 @@ function DeviceCard({ template, index, onPreview, scrollY }) {
         }}
         onClick={() => onPreview(template)}
       >
-        {/* Device Mockup */}
-        {renderDevice()}
+        {/* Background Screenshot */}
+        <div className={`relative w-full ${getAspectRatio()}`}>
+          <img
+            src={template.image}
+            alt={template.name}
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 w-full h-full object-cover object-top"
+          />
 
-        {/* Hover Overlay */}
-        <div
-          className={`absolute inset-0 flex items-center justify-center rounded-2xl transition-all duration-300 ${
-            isHovered ? "opacity-100 bg-black/40 backdrop-blur-sm" : "opacity-0"
-          }`}
-        >
-          <button className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black hover:bg-[#3a7cff] hover:text-white font-medium text-xs tracking-widest uppercase transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-            <Eye className="w-4 h-4" />
-            Preview
-          </button>
-        </div>
+          {/* Dark Gradient Overlay (always visible) */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.7) 100%)",
+            }}
+          />
 
-        {/* Floating Label */}
-        <div
-          className={`absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full bg-[#0b0d10]/90 backdrop-blur-sm border border-white/10 transition-all duration-300 ${
-            isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-          }`}
-        >
-          <span className="text-[10px] font-medium text-white/80 tracking-wider uppercase whitespace-nowrap">
-            {template.name}
-          </span>
-        </div>
+          {/* Blur Overlay on Hover */}
+          <div
+            className={`absolute inset-0 backdrop-blur-sm transition-opacity duration-300 ${
+              isHovered ? "opacity-100" : "opacity-0"
+            }`}
+            style={{
+              background: "rgba(0,0,0,0.3)",
+            }}
+          />
 
-        {/* Tier Badge */}
-        <div
-          className={`absolute top-2 right-2 px-2 py-1 rounded text-[8px] tracking-wider uppercase font-medium border backdrop-blur-md ${
-            tierColors[template.tier]
-          }`}
-        >
-          {template.tier}
+          {/* Browser Chrome Header (for browser type) */}
+          {template.device === "browser" && (
+            <div className="absolute top-0 left-0 right-0 flex items-center gap-2 px-4 py-2.5 bg-[#1f1f1f]/90 backdrop-blur-sm border-b border-white/5">
+              {/* Traffic Lights */}
+              <div className="flex gap-1.5">
+                <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+                <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+                <div className="w-3 h-3 rounded-full bg-[#28c940]" />
+              </div>
+
+              {/* URL Bar */}
+              <div className="flex-1 flex justify-center">
+                <div className="px-4 py-1 bg-[#2a2a2a] rounded-md text-[10px] text-white/50 font-mono">
+                  {template.id}.genie
+                </div>
+              </div>
+
+              {/* Tier Badge (in header for browser) */}
+              <div
+                className={`px-2.5 py-1 rounded text-[9px] tracking-wider uppercase font-semibold border backdrop-blur-md ${
+                  tierColors[template.tier]
+                }`}
+              >
+                {template.tier}
+              </div>
+            </div>
+          )}
+
+          {/* Tier Badge (top right for non-browser devices) */}
+          {template.device !== "browser" && (
+            <div
+              className={`absolute top-3 right-3 px-2.5 py-1 rounded text-[9px] tracking-wider uppercase font-semibold border backdrop-blur-md z-10 ${
+                tierColors[template.tier]
+              }`}
+            >
+              {template.tier}
+            </div>
+          )}
+
+          {/* Center PREVIEW Button */}
+          <div className="absolute inset-0 flex items-center justify-center z-10">
+            <button
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black font-medium text-xs tracking-widest uppercase transition-all duration-300 shadow-lg ${
+                isHovered
+                  ? "opacity-100 transform scale-100"
+                  : "opacity-0 transform scale-95"
+              }`}
+              style={{
+                boxShadow: "0 10px 40px rgba(0,0,0,0.3)",
+              }}
+            >
+              <Eye className="w-4 h-4" />
+              Preview
+            </button>
+          </div>
+
+          {/* Template Name (bottom center) */}
+          <div className="absolute bottom-0 left-0 right-0 flex justify-center pb-4 z-10">
+            <div
+              className="px-4 py-2 rounded-full bg-[#0b0d10]/80 backdrop-blur-md border border-white/10"
+              style={{
+                boxShadow: "0 5px 20px rgba(0,0,0,0.3)",
+              }}
+            >
+              <span className="text-[11px] font-semibold text-white/90 tracking-wider uppercase whitespace-nowrap">
+                {template.name}
+              </span>
+            </div>
+          </div>
+
+          {/* Phone Notch (for phone type) */}
+          {template.device === "phone" && (
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[30%] h-[1.2rem] bg-black rounded-full z-20" />
+          )}
+
+          {/* Home Indicator (for phone type) */}
+          {template.device === "phone" && (
+            <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-[35%] h-[4px] bg-white/30 rounded-full z-20" />
+          )}
         </div>
 
         {/* Glow Effect on Hover */}
         <div
-          className={`absolute inset-0 -z-10 rounded-3xl transition-opacity duration-500 ${
+          className={`absolute inset-0 -z-10 ${getBorderRadius()} transition-opacity duration-500 ${
             isHovered ? "opacity-100" : "opacity-0"
           }`}
           style={{
             background:
-              "radial-gradient(circle, rgba(58,124,255,0.3) 0%, transparent 70%)",
-            filter: "blur(40px)",
-            transform: "scale(1.2)",
+              "radial-gradient(circle, rgba(58,124,255,0.4) 0%, transparent 70%)",
+            filter: "blur(50px)",
+            transform: "scale(1.3)",
           }}
         />
       </div>

@@ -1,6 +1,6 @@
 // src/pages/TemplatesPage.jsx
-// Premium Templates Showcase with Device Mockups, Parallax Scroll & Floating Animations
-import { useEffect, useRef, useState, useCallback } from "react";
+// Premium Templates Showcase with Device Mockups in Bento Grid Layout
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Eye, X, Monitor, Tablet, Smartphone } from "lucide-react";
 import {
@@ -24,9 +24,6 @@ const TEMPLATES = [
     device: "laptop",
     gridClass: "col-span-2 row-span-2",
     rotation: { x: 8, y: -5 },
-    parallaxSpeed: 0.3,
-    floatDelay: 0,
-    floatDuration: 6,
   },
   {
     id: "genie-studio",
@@ -39,9 +36,6 @@ const TEMPLATES = [
     device: "phone",
     gridClass: "col-span-1 row-span-2",
     rotation: { x: 5, y: 10 },
-    parallaxSpeed: 0.5,
-    floatDelay: 1,
-    floatDuration: 5,
   },
   {
     id: "genie-commerce",
@@ -54,9 +48,6 @@ const TEMPLATES = [
     device: "phone",
     gridClass: "col-span-1 row-span-2",
     rotation: { x: -5, y: -8 },
-    parallaxSpeed: 0.7,
-    floatDelay: 2,
-    floatDuration: 7,
   },
   {
     id: "genie-corporate",
@@ -69,9 +60,6 @@ const TEMPLATES = [
     device: "tablet",
     gridClass: "col-span-2 row-span-2",
     rotation: { x: 10, y: 5 },
-    parallaxSpeed: 0.2,
-    floatDelay: 0.5,
-    floatDuration: 8,
   },
   {
     id: "genie-agency",
@@ -84,9 +72,6 @@ const TEMPLATES = [
     device: "browser",
     gridClass: "col-span-2 row-span-1",
     rotation: { x: 3, y: -3 },
-    parallaxSpeed: 0.4,
-    floatDelay: 1.5,
-    floatDuration: 6,
   },
   {
     id: "genie-starter-pro",
@@ -99,9 +84,6 @@ const TEMPLATES = [
     device: "phone",
     gridClass: "col-span-1 row-span-2",
     rotation: { x: -8, y: 12 },
-    parallaxSpeed: 0.6,
-    floatDelay: 2.5,
-    floatDuration: 5.5,
   },
   {
     id: "genie-studio-pro",
@@ -114,9 +96,6 @@ const TEMPLATES = [
     device: "tablet",
     gridClass: "col-span-2 row-span-2",
     rotation: { x: 5, y: -10 },
-    parallaxSpeed: 0.25,
-    floatDelay: 0.8,
-    floatDuration: 7,
   },
   {
     id: "genie-commerce-pro",
@@ -129,9 +108,6 @@ const TEMPLATES = [
     device: "laptop",
     gridClass: "col-span-2 row-span-2",
     rotation: { x: -5, y: 8 },
-    parallaxSpeed: 0.35,
-    floatDelay: 1.2,
-    floatDuration: 6.5,
   },
   {
     id: "genie-corporate-pro",
@@ -144,9 +120,6 @@ const TEMPLATES = [
     device: "phone",
     gridClass: "col-span-1 row-span-2",
     rotation: { x: 10, y: -5 },
-    parallaxSpeed: 0.55,
-    floatDelay: 3,
-    floatDuration: 5,
   },
   {
     id: "genie-agency-pro",
@@ -159,9 +132,6 @@ const TEMPLATES = [
     device: "browser",
     gridClass: "col-span-3 row-span-1",
     rotation: { x: 2, y: 2 },
-    parallaxSpeed: 0.45,
-    floatDelay: 1.8,
-    floatDuration: 7.5,
   },
 ];
 
@@ -252,30 +222,15 @@ function TemplatePreviewModal({ template, onClose }) {
   );
 }
 
-// Device Card Component with Parallax and Floating Animation
-function DeviceCard({ template, index, onPreview, scrollY }) {
+// Device Card Component - renders template inside appropriate device mockup
+function letsDeviceCard({ template, index, onPreview }) {
   const [isHovered, setIsHovered] = useState(false);
-  const cardRef = useRef(null);
-  const [offsetY, setOffsetY] = useState(0);
 
   const tierColors = {
     Essential: "bg-emerald-500/10 text-emerald-300 border-emerald-500/20",
     Professional: "bg-[#3a7cff]/10 text-[#3a7cff] border-[#3a7cff]/20",
     Enterprise: "bg-purple-500/10 text-purple-300 border-purple-500/20",
   };
-
-  // Calculate parallax offset based on scroll position
-  useEffect(() => {
-    if (cardRef.current) {
-      const rect = cardRef.current.getBoundingClientRect();
-      const centerY = window.innerHeight / 2;
-      const cardCenterY = rect.top + rect.height / 2;
-      const distanceFromCenter = cardCenterY - centerY;
-      const parallaxOffset =
-        distanceFromCenter * (template.parallaxSpeed || 0.3) * 0.1;
-      setOffsetY(parallaxOffset);
-    }
-  }, [scrollY, template.parallaxSpeed]);
 
   const renderDevice = () => {
     const commonProps = {
@@ -300,8 +255,7 @@ function DeviceCard({ template, index, onPreview, scrollY }) {
 
   return (
     <div
-      ref={cardRef}
-      className={`group relative ${template.gridClass} flex items-center justify-center p-4 md:p-6 transition-opacity duration-700 animate-float-in`}
+      className={`group relative ${template.gridClass} flex items-center justify-center p-4 md:p-6 transition-all duration-700 animate-float-in`}
       style={{
         animationDelay: `${0.1 + index * 0.08}s`,
         perspective: "1000px",
@@ -309,20 +263,16 @@ function DeviceCard({ template, index, onPreview, scrollY }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Device Container with 3D Transform, Parallax & Floating */}
+      {/* Device Container with 3D Transform */}
       <div
-        className="relative cursor-pointer"
+        className="relative transition-transform duration-500 ease-out cursor-pointer"
         style={{
           transform: isHovered
-            ? `translateY(${offsetY}px) rotateX(0deg) rotateY(0deg) scale(1.05)`
-            : `translateY(${offsetY}px) rotateX(${
-                template.rotation?.x || 0
-              }deg) rotateY(${template.rotation?.y || 0}deg)`,
+            ? `rotateX(0deg) rotateY(0deg) scale(1.02)`
+            : `rotateX(${template.rotation?.x || 0}deg) rotateY(${
+                template.rotation?.y || 0
+              }deg)`,
           transformStyle: "preserve-3d",
-          transition: "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
-          animation: `float ${template.floatDuration || 6}s ease-in-out ${
-            template.floatDelay || 0
-          }s infinite`,
         }}
         onClick={() => onPreview(template)}
       >
@@ -360,19 +310,6 @@ function DeviceCard({ template, index, onPreview, scrollY }) {
         >
           {template.tier}
         </div>
-
-        {/* Glow Effect on Hover */}
-        <div
-          className={`absolute inset-0 -z-10 rounded-3xl transition-opacity duration-500 ${
-            isHovered ? "opacity-100" : "opacity-0"
-          }`}
-          style={{
-            background:
-              "radial-gradient(circle, rgba(58,124,255,0.3) 0%, transparent 70%)",
-            filter: "blur(40px)",
-            transform: "scale(1.2)",
-          }}
-        />
       </div>
     </div>
   );
@@ -382,25 +319,15 @@ function DeviceCard({ template, index, onPreview, scrollY }) {
 export default function TemplatesPage() {
   const [contentVisible, setContentVisible] = useState(false);
   const [previewTemplate, setPreviewTemplate] = useState(null);
-  const [scrollY, setScrollY] = useState(0);
   const pageRef = useRef(null);
 
   useEffect(() => {
+    // Skip intro, show content immediately
     const timer = setTimeout(() => setContentVisible(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
-  // Scroll listener for parallax
-  const handleScroll = useCallback(() => {
-    setScrollY(window.scrollY);
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
-
-  // Mouse parallax for background
+  // Parallax on mouse move
   useEffect(() => {
     const handleMouseMove = (e) => {
       if (!pageRef.current) return;
@@ -419,6 +346,7 @@ export default function TemplatesPage() {
       ref={pageRef}
       className="min-h-screen relative overflow-hidden selection:bg-[#3a7cff] selection:text-white"
       style={{
+        // Vibrant blue background like the reference image
         background:
           "linear-gradient(135deg, #2563eb 0%, #3b82f6 25%, #1d4ed8 50%, #2563eb 75%, #3b82f6 100%)",
         "--parallax-x": "0px",
@@ -437,36 +365,29 @@ export default function TemplatesPage() {
             transform: translateY(0) scale(1); 
           }
         }
-        @keyframes float {
-          0%, 100% { 
-            transform: translateY(0px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); 
-          }
-          50% { 
-            transform: translateY(-20px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); 
-          }
-        }
-        @keyframes pulse-glow {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 0.6; }
+        @keyframes subtle-float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
         }
         .animate-float-in {
           opacity: 0;
           animation: float-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+        .animate-subtle-float {
+          animation: subtle-float 6s ease-in-out infinite;
+        }
       `}</style>
 
       {/* Atmospheric Effects */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        {/* Animated Gradient Orbs */}
+        {/* Gradient Orbs */}
         <div
           className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full blur-[100px] opacity-30"
           style={{
             background:
               "radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%)",
-            transform: `translate(calc(var(--parallax-x) * 0.5 + ${
-              scrollY * 0.1
-            }px), calc(var(--parallax-y) * 0.5))`,
-            transition: "transform 0.1s linear",
+            transform:
+              "translate(calc(var(--parallax-x) * 0.5), calc(var(--parallax-y) * 0.5))",
           }}
         />
         <div
@@ -474,19 +395,8 @@ export default function TemplatesPage() {
           style={{
             background:
               "radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%)",
-            transform: `translate(calc(var(--parallax-x) * -0.3 - ${
-              scrollY * 0.05
-            }px), calc(var(--parallax-y) * -0.3))`,
-            transition: "transform 0.1s linear",
-          }}
-        />
-        <div
-          className="absolute top-[40%] right-[20%] w-[300px] h-[300px] rounded-full blur-[60px] opacity-25"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(147,197,253,0.4) 0%, transparent 70%)",
-            animation: "pulse-glow 4s ease-in-out infinite",
-            transform: `translate(${scrollY * -0.08}px, ${scrollY * 0.03}px)`,
+            transform:
+              "translate(calc(var(--parallax-x) * -0.3), calc(var(--parallax-y) * -0.3))",
           }}
         />
 
@@ -505,14 +415,8 @@ export default function TemplatesPage() {
       {/* Main Content */}
       {contentVisible && (
         <div className="relative z-10 pt-24 pb-16 px-4 sm:px-6 lg:px-8">
-          {/* Header with Parallax */}
-          <div
-            className="text-center mb-12 max-w-3xl mx-auto"
-            style={{
-              transform: `translateY(${scrollY * 0.15}px)`,
-              opacity: Math.max(0, 1 - scrollY / 400),
-            }}
-          >
+          {/* Header */}
+          <div className="text-center mb-12 max-w-3xl mx-auto">
             <h1
               className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-white animate-float-in tracking-tight"
               style={{
@@ -540,19 +444,15 @@ export default function TemplatesPage() {
                   template={template}
                   index={index}
                   onPreview={setPreviewTemplate}
-                  scrollY={scrollY}
                 />
               ))}
             </div>
           </div>
 
-          {/* CTA Section with Parallax */}
+          {/* CTA Section */}
           <div
             className="mt-20 text-center animate-float-in"
-            style={{
-              animationDelay: "1s",
-              transform: `translateY(${scrollY * -0.05}px)`,
-            }}
+            style={{ animationDelay: "1s" }}
           >
             <div className="inline-block p-8 md:p-12 rounded-3xl bg-white/10 backdrop-blur-md border border-white/20">
               <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">

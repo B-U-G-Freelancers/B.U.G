@@ -1,37 +1,41 @@
 // src/components/layout/Layout.jsx
-import { useState, useEffect } from "react";
-import Menu from "./Menu";
+import { useState } from "react";
+import StaggeredMenu from "./StaggeredMenu";
 import Footer from "./Footer";
 import IntroAnimation from "../ui/IntroAnimation";
+import GlobalBackground from "./GlobalBackground";
 
 export default function Layout({ children }) {
-  const [scrolled, setScrolled] = useState(false);
-  const [introComplete, setIntroComplete] = useState(false);
+    const [introComplete, setIntroComplete] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    return (
+        <div className="relative min-h-screen bg-transparent text-white overflow-x-hidden selection:bg-cyan-500 selection:text-black">
 
-  return (
-    <div className="min-h-screen flex flex-col bg-bg-primary">
-      {/* Intro Animation Overlay */}
-      {!introComplete && (
-        <IntroAnimation onComplete={() => setIntroComplete(true)} />
-      )}
+            {/* 🌐 GLOBAL CYBERPUNK UNIVERSE (ALWAYS ON) */}
+            <GlobalBackground />
 
-      {/* Header / Menu - absolute to avoid taking space in flow */}
-      <div
-        className={`fixed top-0 left-0 w-full z-[100] transition-opacity duration-500 ${introComplete ? "opacity-100" : "opacity-0"
-          }`}
-      >
-        <Menu isFixed />
-      </div>
+            {/* 🧠 INTRO BOOT SEQUENCE (TOPMOST) */}
+            {!introComplete && (
+                <div className="fixed inset-0 z-[9999]">
+                    <IntroAnimation onComplete={() => setIntroComplete(true)} />
+                </div>
+            )}
 
-      <main className="flex-1">{children}</main>
+            {/* UI & CONTENT LAYER */}
+            <div className={`relative z-10 transition-opacity duration-1000 ${introComplete ? "opacity-100" : "opacity-0"}`}>
 
-      <Footer />
-    </div>
-  );
+                {/* STAGGERED MENU */}
+                <StaggeredMenu />
+
+                {/* MAIN CONTENT */}
+                <main className="relative z-10 w-full">
+                    {children}
+                </main>
+
+                {/* FOOTER */}
+                <Footer />
+            </div>
+
+        </div>
+    );
 }

@@ -1,152 +1,90 @@
-// src/components/ui/IntroAnimation.jsx
-import { useEffect, useRef, useState } from "react";
+import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
-import logoWhite from "../../assets/bug_logo_white.svg";
 
 export default function IntroAnimation({ onComplete }) {
-  const containerRef = useRef(null);
-  const logoRef = useRef(null);
-  const textRef = useRef(null);
-  const taglineRef = useRef(null);
-  const shimmerRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(true);
+    const containerRef = useRef(null);
+    const textRef = useRef(null);
+    const subTextRef = useRef(null);
+    const progressRef = useRef(null);
+    const barRef = useRef(null);
 
-  useEffect(() => {
-    const tl = gsap.timeline({
-      onComplete: () => {
-        setIsVisible(false);
-        onComplete?.();
-      },
-    });
+    useEffect(() => {
+        const tl = gsap.timeline({
+            onComplete: () => {
+                if (onComplete) onComplete();
+            },
+        });
 
-    // Initial state
-    gsap.set([logoRef.current, textRef.current, taglineRef.current], {
-      opacity: 0,
-      scale: 0.9,
-      y: 20
-    });
+        // Initial state
+        gsap.set(containerRef.current, { autoAlpha: 1 });
+        gsap.set(textRef.current, { autoAlpha: 0, scale: 0.9, filter: "blur(10px)" });
+        gsap.set(subTextRef.current, { autoAlpha: 0 });
+        gsap.set(progressRef.current, { scaleX: 0 });
+        gsap.set(barRef.current, { autoAlpha: 0 });
 
-    // Shimmer initial position
-    gsap.set(shimmerRef.current, {
-      xPercent: -150,
-      rotate: 20
-    });
+        // Animation sequence
+        tl.to(textRef.current, {
+            autoAlpha: 1,
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 1.2,
+            ease: "power4.out",
+        })
+            .to(subTextRef.current, {
+                autoAlpha: 1,
+                duration: 0.5,
+                repeat: 3,
+                yoyo: true, // Blink effect
+                ease: "steps(1)",
+            }, "-=0.5")
+            .to(barRef.current, {
+                autoAlpha: 1,
+                duration: 0.3
+            })
+            .to(progressRef.current, {
+                scaleX: 1,
+                duration: 1.5,
+                ease: "expo.inOut",
+            })
+            .to([textRef.current, subTextRef.current, barRef.current], {
+                autoAlpha: 0,
+                y: -20,
+                duration: 0.5,
+                ease: "power2.in"
+            })
+            .to(containerRef.current, {
+                clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
+                duration: 0.8,
+                ease: "power4.inOut"
+            });
 
-    // Entrance animation
-    tl.to(logoRef.current, {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      duration: 1,
-      ease: "power3.out",
-    })
-      .to(
-        textRef.current,
-        {
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-        },
-        "-=0.6"
-      )
-      .to(
-        taglineRef.current,
-        {
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-        },
-        "-=0.6"
-      )
+        return () => {
+            tl.kill();
+        };
+    }, [onComplete]);
 
-      // Shimmer Effect Pass
-      .to(shimmerRef.current, {
-        xPercent: 150,
-        duration: 1.2,
-        ease: "power2.inOut",
-      }, "-=1.0") // Overlap with entrance
-
-      // Hold
-      .to({}, { duration: 0.5 })
-
-      // Exit - Diagonal Movement (Left-Up) then Fade
-      // We move the logo towards the header position, then fade everything out
-      .to([logoRef.current], {
-        x: -window.innerWidth / 3, // Move left
-        y: -window.innerHeight / 3, // Move up
-        scale: 0.5,
-        rotation: -10,
-        opacity: 0, // Fade out during movement
-        duration: 1.2,
-        ease: "power3.in",
-      })
-      .to([textRef.current, taglineRef.current], {
-        x: -50,
-        y: -50,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.in"
-      }, "<") // Start with logo movement
-
-      .to(
-        containerRef.current,
-        {
-          opacity: 0,
-          duration: 0.8,
-          ease: "power2.inOut",
-        },
-        "-=0.5"
-      );
-
-    return () => {
-      tl.kill();
-    };
-  }, [onComplete]);
-
-  if (!isVisible) return null;
-
-  return (
-    <div
-      ref={containerRef}
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-bg-primary overflow-hidden"
-    >
-      {/* Content wrapper with shimmer mask */}
-      <div className="relative flex flex-col items-center justify-center p-10">
-
-        {/* Shimmer Overlay */}
+    return (
         <div
-          ref={shimmerRef}
-          className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-transparent via-white/10 to-transparent w-full h-full blur-md"
-        ></div>
-
-        {/* Logo */}
-        <div
-          ref={logoRef}
-          className="flex flex-col items-center justify-center mb-8 relative z-0"
+            ref={containerRef}
+            className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black text-white overflow-hidden"
+            style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
         >
-          <img src={logoWhite} alt="BUG Logo" className="size-24" />
+            {/* Background Grid */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,102,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,102,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+
+            <div className="relative z-10 flex flex-col items-center">
+                <h1 ref={textRef} className="text-6xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 font-mono">
+                    B.U.G
+                </h1>
+                <p ref={subTextRef} className="mt-4 text-[#00f6ff] font-mono text-sm tracking-[0.3em] uppercase">
+                    System Initialization Sequence...
+                </p>
+
+                {/* Loader Bar */}
+                <div ref={barRef} className="w-64 h-1 bg-gray-900 mt-8 relative overflow-hidden">
+                    <div ref={progressRef} className="h-full bg-[#0066ff] origin-left w-full shadow-[0_0_10px_#0066ff]"></div>
+                </div>
+            </div>
         </div>
-
-        {/* Company Name */}
-        <h1
-          ref={textRef}
-          className="font-display text-6xl sm:text-8xl font-black tracking-tighter text-white relative z-0"
-        >
-          BUG
-        </h1>
-
-        {/* Tagline */}
-        <p
-          ref={taglineRef}
-          className="mt-4 text-lg sm:text-xl font-medium text-text-secondary uppercase tracking-[0.3em] relative z-0"
-        >
-          Build Your Genie
-        </p>
-      </div>
-    </div>
-  );
+    );
 }

@@ -1,100 +1,137 @@
-// src/sections/Works.jsx
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 const PROJECTS = [
-  {
-    title: "Nova Finance",
-    category: "Fintech • Mobile App & Dashboard",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBrtMzsngaIkUHKX3wwbqO-6MeL6LTbaDURKBJF9GMOnobgNhCTBNs9ObeM4Hdc26sxPmBNMjQzclFrYwFPJnWStLz6HEUCLeZs5g1f200HZSr2uphYWwPLFChp8o74qXOM-1jbN88I8OfMATRP3Gey71lavYXyG0PfQWX-XhABDXQjWx0KAURemIT0s2eqiDXwLnXl0cGjnYZucmULkq9RGKUkIkTGnO2FlK8OynBhxVy3vvawR72P6niR0IfX-EYYicwKBEQLKg",
-    stagger: false,
-  },
-  {
-    title: "Aether Core",
-    category: "SaaS • AI Infrastructure Platform",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDIiL_Bn6YUUtBKsu8KGhkevCRAJI17t4DAD5TOOmTRnu3gGXvsa6IebyBdbV5PAh7F4SGX3uK0DyJsORtl1wy0L59iWDwRa0xrEHY27llbfCsJWR7xCvv_87_jnSUCVegZXY9qYA2UXwnAV-ZgUmDNq9zV4o08CyXBDMOrxFBFMFdyIKYrAGCtfskGwDWF5M1keGyu-T6J2mYrCNIwHcfWBueSjSomC0b24wUPQuWrJv4UUfzsp3GS7Su59RkjVky0z2OaXelFJA",
-    stagger: true,
-  },
-  {
-    title: "Lumina",
-    category: "E-commerce • Design System",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuB_qC94TBkNDNka4dMLtKmo3GrZuHno6c2hcFTGgGNqSviWLmyud8nmuihbfXNBuofiLtXe9nnyH1Sy714NFsP76lgJBZL1Dg3ZT7jzS8rURkJn_lwZ_jK9kxFbV-FncmsHHlNWk06Gl2JMwJcLNVmUvAEis0CQTsWBvMZAGSmYimASFxrkHv8DAxjooxJ3VxxhXpjHZi9AeDhxzZdl_S55eqQR931U4EgGuPOW7ecalm8fTkXel_yVJQs_dTxngrZoCfUr1dFbLA",
-    stagger: false,
-  },
-  {
-    title: "MedSync",
-    category: "Healthcare • IoT Integration",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAlCBXX_Xlya0tOIKNZXDx-nfJz8m9ZWNc3D0gJ8G4qd6zPj-HHGOUJSk0qD2oNAdsj9y-q0-75jYD4C4rIan9KcLvfdvHM1Sapim-0AZjvK7PdaRo1m87cRtiWg8u1fe84dEF9ueuuFVhaiO4EEWa9ZP7ZXSqDPe4Cf5TxGFMWIC9aJqtFPHIApO7LWmKyCPlsPbS1_5o-L-I7WHtoADu8HsizTnLZ_cb93WXkrRE3NnV9pjS09n5LPLDc_kEcdCeee3rQFDeVTg",
-    stagger: true,
-  },
+    {
+        title: "Nova Finance",
+        category: "Fintech • Mobile App & Dashboard",
+        image:
+            "https://images.unsplash.com/photo-1639322537228-ad714291f22c?q=80&w=2600&auto=format&fit=crop",
+        stagger: false,
+    },
+    {
+        title: "Aether Core",
+        category: "SaaS • AI Infrastructure",
+        image:
+            "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2565&auto=format&fit=crop",
+        stagger: true,
+    },
+    {
+        title: "Lumina Vision",
+        category: "E-commerce • 3D Design System",
+        image:
+            "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop",
+        stagger: false,
+    },
+    {
+        title: "MedSync Prime",
+        category: "Healthcare • Bio-Tech Interface",
+        image:
+            "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2670&auto=format&fit=crop",
+        stagger: true,
+    },
 ];
 
 export default function Works() {
-  return (
-    <section id="work" className="py-32 px-6 lg:px-8 bg-bg-secondary/40">
-      <div className="mx-auto max-w-7xl">
-        <div className="flex items-end justify-between mb-24">
-          <h2 className="text-5xl font-bold tracking-tighter text-text-primary sm:text-7xl">
-            Selected <br className="sm:hidden" /> Works
-          </h2>
-          <a
-            href="#"
-            className="hidden sm:flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-accent hover:text-text-primary transition-colors duration-300 group"
-          >
-            View all projects
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-          </a>
-        </div>
-
-        <div className="grid gap-12 md:grid-cols-2 lg:gap-20">
-          {PROJECTS.map((project) => (
-            <div
-              key={project.title}
-              className={`group cursor-pointer ${
-                project.stagger ? "md:mt-32" : ""
-              }`}
-            >
-              <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-bg-secondary border border-border-subtle shadow-2xl">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                {/* Overlay text shown on hover for mobile/extra context */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="h-14 w-14 rounded-full bg-accent flex items-center justify-center text-text-primary scale-75 group-hover:scale-100 transition-transform duration-500">
-                    <ArrowUpRight className="size-6" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-8 space-y-2">
-                <h3 className="text-3xl font-bold text-text-primary group-hover:text-accent transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-text-secondary text-base font-medium uppercase tracking-wider">
-                  {project.category}
-                </p>
-              </div>
+    return (
+        <section
+            id="works"
+            className="relative py-40 px-6 lg:px-8 bg-transparent pointer-events-none overflow-hidden"
+        >
+            {/* SECTION AURA (Luxury Contrast Layer) */}
+            <div className="absolute inset-0 -z-10">
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60" />
+                <div className="absolute top-1/2 left-1/2 w-[900px] h-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#3A7CFF]/10 blur-[180px]" />
             </div>
-          ))}
-        </div>
 
-        <div className="mt-20 sm:hidden">
-          <a
-            href="#"
-            className="flex items-center justify-center gap-2 w-full py-5 border border-border-subtle rounded-lg text-sm font-bold uppercase tracking-widest text-text-primary"
-          >
-            View all projects
-            <ArrowRight className="size-4" />
-          </a>
-        </div>
-      </div>
-    </section>
-  );
+            <div className="mx-auto max-w-7xl relative z-10 pointer-events-auto">
+                {/* HEADER */}
+                <div className="flex items-end justify-between mb-28">
+                    <div>
+                        <div className="inline-flex items-center gap-2 mb-5 px-4 py-1.5 border border-[#3A7CFF]/30 rounded-full bg-[#3A7CFF]/10 backdrop-blur-md">
+                            <span className="w-2 h-2 rounded-full bg-[#3A7CFF] animate-pulse shadow-[0_0_8px_#3A7CFF]" />
+                            <span className="text-[#3A7CFF] text-xs font-mono font-bold tracking-[0.25em] uppercase">
+                                Project Archives
+                            </span>
+                        </div>
+
+                        <h2 className="text-5xl sm:text-7xl font-black tracking-tighter text-white leading-tight">
+                            SELECTED{" "}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3A7CFF] to-[#00f6ff]">
+                                WORKS
+                            </span>
+                        </h2>
+                    </div>
+
+                    <a
+                        href="#"
+                        className="hidden sm:flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#3A7CFF] hover:text-white transition-colors group"
+                    >
+                        View all projects
+                        <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                    </a>
+                </div>
+
+                {/* PROJECT GRID */}
+                <div className="grid gap-16 md:grid-cols-2 lg:gap-24">
+                    {PROJECTS.map((project) => (
+                        <div
+                            key={project.title}
+                            className={`group ${project.stagger ? "md:mt-32" : ""}`}
+                        >
+                            {/* CARD */}
+                            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-black/40 backdrop-blur-xl transition-all duration-700 group-hover:border-[#3A7CFF]/70">
+
+                                {/* IMAGE */}
+                                <img
+                                    src={project.image}
+                                    alt={project.title}
+                                    className="absolute inset-0 w-full h-full object-cover scale-105 opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-[1200ms]"
+                                />
+
+                                {/* LUXURY OVERLAYS */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                                <div className="absolute inset-0 opacity-20 bg-[linear-gradient(rgba(255,255,255,0.2)_1px,transparent_1px)] bg-[size:100%_4px]" />
+
+                                {/* DATA HUD */}
+                                <div className="absolute top-6 left-6 flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10">
+                                    <span className="w-1.5 h-1.5 bg-[#3A7CFF] rounded-full animate-pulse" />
+                                    <span className="text-xs font-mono uppercase tracking-widest text-[#3A7CFF]">
+                                        Case Study
+                                    </span>
+                                </div>
+
+                                {/* CTA */}
+                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-700">
+                                    <div className="w-20 h-20 rounded-full bg-[#3A7CFF] text-black flex items-center justify-center scale-75 group-hover:scale-100 transition-transform shadow-[0_0_30px_#3A7CFF]">
+                                        <ArrowUpRight className="w-9 h-9" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* META */}
+                            <div className="mt-10 pl-4 border-l-2 border-white/0 group-hover:border-[#3A7CFF] transition-all">
+                                <h3 className="text-3xl font-bold text-white group-hover:text-[#3A7CFF] transition-colors">
+                                    {project.title}
+                                </h3>
+                                <p className="mt-2 text-xs font-mono uppercase tracking-[0.25em] text-gray-400">
+                                    {project.category}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* MOBILE CTA */}
+                <div className="mt-24 sm:hidden">
+                    <a
+                        href="#"
+                        className="flex items-center justify-center gap-2 w-full py-6 border border-[#3A7CFF]/30 rounded-xl text-sm font-bold uppercase tracking-widest text-[#3A7CFF] hover:bg-[#3A7CFF] hover:text-black transition-colors"
+                    >
+                        View all projects
+                        <ArrowRight className="size-4" />
+                    </a>
+                </div>
+            </div>
+        </section>
+    );
 }

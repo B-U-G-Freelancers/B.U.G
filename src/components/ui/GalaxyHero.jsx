@@ -1,9 +1,48 @@
-import React, { useEffect, useRef, useState, Suspense, lazy } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import { ChevronDown } from 'lucide-react';
-const Spline = lazy(() => import('@splinetool/react-spline'));
+import { ChevronDown, BarChart3, Activity, Globe, Cpu, Radio, ChevronDown as ScrollArrow, Signal, Wifi } from 'lucide-react';
 
-function ParticleOverlay() {
+/* =========================
+   DECRYPTION TEXT EFFECT
+========================= */
+const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+-=[]{}|;:,.<>?";
+
+const DecryptionText = ({ text, className }) => {
+    const [displayText, setDisplayText] = useState(text);
+    const elementRef = useRef(null);
+
+    useEffect(() => {
+        let iterations = 0;
+        const interval = setInterval(() => {
+            setDisplayText(
+                text
+                    .split("")
+                    .map((char, index) => {
+                        if (index < iterations) {
+                            return text[index];
+                        }
+                        return CHARS[Math.floor(Math.random() * CHARS.length)];
+                    })
+                    .join("")
+            );
+
+            if (iterations >= text.length) {
+                clearInterval(interval);
+            }
+            iterations += 1 / 3;
+        }, 30);
+
+        return () => clearInterval(interval);
+    }, [text]);
+
+    return <span ref={elementRef} className={className}>{displayText}</span>;
+};
+
+/* =========================
+   PARTICLE OVERLAY
+   (Anti-Gravity System Nodes)
+========================= */
+export function ParticleOverlay() {
     const canvasRef = useRef(null);
 
     useEffect(() => {
@@ -16,7 +55,7 @@ function ParticleOverlay() {
         let height = canvas.height = window.innerHeight;
 
         const particles = [];
-        const particleCount = 60;
+        const particleCount = 80;
 
         class Particle {
             constructor() {
@@ -24,28 +63,32 @@ function ParticleOverlay() {
             }
             reset() {
                 this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.y = height + Math.random() * 100;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedY = -(Math.random() * 0.5 + 0.2);
+                this.speedX = (Math.random() - 0.5) * 0.2;
                 this.opacity = 0;
-                this.maxOpacity = Math.random() * 0.7 + 0.3;
-                this.fadeSpeed = 0.005 + Math.random() * 0.01;
+                this.maxOpacity = Math.random() * 0.6 + 0.2;
+                this.life = 0;
+                this.maxLife = 100 + Math.random() * 200;
             }
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
+                this.life++;
 
-                if (this.opacity < this.maxOpacity) {
-                    this.opacity += this.fadeSpeed;
-                }
+                if (this.life < 20) this.opacity += 0.05;
+                else if (this.life > this.maxLife - 20) this.opacity -= 0.05;
 
-                if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+                if (this.opacity < 0) this.opacity = 0;
+                if (this.opacity > this.maxOpacity) this.opacity = this.maxOpacity;
+
+                if (this.y < -10 || this.life >= this.maxLife) {
                     this.reset();
                 }
             }
             draw() {
-                ctx.fillStyle = `rgba(58, 124, 255, ${this.opacity})`;
+                ctx.fillStyle = `rgba(58, 124, 255, ${this.opacity})`; // #3A7CFF
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -82,233 +125,275 @@ function ParticleOverlay() {
     return (
         <canvas
             ref={canvasRef}
-            className="absolute inset-0 z-[5] pointer-events-none opacity-0"
+            className="absolute inset-0 z-[5] pointer-events-none mix-blend-screen"
             id="hero-particles"
         />
     );
 }
 
-function HeroSplineBackground() {
-    const splineContainerRef = useRef(null);
+/* =========================
+   COMMAND CENTER HOLOGRAM
+   (Projected 3D Interface)
+========================= */
+const HologramPanel = ({ className, children, delay = 0, initialRotation = 0, tx = 0, ty = 0, tz = 0 }) => {
+    const panelRef = useRef(null);
 
     useEffect(() => {
-        const k = ['spline', 'logo', 'design'];
-        const o = new MutationObserver((m) => {
-            m.forEach((mu) => {
-                mu.addedNodes.forEach((n) => {
-                    if (n.nodeType === 1) {
-                        const a = n.tagName === 'A' ? n : n.querySelector?.('a');
-                        if (a && k.some(s => a.href?.toLowerCase().includes(s) || a.id?.toLowerCase().includes(s))) {
-                            a.remove();
-                        }
-                        const b = n.querySelector?.(`[id*="${k[0]}"], [class*="${k[0]}"]`);
-                        if (b) b.remove();
-                    }
-                });
-            });
+        gsap.to(panelRef.current, {
+            rotationY: `+=${10}`,
+            y: "+=10",
+            duration: 4 + Math.random() * 2,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            delay
         });
+    }, [delay]);
 
-        if (splineContainerRef.current) {
-            o.observe(splineContainerRef.current, { childList: true, subtree: true });
-        }
-        return () => o.disconnect();
+    return (
+        <div
+            ref={panelRef}
+            className={`absolute backdrop-blur-md bg-[#3A7CFF]/5 border border-[#3A7CFF]/30 rounded-lg p-3 shadow-[0_0_20px_rgba(58,124,255,0.1)] transition-all hover:border-[#3A7CFF]/60 hover:shadow-[0_0_30px_rgba(58,124,255,0.2)] ${className}`}
+            style={{
+                transformStyle: 'preserve-3d',
+                transform: `rotateY(${initialRotation}deg) translate3d(${tx}px, ${ty}px, ${tz}px)`
+            }}
+        >
+            <div className="relative z-10 font-mono">
+                {children}
+            </div>
+            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#3A7CFF]" />
+            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#3A7CFF]" />
+        </div>
+    );
+};
+
+export function CommandCenter3D() {
+    const containerRef = useRef(null);
+    const imageContainerRef = useRef(null);
+    const spotlightRef = useRef(null);
+
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            const { clientX, clientY } = e;
+            const xRotation = (clientY / window.innerHeight - 0.5) * 10;
+            const yRotation = (clientX / window.innerWidth - 0.5) * 10;
+
+            // Move container
+            gsap.to(imageContainerRef.current, {
+                rotationX: -xRotation,
+                rotationY: yRotation,
+                duration: 1.5,
+                ease: 'power2.out',
+                transformPerspective: 1000
+            });
+
+            // Move Spotlight
+            if (spotlightRef.current) {
+                const rect = containerRef.current.getBoundingClientRect();
+                const x = clientX - rect.left;
+                const y = clientY - rect.top;
+                spotlightRef.current.style.background = `radial-gradient(600px circle at ${x}px ${y}px, rgba(58, 124, 255, 0.15), transparent 40%)`;
+            }
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
     }, []);
 
     return (
         <div
-            ref={splineContainerRef}
-            className="relative w-full h-screen overflow-hidden bg-[#040506]"
+            ref={containerRef}
+            className="absolute inset-0 overflow-hidden flex items-center justify-center pointer-events-none"
+            style={{ perspective: '2000px' }}
         >
-            <Suspense fallback={<div className="w-full h-full bg-[#040506]" />}>
-                <div className="absolute inset-0 w-full h-full">
-                    <Spline
-                        className="w-full h-full"
-                        style={{ width: '100%', height: '100%' }}
-                        scene="https://prod.spline.design/us3ALejTXl6usHZ7/scene.splinecode"
-                    />
-                </div>
-            </Suspense>
+            {/* Interactive Spotlight Overlay */}
+            <div ref={spotlightRef} className="absolute inset-0 z-0 pointer-events-none" />
 
-            {/* Subtle Noise for grain texture */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-[50vh] bg-gradient-to-b from-[#3A7CFF] to-transparent opacity-30 z-0" />
+            <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-[#3A7CFF]/5 blur-[100px] rounded-full z-0" />
+
             <div
-                className="absolute inset-0 z-20 pointer-events-none opacity-[0.03] mix-blend-overlay"
-                style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E")`,
-                    backgroundRepeat: 'repeat',
-                    backgroundSize: '128px 128px'
-                }}
-            />
+                ref={imageContainerRef}
+                className="relative w-full max-w-4xl aspect-video flex items-center justify-center transition-all duration-1000 z-10"
+                style={{ transformStyle: 'preserve-3d' }}
+            >
+                <div className="relative w-full h-full group">
+                    <div className="absolute inset-0 border border-[#3A7CFF]/10 rounded-xl mix-blend-overlay" />
 
-            {/* Interaction flash Layer */}
-            <div id="interaction-flash" className="absolute inset-0 bg-white/10 opacity-0 pointer-events-none z-20 mix-blend-overlay" />
+                    <div className="absolute inset-0 z-20 pointer-events-none opacity-10 bg-[length:100%_4px]"
+                        style={{ backgroundImage: `linear-gradient(rgba(58, 124, 255, 0.2) 1px, transparent 1px)` }}
+                    />
 
-            {/* Particles layer */}
-            <ParticleOverlay />
+                    {/* Transparent HUD Frame causing GlobalBackground to be visible */}
+                    <div className="w-full h-full relative overflow-hidden rounded-xl border border-[#3A7CFF]/10 bg-transparent backdrop-blur-[2px]">
+                        <div className="absolute inset-0 flex items-center justify-center opacity-30">
+                            {/* Central CPU/System Icon acting as a HUD reticle */}
+                            <Cpu className="w-32 h-32 text-[#3A7CFF] animate-pulse opacity-50" />
+                        </div>
+                    </div>
+
+                    <div className="absolute top-0 w-full h-[2px] bg-[#3A7CFF] opacity-50 blur-[2px] animate-scanline" />
+                </div>
+
+                {/* Original Widgets */}
+                <HologramPanel className="w-48" initialRotation={-20} tx={-250} ty={-50} tz={100} delay={0}>
+                    <div className="flex items-center gap-2 mb-2 text-[#3A7CFF]">
+                        <Activity className="w-3 h-3" />
+                        <span className="text-[10px] font-bold uppercase tracking-widest">Sys_Monitor</span>
+                    </div>
+                    <div className="h-0.5 bg-white/10 rounded-full overflow-hidden">
+                        <div className="h-full w-[65%] bg-[#3A7CFF] animate-pulse" />
+                    </div>
+                    <div className="mt-1 flex justify-between text-[8px] text-gray-400">
+                        <span>CPU</span>
+                        <span>48%</span>
+                    </div>
+                </HologramPanel>
+
+                <HologramPanel className="w-56" initialRotation={20} tx={280} ty={40} tz={120} delay={0.5}>
+                    <div className="flex items-center gap-2 mb-2 text-[#E947F5]">
+                        <Radio className="w-3 h-3" />
+                        <span className="text-[10px] font-bold uppercase tracking-widest">Net_Link</span>
+                    </div>
+                    <div className="flex gap-0.5 h-4 items-end">
+                        {[40, 70, 45, 90, 60, 80, 50, 95].map((h, i) => (
+                            <div key={i} className="flex-1 bg-[#E947F5]/60" style={{ height: `${h}%` }} />
+                        ))}
+                    </div>
+                </HologramPanel>
+
+                {/* NEW: Globe Uplink Widget */}
+                <HologramPanel className="w-40" initialRotation={-15} tx={-280} ty={120} tz={80} delay={0.8}>
+                    <div className="flex items-center gap-2 mb-2 text-[#00f6ff]">
+                        <Globe className="w-3 h-3 animate-spin duration-[10s]" />
+                        <span className="text-[10px] font-bold uppercase tracking-widest">Geo_Node</span>
+                    </div>
+                    <div className="grid grid-cols-4 gap-1">
+                        {[...Array(8)].map((_, i) => (
+                            <div key={i} className={`h-1 w-1 rounded-full ${i % 3 === 0 ? 'bg-[#00f6ff]' : 'bg-white/10'}`} />
+                        ))}
+                    </div>
+                    <p className="mt-2 text-[8px] text-gray-400 font-mono tracking-widest">SYNCING...</p>
+                </HologramPanel>
+
+                {/* NEW: Signal Strength Widget */}
+                <HologramPanel className="w-32" initialRotation={15} tx={320} ty={-100} tz={90} delay={1.2}>
+                    <div className="flex items-center gap-2 mb-2 text-[#ffe900]">
+                        <Wifi className="w-3 h-3" />
+                        <span className="text-[10px] font-bold uppercase tracking-widest">Signal</span>
+                    </div>
+                    <div className="flex items-end gap-1 h-6">
+                        <div className="w-2 h-2 bg-[#ffe900]/40" />
+                        <div className="w-2 h-3 bg-[#ffe900]/60" />
+                        <div className="w-2 h-4 bg-[#ffe900]/80" />
+                        <div className="w-2 h-6 bg-[#ffe900] animate-pulse" />
+                    </div>
+                </HologramPanel>
+            </div>
+
+            <style dangerouslySetInnerHTML={{
+                __html: `
+                @keyframes scanline {
+                    0% { top: 0%; opacity: 0; }
+                    50% { opacity: 1; }
+                    100% { top: 100%; opacity: 0; }
+                }
+                .animate-scanline { animation: scanline 3s linear infinite; }
+            `}} />
         </div>
     );
 }
 
-function HeroContent() {
+/* =========================
+   HERO CONTENT
+========================= */
+export function HeroContent() {
     const headlineRef = useRef(null);
     const subtitleRef = useRef(null);
     const ctaRef = useRef(null);
     const scrollRef = useRef(null);
 
     useEffect(() => {
-        const delay = 1.0;
-        const tl = gsap.timeline({ delay });
+        const tl = gsap.timeline({ delay: 0.5 });
 
-        gsap.set(
-            [headlineRef.current, subtitleRef.current, ctaRef.current, scrollRef.current],
-            { opacity: 0, y: 60, filter: 'blur(10px)' }
-        );
+        gsap.set([headlineRef.current, subtitleRef.current, ctaRef.current, scrollRef.current], { autoAlpha: 0, y: 30, filter: "blur(10px)" });
 
-        tl.to(headlineRef.current, {
-            opacity: 1,
-            y: 0,
-            filter: 'blur(0px)',
-            duration: 1.2,
-            ease: "power4.out",
-        })
-            .to("#hero-particles", {
-                opacity: 0.6,
-                duration: 2,
-                ease: "power2.inOut"
-            }, "-=1")
-            .to(subtitleRef.current, {
-                opacity: 1,
-                y: 0,
-                filter: 'blur(0px)',
-                duration: 1,
-                ease: "power3.out",
-            }, "-=0.8")
-            .to(ctaRef.current, {
-                opacity: 1,
-                y: 0,
-                filter: 'blur(0px)',
-                duration: 0.8,
-                ease: "power3.out",
-            }, "-=0.6")
-            .to(scrollRef.current, {
-                opacity: 1,
-                y: 0,
-                filter: 'blur(0px)',
-                duration: 1.2,
-                ease: "elastic.out(1, 0.75)",
-            }, "-=0.4");
+        tl.to(headlineRef.current, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 1, ease: "power3.out" })
+            .to(subtitleRef.current, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 1, ease: "power3.out" }, "-=0.8")
+            .to(ctaRef.current, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 1, ease: "power3.out" }, "-=0.8")
+            .to(scrollRef.current, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 1, ease: "back.out(1.7)" }, "-=0.5");
 
         gsap.to(scrollRef.current, {
             y: 10,
-            duration: 2,
+            duration: 1.5,
             repeat: -1,
             yoyo: true,
             ease: "sine.inOut"
         });
-
-        return () => tl.kill();
     }, []);
 
     return (
-        <div className="flex min-h-screen flex-col items-center justify-center px-6 lg:px-8 text-center relative z-10 w-full pointer-events-none">
-            <div className="max-w-5xl relative z-10 pointer-events-none">
-                <h1
-                    ref={headlineRef}
-                    className="font-display text-5xl font-black leading-[1.05] tracking-tighter text-white sm:text-7xl lg:text-9xl drop-shadow-2xl select-none"
-                >
-                    We build digital <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-gray-400">
-                        products that work
-                    </span>
-                </h1>
-
-                <p
-                    ref={subtitleRef}
-                    className="mx-auto mt-10 max-w-xl text-lg text-gray-200 sm:text-xl font-light leading-relaxed drop-shadow-lg select-none"
-                >
-                    Engineering-led design for high-growth companies.{" "}
-                    <br className="hidden sm:block" />
-                    We turn complexity into clarity.
-                </p>
-
-                <div
-                    ref={ctaRef}
-                    className="mt-12 flex flex-col items-center justify-center gap-6 sm:flex-row pointer-events-auto"
-                >
-                    <a
-                        href="#contact"
-                        className="group relative h-14 overflow-hidden rounded-md bg-[#3A7CFF] px-10 text-base font-bold text-white shadow-[0_0_30px_rgba(58,124,255,0.3)] transition-all hover:bg-[#6FA0FF] hover:shadow-[0_0_40px_rgba(58,124,255,0.5)] flex items-center justify-center"
-                    >
-                        <span className="relative z-10">Get in touch</span>
-                        <div className="absolute inset-0 z-0 flex items-center justify-center opacity-30 pointer-events-none">
-                            <div className="w-[100%] h-full bg-gradient-to-r from-transparent via-white to-transparent -skew-x-12 animate-shimmer-slide" style={{ width: '40px' }} />
-                        </div>
-                    </a>
-                </div>
+        <div className="relative z-30 flex flex-col items-center justify-center min-h-screen text-center px-4 pointer-events-none">
+            <div className="mb-8 flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#3A7CFF]/30 bg-[#000510]/60 backdrop-blur-md">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#3A7CFF] animate-pulse shadow-[0_0_8px_#3A7CFF]" />
+                <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-[#3A7CFF] uppercase">
+                    System Online
+                </span>
             </div>
 
-            {/* Scroll Indicator */}
-            <div
+            <h1 ref={headlineRef} className="font-display text-5xl md:text-8xl font-black tracking-tighter text-white leading-tight drop-shadow-2xl">
+                WE BUILD <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3A7CFF] via-[#5c92ff] to-[#E947F5] animate-pulse-slow">
+                    <DecryptionText text="DIGITAL REALITIES" />
+                </span>
+            </h1>
+
+            <p ref={subtitleRef} className="mt-8 max-w-2xl text-lg md:text-xl text-gray-300 font-light leading-relaxed drop-shadow-md">
+                High-performance engineering meets elite cyberpunk aesthetics.<br />
+                Establish your digital dominance.
+            </p>
+
+            <div ref={ctaRef} className="mt-12 flex flex-col sm:flex-row gap-6 pointer-events-auto">
+                <a href="#services" className="group px-10 py-4 bg-[#3A7CFF] text-white font-bold tracking-widest uppercase hover:bg-white hover:text-[#3A7CFF] transition-all shadow-[0_0_20px_rgba(58,124,255,0.4)] clip-path-button flex items-center gap-2">
+                    <span className="relative z-10">Get Started</span>
+                    <ChevronDown className="w-5 h-5 -rotate-90 group-hover:rotate-0 transition-transform duration-300" />
+                </a>
+                <a href="#works" className="px-8 py-4 border border-white/20 text-white font-bold tracking-widest uppercase hover:border-[#3A7CFF] hover:text-[#3A7CFF] transition-all bg-black/50 backdrop-blur-sm">
+                    View Systems
+                </a>
+            </div>
+
+            {/* Animated Scroll Arrow */}
+            <a
                 ref={scrollRef}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-auto cursor-pointer group"
-                onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+                href="#services"
+                className="absolute bottom-12 pointer-events-auto flex flex-col items-center gap-2 group cursor-pointer"
             >
-                <div className="relative flex flex-col items-center">
-                    <span className="text-[10px] uppercase tracking-[0.4em] mb-4 font-bold text-white/40 group-hover:text-[#3A7CFF] transition-colors duration-300">
-                        Scroll
-                    </span>
-                    <div className="w-[26px] h-[45px] rounded-full border-2 border-white/10 group-hover:border-[#3A7CFF]/50 transition-colors duration-500 relative flex justify-center p-1 overflow-hidden backdrop-blur-sm bg-white/5">
-                        <div className="w-[3px] h-[8px] bg-gradient-to-b from-[#3A7CFF] to-[#E947F5] rounded-full animate-scroll-wheel shadow-[0_0_10px_#3A7CFF]" />
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#3A7CFF]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    </div>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#3A7CFF] opacity-0 group-hover:opacity-100 transition-opacity duration-300">Scroll Down</span>
+                <div className="w-12 h-12 rounded-full border border-[#3A7CFF]/30 flex items-center justify-center group-hover:border-[#3A7CFF] group-hover:bg-[#3A7CFF]/10 transition-all shadow-[0_0_15px_rgba(58,124,255,0.2)]">
+                    <ScrollArrow className="w-6 h-6 text-[#3A7CFF] group-hover:text-white transition-colors" />
                 </div>
-            </div>
-
-            <style dangerouslySetInnerHTML={{
-                __html: `
-                @keyframes scroll-wheel {
-                    0% { transform: translateY(0); opacity: 0; }
-                    20% { opacity: 1; }
-                    80% { opacity: 1; }
-                    100% { transform: translateY(20px); opacity: 0; }
-                }
-                @keyframes shimmer-slide {
-                    0% { transform: translateX(-300%); }
-                    100% { transform: translateX(300%); }
-                }
-                .animate-shimmer-slide {
-                    animation: shimmer-slide 3s infinite linear;
-                }
-            `}} />
+            </a>
         </div>
     );
 }
 
-export const HeroSection = () => {
-    const handleInteraction = () => {
-        const flash = document.getElementById('interaction-flash');
-        if (flash) {
-            gsap.fromTo(flash, { opacity: 0.3 }, { opacity: 0, duration: 0.5, ease: 'power2.out' });
-        }
-    };
-
+export function HeroSection() {
     return (
-        <div className="relative bg-[#040506] overflow-hidden" onClick={handleInteraction}>
-            <div className="relative min-h-screen">
-                <div className="absolute inset-0 z-0">
-                    <HeroSplineBackground />
-                </div>
-                <div className="absolute inset-0 z-10 pointer-events-none">
-                    <HeroContent />
-                </div>
+        <div className="relative w-full h-screen overflow-hidden">
+            <div className="absolute inset-0 bg-transparent z-0">
+                {/* Local Particles for extra depth */}
+                <ParticleOverlay />
+                <CommandCenter3D />
             </div>
 
-            {/* Visual Bridge */}
-            <div className="absolute bottom-0 left-0 w-full h-40 z-30 pointer-events-none">
-                <div className="absolute bottom-[-80px] left-1/2 -translate-x-1/2 w-[140%] h-[160px] bg-[#3A7CFF]/15 blur-[100px] rounded-[100%] opacity-40" />
-                <div className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 w-[110%] h-[80px] bg-[#E947F5]/20 blur-[60px] rounded-[100%] opacity-30" />
-            </div>
+            <HeroContent />
+
+            {/* Bottom Fade Gradient to merge with next section */}
+            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black via-black/80 to-transparent z-20 pointer-events-none" />
         </div>
     );
-};
+}
 
 export default HeroSection;

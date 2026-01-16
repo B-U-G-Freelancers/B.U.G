@@ -5,46 +5,46 @@
    DESIGN TOKENS (TAILWIND v4)
 -------------------------------- */
 @theme {
-  /* Backgrounds */
-  --color-bg-primary: #0B0D10;
-  --color-bg-secondary: #10131A;
+    /* Backgrounds */
+    --color-bg-primary: #0B0D10;
+    --color-bg-secondary: #10131A;
 
-  /* Text */
-  --color-text-primary: #E6E6E6;
-  --color-text-secondary: #B0B3B8;
-  --color-text-muted: #7A7F87;
+    /* Text */
+    --color-text-primary: #E6E6E6;
+    --color-text-secondary: #B0B3B8;
+    --color-text-muted: #7A7F87;
 
-  /* Accent — Aladdin Blue */
-  --color-accent: #3A7CFF;
-  --color-accent-soft: #6FA0FF;
-  --color-accent-muted: #243A6E;
+    /* Accent — Aladdin Blue */
+    --color-accent: #3A7CFF;
+    --color-accent-soft: #6FA0FF;
+    --color-accent-muted: #243A6E;
 
-  /* Borders */
-  --color-border-subtle: rgba(255, 255, 255, 0.08);
+    /* Borders */
+    --color-border-subtle: rgba(255, 255, 255, 0.08);
 
-  /* Fonts */
-  --font-sans: Inter, system-ui, sans-serif;
-  --font-display: "Space Grotesk", Inter, sans-serif;
+    /* Fonts */
+    --font-sans: Inter, system-ui, sans-serif;
+    --font-display: "Space Grotesk", Inter, sans-serif;
 
-  /* Spacing rhythm (optional, but clean) */
-  --spacing-section: 5rem;
+    /* Spacing rhythm (optional, but clean) */
+    --spacing-section: 5rem;
 }
 
 html,
 body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden !important;
-  width: 100% !important;
-  position: relative;
-  background-color: #040506;
-  color: var(--color-text-primary);
-  font-family: var(--font-sans);
-  scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    position: relative;
+    background-color: #040506;
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 /* 🛡️ Extended Object Cleanup */
@@ -52,30 +52,50 @@ body {
 [class*="spline"],
 [aria-label*="Spline"],
 a[href*="spline.design"] {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  height: 0 !important;
-  width: 0 !important;
-  font-size: 0 !important;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    height: 0 !important;
+    width: 0 !important;
+    font-size: 0 !important;
 }
 
 ::selection {
-  background-color: var(--color-accent);
-  color: var(--color-bg-primary);
+    background-color: var(--color-accent);
+    color: var(--color-bg-primary);
 }
 
 .font-display {
-  font-family: var(--font-display);
+    font-family: var(--font-display);
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
+    from {
+        opacity: 0;
+    }
 
-  to {
-    opacity: 1;
-  }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse-slow {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.animate-pulse-slow {
+    animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.clip-path-button {
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
 }

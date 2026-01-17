@@ -1,17 +1,19 @@
 import { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function StaggeredMenu() {
     const [isOpen, setIsOpen] = useState(false);
     const overlayRef = useRef(null);
     const linksRef = useRef([]);
     const marqueeRefs = useRef([]);
+    const navigate = useNavigate();
 
     const links = [
-        { name: "Services", href: "#services", image: "/img/services.jpg" },
-        { name: "Works", href: "#works", image: "/img/works.jpg" },
-        { name: "About", href: "#about", image: "/img/about.jpg" },
-        { name: "Contact", href: "#contact", image: "/img/contact.jpg" },
+        { name: "Services", href: "/", image: "/img/services.jpg" },
+        { name: "Works", href: "/", image: "/img/works.jpg" },
+        { name: "About", href: "/about", image: "/img/about.jpg" },
+        { name: "Contact", href: "/contact", image: "/img/contact.jpg" },
     ];
 
     /* =========================
@@ -131,8 +133,8 @@ export default function StaggeredMenu() {
                             onMouseLeave={() => hideMarquee(i)}
                         >
                             {/* MAIN LINK */}
-                            <a
-                                href={link.href}
+                            <Link
+                                to={link.href}
                                 ref={(el) => (linksRef.current[i] = el)}
                                 onClick={() => setIsOpen(false)}
                                 className="
@@ -144,7 +146,7 @@ export default function StaggeredMenu() {
                 "
                             >
                                 {link.name}
-                            </a>
+                            </Link>
 
                             {/* FLOWING MARQUEE */}
                             <div
@@ -161,8 +163,8 @@ export default function StaggeredMenu() {
                     ))}
 
                     {/* CTA */}
-                    <a
-                        href="#contact"
+                    <Link
+                        to="/contact"
                         onClick={() => setIsOpen(false)}
                         className="
               mt-14 self-center px-12 py-4
@@ -176,7 +178,7 @@ export default function StaggeredMenu() {
             "
                     >
                         Initialize Project
-                    </a>
+                    </Link>
                 </div>
             </div>
         </>

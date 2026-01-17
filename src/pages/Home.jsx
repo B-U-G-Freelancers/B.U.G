@@ -11,11 +11,9 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <About />
       <Services />
       <Works />
       <Feedback />
-      <Contact />
       <AIConsultant />
     </>
   );

@@ -1,236 +1,188 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Instagram, CheckCircle2 } from "lucide-react";
-import { FaDiscord, FaLinkedin } from "react-icons/fa";
+import { useState, useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { Instagram, Mail, MapPin, ArrowRight } from "lucide-react";
+import { FaDiscord, FaLinkedin, FaGithub } from "react-icons/fa";
 
-/* =====================
-   CHIP (CYBER STYLE)
-===================== */
-const Chip = ({ label, isActive, onClick }) => (
-    <button
-        onClick={onClick}
-        className={`px-6 py-2 rounded-full text-sm font-medium border transition-all duration-300
-      ${isActive
-                ? "bg-[#4f9cff] text-black border-[#4f9cff] shadow-[0_0_20px_#4f9cff]"
-                : "bg-transparent text-slate-300 border-slate-700 hover:border-[#4f9cff] hover:text-[#4f9cff]"
-            }`}
+function VisitingCard() {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const ref = useRef(null);
+
+  // Mouse tilt values
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
+  const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
+
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], [15, -15]);
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-15, 15]);
+
+  function handleMouseMove(e) {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseXVal = e.clientX - rect.left;
+    const mouseYVal = e.clientY - rect.top;
+    const xPct = mouseXVal / width - 0.5;
+    const yPct = mouseYVal / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  }
+
+  function handleMouseLeave() {
+    x.set(0);
+    y.set(0);
+  }
+
+  return (
+    <div
+      className="perspective-1000 w-[350px] h-[220px] sm:w-[500px] sm:h-[300px] cursor-pointer"
+      onClick={() => setIsFlipped(!isFlipped)}
     >
-        {label}
-    </button>
-);
+      <motion.div
+        ref={ref}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        initial={false}
+        animate={{ rotateY: isFlipped ? 180 : 0 }}
+        style={{
+          rotateX: isFlipped ? 0 : rotateX, // Only tilt when not flipped to avoid confusion
+          rotateY: isFlipped ? 180 : rotateY,
+          transformStyle: "preserve-3d",
+        }}
+        transition={{
+          duration: 0.6,
+          type: "spring",
+          stiffness: 260,
+          damping: 20,
+        }}
+        className="relative w-full h-full"
+      >
+        {/* FRONT SIDE */}
+        <div className="absolute inset-0 backface-hidden rounded-xl bg-black border border-white/10 shadow-2xl p-8 flex flex-col justify-between overflow-hidden">
+          {/* Subtle texture/gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-[50px] rounded-full pointer-events-none" />
 
-/* =====================
-   INPUT (CYBER)
-===================== */
-const AnimatedInput = ({
-    label,
-    type = "text",
-    placeholder,
-    value,
-    onChange,
-}) => (
-    <div className="flex flex-col space-y-2 w-full">
-        <label className="text-[10px] font-bold text-[#4f9cff] uppercase tracking-[0.25em]">
-            {label}
-        </label>
+          <div className="relative z-10 flex justify-between items-start">
+            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+              <span className="font-black text-white text-xs">BUG</span>
+            </div>
+            <span className="text-xs text-white/40 tracking-[0.2em] uppercase font-mono">
+              2025
+            </span>
+          </div>
 
-        {type === "textarea" ? (
-            <textarea
-                rows={1}
-                placeholder={placeholder}
-                value={value}
-                onChange={onChange}
-                className="bg-transparent border-b border-[#4f9cff]/40 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#4f9cff] transition-all resize-none"
-            />
-        ) : (
-            <input
-                type={type}
-                placeholder={placeholder}
-                value={value}
-                onChange={onChange}
-                className="bg-transparent border-b border-[#4f9cff]/40 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#4f9cff] transition-all"
-            />
-        )}
-    </div>
-);
+          <div className="relative z-10">
+            <h3
+              className="text-3xl sm:text-4xl font-black text-white tracking-tighter mix-blend-difference mb-1"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
+              B.U.G
+            </h3>
+            <p className="text-sm text-white/50 tracking-widest uppercase font-light">
+              Build Your Genie
+            </p>
+          </div>
 
-/* =====================
-   MAIN APP
-===================== */
-export default function App() {
-    const [selectedServices, setSelectedServices] = useState([]);
-    const [selectedBudget, setSelectedBudget] = useState(null);
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [details, setDetails] = useState("");
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
-
-    const services = [
-        "Branding",
-        "UX/UI",
-        "Animation",
-        "3D Design",
-        "Identity",
-        "Webflow",
-    ];
-    const budgets = ["2K - 10K", "10K - 50K", "More than 50K"];
-
-    const toggleService = (service) => {
-        setSelectedServices((prev) =>
-            prev.includes(service)
-                ? prev.filter((s) => s !== service)
-                : [...prev, service]
-        );
-    };
-
-    const handleSubmit = () => {
-        setIsSubmitting(true);
-        setTimeout(() => {
-            setIsSubmitting(false);
-            setIsSuccess(true);
-            setTimeout(() => setIsSuccess(false), 3000);
-        }, 1500);
-    };
-
-    return (
-        <div className="min-h-screen bg-[#05080f] text-white relative overflow-hidden">
-            {/* CYBER GLOW BACKGROUND */}
-            <div className="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] bg-[#4f9cff]/10 blur-[160px] rounded-full" />
-            <div className="absolute bottom-[-30%] right-[-20%] w-[60%] h-[60%] bg-[#4f9cff]/10 blur-[160px] rounded-full" />
-
-            {/* HERO */}
-            <section className="relative pt-32 pb-24 px-6">
-                <motion.h1
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-[6rem] md:text-[9rem] font-black tracking-tighter text-[#4f9cff]/10 uppercase"
-                >
-                    Contact
-                </motion.h1>
-
-                <div className="h-px w-full bg-gradient-to-r from-transparent via-[#4f9cff]/60 to-transparent mt-6" />
-            </section>
-
-            {/* CONTENT */}
-            <section className="max-w-7xl mx-auto px-6 py-24 grid grid-cols-1 lg:grid-cols-12 gap-16">
-                {/* LEFT PANEL */}
-                <div className="lg:col-span-4 space-y-16">
-                    <div>
-                        <p className="text-xs font-bold text-[#4f9cff] tracking-[0.3em] uppercase">
-                            Contact
-                        </p>
-                        <a
-                            href="mailto:buildyourgenie@gmail.com"
-                            className="block mt-4 text-xl font-black hover:text-[#4f9cff] transition"
-                        >
-                            buildyourgenie@gmail.com
-                        </a>
-                    </div>
-
-                    <div>
-                        <p className="text-xs font-bold text-[#4f9cff] tracking-[0.3em] uppercase">
-                            Follow
-                        </p>
-                        <div className="flex gap-6 mt-4">
-                            {[Instagram, FaDiscord, FaLinkedin].map((Icon, i) => (
-                                <Icon
-                                    key={i}
-                                    size={20}
-                                    className="text-white hover:text-[#4f9cff] transition"
-                                />
-                            ))}
-                        </div>
-                    </div>
-
-                    <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
-                        We design cyber-native brands, interfaces, and systems that perform
-                        under pressure.
-                    </p>
-
-                    <p className="text-[10px] text-slate-600 tracking-[0.3em]">
-                        © B.U.G 2025
-                    </p>
-                </div>
-
-                {/* RIGHT PANEL */}
-                <div className="lg:col-span-8 space-y-16">
-                    <h2 className="text-5xl md:text-7xl font-black uppercase leading-none">
-                        Start a <br />
-                        Project?
-                    </h2>
-
-                    {/* SERVICES */}
-                    <div>
-                        <p className="mb-4 text-sm text-[#4f9cff] uppercase tracking-widest">
-                            Services
-                        </p>
-                        <div className="flex flex-wrap gap-3">
-                            {services.map((s) => (
-                                <Chip
-                                    key={s}
-                                    label={s}
-                                    isActive={selectedServices.includes(s)}
-                                    onClick={() => toggleService(s)}
-                                />
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* BUDGET */}
-                    <div>
-                        <p className="mb-4 text-sm text-[#4f9cff] uppercase tracking-widest">
-                            Budget
-                        </p>
-                        <div className="flex flex-wrap gap-3">
-                            {budgets.map((b) => (
-                                <Chip
-                                    key={b}
-                                    label={b}
-                                    isActive={selectedBudget === b}
-                                    onClick={() => setSelectedBudget(b)}
-                                />
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* INPUTS */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                        <AnimatedInput
-                            label="Name"
-                            placeholder="Your name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                        <AnimatedInput
-                            label="Email"
-                            placeholder="Your email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </div>
-
-                    <AnimatedInput
-                        label="Project Details"
-                        placeholder="Describe your project..."
-                        type="textarea"
-                        value={details}
-                        onChange={(e) => setDetails(e.target.value)}
-                    />
-
-                    {/* SUBMIT */}
-                    <button
-                        onClick={handleSubmit}
-                        disabled={isSubmitting || isSuccess}
-                        className="relative w-48 h-48 rounded-full border border-[#4f9cff] flex items-center justify-center
-              hover:scale-110 transition-all duration-500 shadow-[0_0_40px_#4f9cff]/30"
-                    >
-                        <span className="text-[#4f9cff] font-bold tracking-widest uppercase">
-                            {isSubmitting ? "..." : isSuccess ? "Done" : "Send"}
-                        </span>
-                    </button>
-                </div>
-            </section>
+          <div className="relative z-10 flex justify-between items-end">
+            <div className="text-[10px] text-white/30 font-mono tracking-widest">
+              FREELANCE COLLECTIVE
+              <br />
+              DESIGN & ENGINEERING
+            </div>
+            <div className="flex items-center gap-2 text-blue-400 text-xs tracking-widest uppercase animate-pulse">
+              Click to flip <ArrowRight size={12} />
+            </div>
+          </div>
         </div>
-    );
+
+        {/* BACK SIDE */}
+        <div
+          className="absolute inset-0 backface-hidden rounded-xl bg-white text-black p-8 flex flex-col justify-between shadow-2xl overflow-hidden"
+          style={{ transform: "rotateY(180deg)" }}
+        >
+          {/* Decorative elements */}
+          <div className="absolute bottom-0 right-0 w-40 h-40 bg-blue-500/10 blur-[60px] rounded-full pointer-events-none" />
+
+          <div>
+            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">
+              Contact Details
+            </h4>
+
+            <div className="space-y-4">
+              <a
+                href="mailto:hello@buildyourgenie.com"
+                className="flex items-center gap-3 group"
+              >
+                <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                  <Mail size={14} />
+                </div>
+                <span className="font-medium text-lg tracking-tight group-hover:text-blue-600 transition-colors">
+                  hello@buildyourgenie.com
+                </span>
+              </a>
+
+              <div className="flex items-center gap-3 text-gray-500">
+                <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
+                  <MapPin size={14} />
+                </div>
+                <span className="text-sm">Chennai, India</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="h-px w-full bg-gray-100 mb-4" />
+            <div className="flex gap-4">
+              {[
+                { icon: Instagram, href: "https://instagram.com" },
+                { icon: FaGithub, href: "https://github.com" },
+                { icon: FaLinkedin, href: "https://linkedin.com" },
+                { icon: FaDiscord, href: "https://discord.com" },
+              ].map((social, i) => (
+                <a
+                  key={i}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-gray-400 hover:text-blue-600 hover:scale-110 transition-all"
+                >
+                  <social.icon size={20} />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+export default function Contact() {
+  return (
+    <section className="relative min-h-screen bg-black flex flex-col items-center justify-center py-24 overflow-hidden">
+      {/* Background Ambience */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-900/10 blur-[100px] rounded-full" />
+      </div>
+
+      <div className="relative z-10 text-center mb-16 space-y-4">
+        <h2
+          className="text-4xl sm:text-6xl font-black text-white tracking-tighter"
+          style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+        >
+          LET'S WORK <span className="text-blue-500">TOGETHER</span>
+        </h2>
+        <p className="text-white/40 max-w-md mx-auto text-sm sm:text-base leading-relaxed">
+          Ready to bring your vision to life? Flip the card to get in touch.
+        </p>
+      </div>
+
+      <div className="relative z-20">
+        <VisitingCard />
+      </div>
+    </section>
+  );
 }

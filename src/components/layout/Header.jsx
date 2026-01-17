@@ -8,6 +8,7 @@ export const Header = ({
   // Using light grays and white for shimmer to transition smoothly to the white panel
   colors = ["#f3f4f6", "#ffffff"],
   items = [
+    { label: "Home", link: "/home", isRoute: true },
     { label: "Genie World", link: "/works", isRoute: true },
     { label: "Genie Lab", link: "/templates", isRoute: true },
     { label: "About", link: "/about", isRoute: true },
@@ -639,7 +640,7 @@ export const Header = ({
 .sm-scope .staggered-menu-wrapper { position: relative; width: 100%; height: 100%; z-index: 40; pointer-events: none; }
 
 /* Header Z-index > Panel */
-.sm-scope .staggered-menu-header { position: fixed; top: 0; left: 0; width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem; background: transparent; pointer-events: none; z-index: 55; }
+.sm-scope .staggered-menu-header { position: fixed; top: 0; left: 0; width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem; background: transparent; pointer-events: none; z-index: 95; }
 .sm-scope .staggered-menu-header > * { pointer-events: auto; }
 
 .sm-scope .sm-logo { display: flex; align-items: center; user-select: none; }
@@ -656,11 +657,11 @@ export const Header = ({
 .sm-scope .sm-line { display: none !important; }
 
 /* Panel Z-index > Prelayers */
-.sm-scope .staggered-menu-panel { position: fixed; top: 0; right: 0; width: clamp(300px, 40vw, 500px); height: 100vh; background: #ffffff; display: flex; flex-direction: column; padding: 6em 3em 3em 3em; overflow-y: auto; z-index: 50; }
+.sm-scope .staggered-menu-panel { position: fixed; top: 0; right: 0; width: clamp(300px, 40vw, 500px); height: 100vh; background: #ffffff; display: flex; flex-direction: column; padding: 6em 3em 3em 3em; overflow-y: auto; z-index: 90; }
 .sm-scope [data-position='left'] .staggered-menu-panel { right: auto; left: 0; }
 
 /* Prelayers Z-index < Panel */
-.sm-scope .sm-prelayers { position: fixed; top: 0; right: 0; bottom: 0; width: clamp(300px, 40vw, 500px); pointer-events: none; z-index: 45; }
+.sm-scope .sm-prelayers { position: fixed; top: 0; right: 0; bottom: 0; width: clamp(300px, 40vw, 500px); pointer-events: none; z-index: 85; }
 .sm-scope [data-position='left'] .sm-prelayers { right: auto; left: 0; }
 .sm-scope .sm-prelayer { position: absolute; top: 0; right: 0; height: 100%; width: 100%; transform: translateX(0); }
 

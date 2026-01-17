@@ -1,361 +1,265 @@
-// src/pages/About.jsx
-// Premium About page with cinematic design
-import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { ArrowLeft, Users, Target, Sparkles, Code } from "lucide-react";
+import { useEffect, useRef } from "react";
 import {
-  FloatingFragments,
-  SceneParallax,
-} from "../components/ui/FloatingElement";
+  Camera,
+  Mesh,
+  Plane,
+  Program,
+  Renderer,
+  Texture,
+  Transform,
+} from "ogl";
 import { Header } from "../components/layout/Header";
 
-// System initialization sequence
-function SystemInit({ onComplete }) {
-  const [lines, setLines] = useState([]);
-  const [fading, setFading] = useState(false);
-  const hasRun = useRef(false);
-
-  const initLines = [
-    { text: "SYS.BOOT", delay: 0 },
-    { text: "LOADING IDENTITY...", delay: 200 },
-    { text: "INITIALIZING STORY MODULE", delay: 400 },
-    { text: "STATUS: READY", delay: 600 },
-  ];
+/* =========================
+   STARFIELD
+========================= */
+function Starfield() {
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    if (hasRun.current) return;
-    hasRun.current = true;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    let raf;
 
-    initLines.forEach((line) => {
-      setTimeout(() => {
-        setLines((prev) => [...prev, line.text]);
-      }, line.delay);
-    });
+    let w = (canvas.width = window.innerWidth);
+    let h = (canvas.height = window.innerHeight);
 
-    setTimeout(() => setFading(true), 1200);
-    setTimeout(() => onComplete(), 1800);
-  }, []);
+    const stars = Array.from({ length: 140 }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      size: Math.random() * 2 + 0.4,
+      speed: Math.random() * 0.6 + 0.3,
+      color:
+        Math.random() > 0.6
+          ? "#4f9cff"
+          : Math.random() > 0.5
+            ? "#b44cff"
+            : "#ffffff",
+    }));
 
-  return (
-    <div
-      className={`fixed inset-0 z-50 bg-black flex items-center justify-center transition-opacity duration-700 ${
-        fading ? "opacity-0" : "opacity-100"
-      }`}
-    >
-      <div className="font-mono text-xs text-white/60 space-y-2">
-        {lines.map((line, i) => (
-          <div
-            key={i}
-            className="tracking-widest uppercase animate-fade-in"
-            style={{
-              fontFamily: "'Space Grotesk', monospace",
-              animationDelay: `${i * 0.2}s`,
-            }}
-          >
-            {line}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// Value card component
-function ValueCard({ icon: Icon, title, description, index }) {
-  return (
-    <div
-      className="group p-6 rounded-lg border border-white/10 bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500 animate-emerge"
-      style={{ animationDelay: `${0.4 + index * 0.15}s` }}
-    >
-      <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mb-4 group-hover:bg-blue-500/20 transition-colors">
-        <Icon className="w-6 h-6 text-blue-400" />
-      </div>
-      <h3
-        className="text-lg font-semibold text-white mb-2"
-        style={{ fontFamily: "'Inter', sans-serif" }}
-      >
-        {title}
-      </h3>
-      <p
-        className="text-sm text-white/50 leading-relaxed"
-        style={{ fontFamily: "'Inter', sans-serif" }}
-      >
-        {description}
-      </p>
-    </div>
-  );
-}
-
-export default function About() {
-  const [initialized, setInitialized] = useState(false);
-  const [contentVisible, setContentVisible] = useState(false);
-  const pageRef = useRef(null);
-
-  useEffect(() => {
-    if (initialized) {
-      setTimeout(() => setContentVisible(true), 200);
-    }
-  }, [initialized]);
-
-  // Parallax on mouse move
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (!pageRef.current) return;
-      const x = (e.clientX / window.innerWidth - 0.5) * 20;
-      const y = (e.clientY / window.innerHeight - 0.5) * 20;
-
-      pageRef.current.style.setProperty("--parallax-x", `${x}px`);
-      pageRef.current.style.setProperty("--parallax-y", `${y}px`);
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      stars.forEach((s) => {
+        s.y += s.speed;
+        if (s.y > h) s.y = 0;
+        ctx.fillStyle = s.color;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      raf = requestAnimationFrame(draw);
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    draw();
+    return () => cancelAnimationFrame(raf);
   }, []);
 
-  const values = [
-    {
-      icon: Sparkles,
-      title: "Innovation First",
-      description:
-        "We push boundaries with cutting-edge technology and fresh perspectives to create digital experiences that stand out.",
-    },
-    {
-      icon: Users,
-      title: "Client Partnership",
-      description:
-        "We believe in true collaboration. Your vision drives our process, and together we create something exceptional.",
-    },
-    {
-      icon: Target,
-      title: "Results Driven",
-      description:
-        "Every pixel, every line of code serves a purpose. We measure success by the impact we create for your business.",
-    },
-    {
-      icon: Code,
-      title: "Craft & Quality",
-      description:
-        "We take pride in clean code, polished designs, and attention to detail that elevates every project.",
-    },
+  return (
+    <canvas ref={canvasRef} className="absolute inset-0 z-[1] opacity-60" />
+  );
+}
+
+/* =========================
+   PROFESSIONAL TEXT COMPONENTS
+========================= */
+const ProfessionalTitle = ({ children }) => (
+  <h2 className="relative inline-block text-6xl md:text-8xl font-black tracking-tight mb-16 group cursor-default">
+    <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-slate-400 group-hover:to-slate-200 transition-all duration-700">
+      {children}
+    </span>
+    <span className="absolute -bottom-4 left-0 w-full h-1 bg-[#4f9cff] scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-expo origin-left" />
+  </h2>
+);
+
+const ProfessionalText = ({ children }) => (
+  <p className="max-w-4xl mx-auto text-xl md:text-2xl leading-relaxed mb-24 text-slate-400 font-light">
+    <span className="hover:text-white transition-colors duration-500">
+      {children}
+    </span>
+  </p>
+);
+
+/* =========================
+   UTILS
+========================= */
+const lerp = (a, b, t) => a + (b - a) * t;
+
+/* =========================
+   CIRCULAR GALLERY (AUTO SCROLL)
+========================= */
+class CircularGalleryApp {
+  constructor(container, items) {
+    this.container = container;
+    this.items = items;
+    this.scroll = { current: 0, target: 0 };
+    this.speed = 0.02;
+    this.init();
+  }
+
+  init() {
+    this.renderer = new Renderer({ alpha: true, antialias: true });
+    this.gl = this.renderer.gl;
+    this.container.appendChild(this.gl.canvas);
+
+    this.camera = new Camera(this.gl, { fov: 45 });
+    this.camera.position.z = 12;
+
+    this.scene = new Transform();
+    this.geometry = new Plane(this.gl, {
+      widthSegments: 40,
+      heightSegments: 20,
+    });
+
+    this.createMedias();
+    this.onResize();
+    this.update();
+
+    window.addEventListener("resize", () => this.onResize());
+  }
+
+  createMedias() {
+    this.medias = this.items.map((item, index) => {
+      const texture = new Texture(this.gl);
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.src = item.image;
+      img.onload = () => (texture.image = img);
+
+      const program = new Program(this.gl, {
+        vertex: `
+          attribute vec3 position;
+          attribute vec2 uv;
+          uniform mat4 modelViewMatrix;
+          uniform mat4 projectionMatrix;
+          uniform float uTime;
+          varying vec2 vUv;
+          void main() {
+            vUv = uv;
+            vec3 p = position;
+            p.z += sin(p.x * 3.0 + uTime) * 0.3;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+          }
+        `,
+        fragment: `
+          precision highp float;
+          uniform sampler2D tMap;
+          varying vec2 vUv;
+          void main() {
+            vec4 c = texture2D(tMap, vUv);
+            gl_FragColor = vec4(c.rgb, c.a);
+          }
+        `,
+        uniforms: {
+          tMap: { value: texture },
+          uTime: { value: Math.random() * 10 },
+        },
+        transparent: true,
+      });
+
+      const mesh = new Mesh(this.gl, { geometry: this.geometry, program });
+      mesh.index = index;
+      mesh.setParent(this.scene);
+      return mesh;
+    });
+  }
+
+  onResize() {
+    const w = this.container.clientWidth;
+    const h = this.container.clientHeight;
+
+    this.renderer.setSize(w, h);
+    this.camera.perspective({ aspect: w / h });
+
+    const fov = (this.camera.fov * Math.PI) / 180;
+    const viewportHeight = 2 * Math.tan(fov / 2) * this.camera.position.z;
+    const viewportWidth = viewportHeight * (w / h);
+
+    this.planeHeight = viewportHeight * 0.55;
+    this.planeWidth = this.planeHeight * 1.4;
+    this.gap = this.planeWidth * 0.35;
+
+    this.totalWidth = (this.planeWidth + this.gap) * this.medias.length;
+
+    this.medias.forEach((m, i) => {
+      m.scale.set(this.planeWidth, this.planeHeight, 1);
+      m.position.x = i * (this.planeWidth + this.gap);
+    });
+  }
+
+  update() {
+    this.scroll.target += this.speed;
+    this.scroll.current = lerp(this.scroll.current, this.scroll.target, 0.05);
+
+    this.medias.forEach((m) => {
+      m.position.x =
+        m.index * (this.planeWidth + this.gap) - this.scroll.current;
+
+      if (m.position.x < -this.totalWidth / 2) {
+        m.position.x += this.totalWidth;
+      }
+
+      m.program.uniforms.uTime.value += 0.04;
+    });
+
+    this.renderer.render({ scene: this.scene, camera: this.camera });
+    this.raf = requestAnimationFrame(() => this.update());
+  }
+
+  destroy() {
+    cancelAnimationFrame(this.raf);
+    this.gl.canvas.remove();
+  }
+}
+
+/* =========================
+   ABOUT SECTION
+========================= */
+export default function About() {
+  const galleryRef = useRef(null);
+
+  const team = [
+    { image: "https://picsum.photos/seed/1/800/600?grayscale" },
+    { image: "https://picsum.photos/seed/2/800/600?grayscale" },
+    { image: "https://picsum.photos/seed/3/800/600?grayscale" },
+    { image: "https://picsum.photos/seed/4/800/600?grayscale" },
+    { image: "https://picsum.photos/seed/5/800/600?grayscale" },
+    { image: "https://picsum.photos/seed/6/800/600?grayscale" },
+    { image: "https://picsum.photos/seed/7/800/600?grayscale" },
   ];
 
+  useEffect(() => {
+    const gallery = new CircularGalleryApp(galleryRef.current, team);
+    return () => gallery.destroy();
+  }, []);
+
   return (
-    <div
-      ref={pageRef}
-      className="min-h-screen bg-black text-white relative overflow-hidden"
-      style={{
-        "--parallax-x": "0px",
-        "--parallax-y": "0px",
-      }}
-    >
-      {/* CSS Animations */}
-      <style>{`
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes emerge {
-          from { opacity: 0; transform: translateY(40px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-          animation: fade-in 0.6s ease-out forwards;
-        }
-        .animate-emerge {
-          opacity: 0;
-          animation: emerge 1s cubic-bezier(0.33, 1, 0.68, 1) forwards;
-        }
-      `}</style>
+    <>
+      <Header isFixed />
+      <section className="relative min-h-screen bg-[#050505] overflow-hidden py-32 px-6 text-white">
+        <Starfield />
 
-      {/* System initialization */}
-      {!initialized && <SystemInit onComplete={() => setInitialized(true)} />}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
-      {/* Floating background effect */}
-      {initialized && <FloatingFragments count={10} />}
+        <div className="relative z-10 max-w-7xl mx-auto text-center">
+          <ProfessionalTitle>B.U.G FREELANCING</ProfessionalTitle>
 
-      {/* Atmospheric layers */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        {/* Vignette */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.8) 100%)",
-          }}
-        />
+          <ProfessionalText>
+            is a specialized collective of engineers and designers. We don’t
+            build templates — we engineer{" "}
+            <span className="text-[#4f9cff] font-medium">
+              immersive digital realities
+            </span>{" "}
+            that survive scale, pressure, and chaos.
+          </ProfessionalText>
 
-        {/* Grain */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-          }}
-        />
+          {/* TEAM TITLE */}
+          <h3 className="text-4xl font-bold uppercase tracking-widest mb-16 text-slate-300">
+            The People Behind <span className="text-[#4f9cff]">B.U.G</span>
+          </h3>
 
-        {/* Fog layers */}
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            background:
-              "radial-gradient(ellipse at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)",
-            transform:
-              "translate(calc(var(--parallax-x) * 0.5), calc(var(--parallax-y) * 0.5))",
-          }}
-        />
-      </div>
-
-      {/* Navigation - Header */}
-      {initialized && <Header isFixed />}
-
-      {/* Main content */}
-      {contentVisible && (
-        <SceneParallax
-          strength={15}
-          duration={0.5}
-          className="relative z-10 pt-32 pb-24 px-6 max-w-6xl mx-auto"
-        >
-          {/* Header */}
-          <div className="text-center mb-20">
-            <div
-              className="text-[10px] tracking-[0.3em] uppercase text-white/30 mb-4 animate-emerge"
-              style={{
-                fontFamily: "'Space Grotesk', monospace",
-                animationDelay: "0s",
-              }}
-            >
-              WHO.WE.ARE
-            </div>
-            <h1
-              className="text-5xl md:text-7xl font-semibold mb-6 animate-emerge"
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                animationDelay: "0.1s",
-              }}
-            >
-              We Are B.U.G
-            </h1>
-            <p
-              className="text-lg text-white/50 max-w-2xl mx-auto leading-relaxed animate-emerge"
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                animationDelay: "0.2s",
-              }}
-            >
-              A collective of designers, developers, and dreamers crafting
-              digital experiences that leave lasting impressions. We turn ideas
-              into reality.
-            </p>
-          </div>
-
-          {/* Story section */}
-          <div
-            className="mb-20 animate-emerge"
-            style={{ animationDelay: "0.3s" }}
-          >
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <div
-                  className="text-[10px] tracking-[0.2em] uppercase text-blue-400/70 mb-4"
-                  style={{ fontFamily: "'Space Grotesk', monospace" }}
-                >
-                  OUR.STORY
-                </div>
-                <h2
-                  className="text-3xl font-semibold mb-6"
-                  style={{ fontFamily: "'Inter', sans-serif" }}
-                >
-                  Building Dreams Into Reality
-                </h2>
-                <div className="space-y-4 text-white/60 leading-relaxed">
-                  <p>
-                    B.U.G — Build Your Genie — was born from a simple belief:
-                    technology should feel magical. Like a genie granting
-                    wishes, we transform your ideas into digital realities that
-                    exceed expectations.
-                  </p>
-                  <p>
-                    Based in Chennai, we're a team of passionate creators who
-                    blend cutting-edge technology with thoughtful design. From
-                    stunning websites to complex applications, we craft
-                    experiences that users love.
-                  </p>
-                  <p>
-                    Our approach is simple: understand deeply, design
-                    thoughtfully, build precisely. Every project is a journey we
-                    take together with our clients.
-                  </p>
-                </div>
-              </div>
-              <div className="relative">
-                <div className="aspect-square rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/10 border border-white/10 flex items-center justify-center">
-                  <div
-                    className="text-[120px] font-bold text-white/5"
-                    style={{ fontFamily: "'Inter', sans-serif" }}
-                  >
-                    B.U.G
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Values section */}
-          <div className="mb-20">
-            <div className="text-center mb-12">
-              <div
-                className="text-[10px] tracking-[0.2em] uppercase text-white/30 mb-4"
-                style={{ fontFamily: "'Space Grotesk', monospace" }}
-              >
-                OUR.VALUES
-              </div>
-              <h2
-                className="text-3xl font-semibold"
-                style={{ fontFamily: "'Inter', sans-serif" }}
-              >
-                What Drives Us
-              </h2>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {values.map((value, index) => (
-                <ValueCard key={value.title} {...value} index={index} />
-              ))}
-            </div>
-          </div>
-
-          {/* CTA section */}
-          <div className="text-center py-16">
-            <div
-              className="text-[10px] tracking-[0.3em] uppercase text-white/30 mb-6"
-              style={{ fontFamily: "'Space Grotesk', monospace" }}
-            >
-              READY.TO.START
-            </div>
-            <h2
-              className="text-3xl md:text-4xl font-semibold mb-4"
-              style={{ fontFamily: "'Inter', sans-serif" }}
-            >
-              Let's Create Something Amazing
-            </h2>
-            <p
-              className="text-white/50 max-w-md mx-auto mb-8"
-              style={{ fontFamily: "'Inter', sans-serif" }}
-            >
-              Have a project in mind? We'd love to hear about it and explore how
-              we can help bring your vision to life.
-            </p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 text-xs tracking-widest uppercase transition-all border border-blue-500/30"
-              style={{ fontFamily: "'Space Grotesk', monospace" }}
-            >
-              GET.IN.TOUCH
-            </Link>
-          </div>
-        </SceneParallax>
-      )}
-
-      {/* Bottom gradient fade */}
-      <div className="fixed bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-20" />
-    </div>
+          <div ref={galleryRef} className="w-full h-[600px]" />
+        </div>
+      </section>
+    </>
   );
 }

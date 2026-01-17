@@ -45,6 +45,14 @@ function App() {
         <Suspense fallback={<PageLoader />}>
           <Routes>
             {/* Works page - full immersive, no layout */}
+            <Route
+              path="/home"
+              element={
+                <Layout>
+                  <Home />
+                </Layout>
+              }
+            />
             <Route path="/works" element={<WorkDetail />} />
             <Route path="/works/:projectId" element={<ProjectPage />} />
 

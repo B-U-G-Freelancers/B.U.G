@@ -1,0 +1,59 @@
+/* src/components/ui/BugIntro.css */
+
+.intro-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0b0d10; /* bg-primary fallback */
+  background-color: var(--color-bg-primary);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.logo-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.bug-svg {
+  width: 300px;
+  height: 300px;
+  min-width: 200px;
+  max-width: 80vw;
+  object-fit: contain;
+  color: #e6e6e6; /* text-primary fallback */
+  color: var(--color-text-primary);
+}
+
+.brand-title {
+  color: #e6e6e6; /* text-primary fallback */
+  color: var(--color-text-primary);
+  font-family: "Space Grotesk", Inter, sans-serif; /* display font fallback */
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 20px 0 10px 0;
+  letter-spacing: 2px;
+}
+
+.brand-tagline {
+  color: #b0b3b8; /* text-secondary fallback */
+  color: var(--color-text-secondary);
+  font-family: Inter, system-ui, sans-serif; /* sans font fallback */
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 4px;
+  margin: 0;
+  text-transform: uppercase;
+}

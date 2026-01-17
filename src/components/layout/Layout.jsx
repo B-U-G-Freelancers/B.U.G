@@ -1,41 +1,53 @@
 // src/components/layout/Layout.jsx
 import { useState } from "react";
-import StaggeredMenu from "./StaggeredMenu";
 import Footer from "./Footer";
-import IntroAnimation from "../ui/IntroAnimation";
+import BugIntro from "../ui/BugIntro";
+import { Header } from "./Header";
 import GlobalBackground from "./GlobalBackground";
 
+// Session storage key for tracking intro completion
+const INTRO_SHOWN_KEY = "bug_intro_shown";
+
 export default function Layout({ children }) {
-    const [introComplete, setIntroComplete] = useState(false);
+  // Check if intro was already shown this session
+  const [introComplete, setIntroComplete] = useState(() => {
+    // Check sessionStorage on initial render
+    if (typeof window !== "undefined") {
+      return sessionStorage.getItem(INTRO_SHOWN_KEY) === "true";
+    }
+    return false;
+  });
 
-    return (
-        <div className="relative min-h-screen bg-transparent text-white overflow-x-hidden selection:bg-cyan-500 selection:text-black">
+  const handleIntroComplete = () => {
+    setIntroComplete(true);
+    // Persist to sessionStorage so it doesn't replay on navigation
+    sessionStorage.setItem(INTRO_SHOWN_KEY, "true");
+  };
 
-            {/* 🌐 GLOBAL CYBERPUNK UNIVERSE (ALWAYS ON) */}
-            <GlobalBackground />
+  return (
+    <div className="relative min-h-screen bg-transparent text-white overflow-x-hidden selection:bg-cyan-500 selection:text-black">
+      {/* 🌐 GLOBAL CYBERPUNK UNIVERSE (ALWAYS ON) */}
+      <GlobalBackground />
 
-            {/* 🧠 INTRO BOOT SEQUENCE (TOPMOST) */}
-            {!introComplete && (
-                <div className="fixed inset-0 z-[9999]">
-                    <IntroAnimation onComplete={() => setIntroComplete(true)} />
-                </div>
-            )}
-
-            {/* UI & CONTENT LAYER */}
-            <div className={`relative z-10 transition-opacity duration-1000 ${introComplete ? "opacity-100" : "opacity-0"}`}>
-
-                {/* STAGGERED MENU */}
-                <StaggeredMenu />
-
-                {/* MAIN CONTENT */}
-                <main className="relative z-10 w-full">
-                    {children}
-                </main>
-
-                {/* FOOTER */}
-                <Footer />
-            </div>
-
+      {/* 🧠 INTRO BOOT SEQUENCE (TOPMOST) */}
+      {!introComplete && (
+        <div className="fixed inset-0 z-[9999]">
+          <BugIntro onComplete={handleIntroComplete} />
         </div>
-    );
+      )}
+
+      {/* Header / Menu - fixed position */}
+      <div
+        className={`fixed top-0 left-0 w-full z-[100] transition-opacity duration-500 ${
+          introComplete ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <Header isFixed />
+      </div>
+
+      <main className="flex-1">{children}</main>
+
+      <Footer />
+    </div>
+  );
 }

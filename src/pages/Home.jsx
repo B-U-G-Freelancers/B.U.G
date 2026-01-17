@@ -9,12 +9,19 @@ import AIConsultant from "../components/ui/AIConsultant";
 
 export default function Home() {
   return (
-    <>
+    <div className="relative">
+      {/* Hero - has its own internal parallax */}
       <Hero />
+
+      {/* Other sections - no parallax wrapper to avoid scroll issues */}
+      <About />
       <Services />
       <Works />
       <Feedback />
+      <Contact />
+
+      {/* AI Consultant floating button */}
       <AIConsultant />
-    </>
+    </div>
   );
 }

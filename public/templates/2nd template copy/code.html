@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Avant-Garde Corporate Landing</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0df280",
+                        "secondary": "#a78bfa", /* Soft Lavender */
+                        "background-light": "#f5f8f7",
+                        "background-dark": "#0a0a0a", /* Deep Obsidian */
+                        "surface-dark": "#111814",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                    backgroundImage: {
+                        'glass-gradient': 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+                        'neon-gradient': 'radial-gradient(circle at center, rgba(13, 242, 128, 0.15) 0%, rgba(10, 10, 10, 0) 70%)',
+                        'lavender-blur': 'radial-gradient(circle at center, rgba(167, 139, 250, 0.2) 0%, rgba(10, 10, 10, 0) 70%)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for horizontal scrolling */
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Glassmorphism utilities */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .glass-hero-shape {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* Text outline effect */
+        .text-outline {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+            color: transparent;
+            transition: all 0.3s ease;
+        }
+        .group:hover .text-outline {
+            -webkit-text-stroke: 0px;
+            color: #0df280; /* Primary color */
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden selection:bg-primary selection:text-black">
+<!-- Ambient Background Gradients -->
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+<div class="absolute top-[-10%] right-[-10%] w-[800px] h-[800px] bg-primary/10 rounded-full blur-[120px] mix-blend-screen animate-pulse"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-secondary/15 rounded-full blur-[100px] mix-blend-screen"></div>
+</div>
+<div class="relative z-10 flex flex-col min-h-screen">
+<!-- Minimalist Corner Nav -->
+<header class="fixed top-0 left-0 w-full p-6 z-50 flex justify-between items-start pointer-events-none">
+<!-- Brand -->
+<div class="pointer-events-auto bg-black/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
+<div class="flex items-center gap-2 text-white">
+<span class="material-symbols-outlined text-primary text-[20px]">change_history</span>
+<h2 class="text-white text-lg font-bold tracking-tight uppercase">Avant-Garde</h2>
+</div>
+</div>
+<!-- Floating Menu Trigger -->
+<button class="pointer-events-auto flex items-center justify-center w-14 h-14 bg-surface-dark/80 backdrop-blur-md border border-white/10 rounded-full text-white hover:bg-primary hover:text-black transition-colors duration-300 shadow-lg group">
+<span class="material-symbols-outlined text-[28px] transition-transform duration-300 group-hover:rotate-90">menu</span>
+</button>
+</header>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center px-6 md:px-20 pt-20 overflow-hidden">
+<div class="container mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<!-- Text Content -->
+<div class="lg:col-span-7 flex flex-col gap-8 z-10">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/20 bg-white/5 w-fit backdrop-blur-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-xs uppercase tracking-widest text-white/80 font-bold">Future Agency</span>
+</div>
+<h1 class="text-5xl md:text-7xl lg:text-[7rem] font-black leading-[0.9] tracking-tighter text-white">
+                        REINVENTING <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-400 to-gray-600">DIGITAL</span> <br/>
+<span class="italic font-light text-secondary">CANVAS</span>
+</h1>
+<p class="text-lg md:text-xl text-gray-400 max-w-xl font-body leading-relaxed">
+                        Fluid organic shapes and asymmetrical grids defining the future of digital interaction. We build systems that breathe.
+                    </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="px-8 py-4 rounded-full bg-primary text-black font-bold text-lg hover:scale-105 transition-transform duration-200 shadow-[0_0_20px_rgba(13,242,128,0.4)]">
+                            Start a Project
+                        </button>
+<button class="px-8 py-4 rounded-full border border-white/20 text-white font-medium hover:bg-white/10 transition-colors flex items-center gap-2 group">
+                            Explore Works 
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- 3D Glass Object (Visual Representation) -->
+<div class="lg:col-span-5 relative h-[500px] w-full flex items-center justify-center perspective-[1000px]">
+<!-- Abstract Background Blob -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 blur-[80px] rounded-full opacity-60 animate-pulse"></div>
+<!-- Glass Card Stack / Abstract Shape -->
+<div class="relative w-64 h-80 glass-hero-shape rounded-[3rem] rotate-[-12deg] translate-x-[-20px] translate-y-[-20px] z-10 flex items-center justify-center border-t border-l border-white/40">
+<div class="absolute inset-0 rounded-[3rem] bg-gradient-to-b from-white/10 to-transparent pointer-events-none"></div>
+</div>
+<div class="absolute w-72 h-72 glass-hero-shape rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 border-b border-r border-white/30 backdrop-blur-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-white/80 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">deployed_code</span>
+</div>
+<div class="absolute w-40 h-40 glass-hero-shape rounded-[2rem] bottom-10 right-0 lg:right-10 rotate-[15deg] z-30 border-t border-r border-white/50 bg-secondary/10"></div>
+</div>
+</div>
+<!-- Scroll Indicator -->
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 animate-bounce">
+<span class="text-xs uppercase tracking-widest text-white">Scroll</span>
+<span class="material-symbols-outlined text-white">keyboard_arrow_down</span>
+</div>
+</section>
+<!-- Horizontal Scroll Services Section -->
+<section class="py-20 overflow-hidden bg-surface-dark border-y border-white/5 relative">
+<div class="px-6 md:px-20 mb-10 flex items-end justify-between">
+<div>
+<h2 class="text-primary uppercase tracking-widest text-sm font-bold mb-2">Services</h2>
+<h3 class="text-3xl md:text-5xl font-bold text-white">What We Do</h3>
+</div>
+<div class="hidden md:flex gap-2">
+<button class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10"><span class="material-symbols-outlined">arrow_back</span></button>
+<button class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10"><span class="material-symbols-outlined">arrow_forward</span></button>
+</div>
+</div>
+<!-- Horizontal Container -->
+<div class="flex overflow-x-auto hide-scroll gap-6 px-6 md:px-20 pb-10 snap-x snap-mandatory">
+<!-- Service 1 -->
+<div class="min-w-[85vw] md:min-w-[400px] h-[500px] bg-background-dark border border-white/10 rounded-xl p-8 flex flex-col justify-between group hover:border-primary/50 transition-colors duration-500 snap-center relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500">
+<span class="material-symbols-outlined text-6xl text-primary">token</span>
+</div>
+<div class="z-10 mt-auto">
+<h4 class="text-5xl md:text-6xl font-bold text-outline uppercase leading-[0.9] mb-4">Brand<br/>Strategy</h4>
+<p class="text-gray-400 text-sm md:text-base border-t border-white/10 pt-4 mt-4 font-body">Defining identity through rigorous analysis and creative intuition.</p>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+</div>
+<!-- Service 2 -->
+<div class="min-w-[85vw] md:min-w-[400px] h-[500px] bg-background-dark border border-white/10 rounded-xl p-8 flex flex-col justify-between group hover:border-primary/50 transition-colors duration-500 snap-center relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500">
+<span class="material-symbols-outlined text-6xl text-primary">devices</span>
+</div>
+<div class="z-10 mt-auto">
+<h4 class="text-5xl md:text-6xl font-bold text-outline uppercase leading-[0.9] mb-4">Digital<br/>Product</h4>
+<p class="text-gray-400 text-sm md:text-base border-t border-white/10 pt-4 mt-4 font-body">Building scalable design systems and intuitive user interfaces.</p>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+</div>
+<!-- Service 3 -->
+<div class="min-w-[85vw] md:min-w-[400px] h-[500px] bg-background-dark border border-white/10 rounded-xl p-8 flex flex-col justify-between group hover:border-primary/50 transition-colors duration-500 snap-center relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500">
+<span class="material-symbols-outlined text-6xl text-primary">view_in_ar</span>
+</div>
+<div class="z-10 mt-auto">
+<h4 class="text-5xl md:text-6xl font-bold text-outline uppercase leading-[0.9] mb-4">Immersive<br/>Web</h4>
+<p class="text-gray-400 text-sm md:text-base border-t border-white/10 pt-4 mt-4 font-body">Creating worlds with WebGL and interactive storytelling.</p>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+</div>
+<!-- Service 4 -->
+<div class="min-w-[85vw] md:min-w-[400px] h-[500px] bg-background-dark border border-white/10 rounded-xl p-8 flex flex-col justify-between group hover:border-primary/50 transition-colors duration-500 snap-center relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500">
+<span class="material-symbols-outlined text-6xl text-primary">motion_mode</span>
+</div>
+<div class="z-10 mt-auto">
+<h4 class="text-5xl md:text-6xl font-bold text-outline uppercase leading-[0.9] mb-4">Motion<br/>Design</h4>
+<p class="text-gray-400 text-sm md:text-base border-t border-white/10 pt-4 mt-4 font-body">Animating life into static pixels to guide and delight users.</p>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+</div>
+</div>
+</section>
+<!-- Selected Works (Asymmetrical Grid) -->
+<section class="py-24 px-6 md:px-20">
+<div class="container mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+<h2 class="text-4xl md:text-6xl font-bold text-white tracking-tight">Selected Works</h2>
+<a class="text-primary hover:text-white transition-colors underline decoration-1 underline-offset-4" href="#">View Full Archive</a>
+</div>
+<!-- Asymmetrical Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16">
+<!-- Item 1 (Large) -->
+<div class="group cursor-pointer relative md:mt-0">
+<div class="overflow-hidden rounded-xl mb-6 relative">
+<!-- Image with pseudo-depth effect via transform on hover -->
+<div class="w-full aspect-[4/3] bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-110" data-alt="Abstract fluid dark liquid shapes with blue lighting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBTmyq4ALujaGp7oO7W_Ugw0_EglrXRiOLeeV3-Gfk-z8rAYojAO2XZMElGZGKtJ_avtYgTJb91o0ACQS0LhIvbt_2AxMQEVSnq2n267Lg_kLdiEz0TFqDIYsNDjJN4xjER3jePF5cj51nDmt8fQZuoVvB7afoiNeuid-PGjwVSEtbVFveuBrTQEw7X3L2c8WhgjIQxnc7awB1T04Wfc06uh_3phn8NRvqSUfonyGh6-p1ZhkVlY204h7ZLnNa1tpbKbyyVOylBDI8');">
+</div>
+<!-- Overlay -->
+<div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+</div>
+<div class="flex justify-between items-start border-b border-white/10 pb-4">
+<div>
+<h3 class="text-2xl font-bold text-white mb-1 group-hover:text-primary transition-colors">Nebula Finance</h3>
+<p class="text-gray-400 font-body text-sm">Fintech • App Design</p>
+</div>
+<span class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-primary group-hover:text-black group-hover:border-primary transition-all">
+<span class="material-symbols-outlined text-sm">arrow_outward</span>
+</span>
+</div>
+</div>
+<!-- Item 2 (Offset Down) -->
+<div class="group cursor-pointer relative md:mt-24">
+<div class="overflow-hidden rounded-xl mb-6 relative">
+<div class="w-full aspect-[3/4] bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-110" data-alt="Dark abstract 3D geometric shapes with purple neon lights" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCCgjKf_VF6sbIUIEc3EXSLYGVQ8DQNLMdOqqOKCc7PwGBG1kWYuLS7iEXbQZfhH0YmyqODYqGTboSHAFl5F07M9M6RWi1fgatQSRhvDMb9EtDX-F6-UMQ9YVX5ENbWmrSXU_BfYvJ8iGxxocMHGATvd62h866DIzZT0AyUKrOlmdlskbtuM_9dZdFLiZemncDnYgZYMiqEBDUJPtD2-LU3y7YceC5MsjYFB2J0rP4eptUMZY53fCEVxm0cPtSEjYVXz9wKS2ngZQU');">
+</div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+</div>
+<div class="flex justify-between items-start border-b border-white/10 pb-4">
+<div>
+<h3 class="text-2xl font-bold text-white mb-1 group-hover:text-primary transition-colors">Cyber Bloom</h3>
+<p class="text-gray-400 font-body text-sm">Art Direction • WebGL</p>
+</div>
+<span class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-primary group-hover:text-black group-hover:border-primary transition-all">
+<span class="material-symbols-outlined text-sm">arrow_outward</span>
+</span>
+</div>
+</div>
+<!-- Item 3 (Large) -->
+<div class="group cursor-pointer relative">
+<div class="overflow-hidden rounded-xl mb-6 relative">
+<div class="w-full aspect-square bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-110" data-alt="Futuristic gradient pattern with flowing purple and blue lines" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBybPrWtR4xnhzKPNSOcHBs499EDzl3FkSEDiYhR2Hxs3Y1ACDZioxU8SewIeGt-GYhuDvUpGrL7uECuF2u5B4epGHqYb_1m38j8P_yp4cbg1fnXmzJIpqdw_Ga7KZYDfKMJiChAeAIpjx_50kf3FcKWxpeB6KPqh6ebMx_QvgcQM60uJmhy40o1pfiMRIXozU3h2WTJ6FYnKZnucb2fGXxhDCEzEujQGQqlyDDC4FTdRTylzL-6lt7RS_9_ZLmpZZtotjyaFtv1-U');">
+</div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+</div>
+<div class="flex justify-between items-start border-b border-white/10 pb-4">
+<div>
+<h3 class="text-2xl font-bold text-white mb-1 group-hover:text-primary transition-colors">Echo Systems</h3>
+<p class="text-gray-400 font-body text-sm">Branding • Identity</p>
+</div>
+<span class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-primary group-hover:text-black group-hover:border-primary transition-all">
+<span class="material-symbols-outlined text-sm">arrow_outward</span>
+</span>
+</div>
+</div>
+<!-- Item 4 (Offset Down) -->
+<div class="group cursor-pointer relative md:mt-32">
+<div class="overflow-hidden rounded-xl mb-6 relative">
+<div class="w-full aspect-video bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-110" data-alt="Retro computer terminal aesthetic with neon green text" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAZiO29zZOh0ywmYpN3c3RkNJZt3C1R6As0E59F6NbQXt7icU9r5Z4IIxiKVETJ-0QscSVgyQTwYx_cc8XdV7hoyqL3WtpD7AFiuH-vY07zGfUPqgz6UN8x57GfLcEB4tEwuasYzfw4sBzRaOSCiOQ6RcVzbS-j_RH6GlRM_Sl3_N968Vtn31L_ZhQ7qo-TnPAQ0qsl9XV92BmmTZ-l-ux73uOFv7CJ2m9r9gTTFAdew9ORXfSToj0b-oMEDDy8Wa-_2vVyX9vZ_Hg');">
+</div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+</div>
+<div class="flex justify-between items-start border-b border-white/10 pb-4">
+<div>
+<h3 class="text-2xl font-bold text-white mb-1 group-hover:text-primary transition-colors">Retro Future</h3>
+<p class="text-gray-400 font-body text-sm">Campaign • Social</p>
+</div>
+<span class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-primary group-hover:text-black group-hover:border-primary transition-all">
+<span class="material-symbols-outlined text-sm">arrow_outward</span>
+</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA / Footer Section -->
+<section class="relative py-32 px-6 md:px-20 overflow-hidden">
+<!-- Background Glow -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full blur-[100px] opacity-40"></div>
+<div class="container mx-auto relative z-10 flex flex-col items-center text-center">
+<h2 class="text-5xl md:text-8xl font-black text-white leading-none tracking-tighter mb-8">
+                    LET'S BUILD <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">THE FUTURE</span>
+</h2>
+<p class="text-gray-400 max-w-lg mx-auto mb-12 text-lg font-body">
+                    We partner with ambitious brands to create digital experiences that define categories.
+                </p>
+<button class="group relative px-10 py-5 bg-white text-black rounded-full font-bold text-xl overflow-hidden hover:scale-105 transition-transform duration-300">
+<span class="relative z-10 flex items-center gap-2">
+                        Get in Touch 
+                        <span class="material-symbols-outlined">mail</span>
+</span>
+<div class="absolute inset-0 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out"></div>
+</button>
+</div>
+</section>
+<!-- Footer Links -->
+<footer class="border-t border-white/10 py-10 px-6 md:px-20 bg-black text-white/60 text-sm font-body">
+<div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">change_history</span>
+<span class="font-bold text-white tracking-widest uppercase">Avant-Garde</span>
+</div>
+<div class="flex gap-8">
+<a class="hover:text-white transition-colors" href="#">Instagram</a>
+<a class="hover:text-white transition-colors" href="#">Twitter</a>
+<a class="hover:text-white transition-colors" href="#">LinkedIn</a>
+</div>
+<div>
+                    © 2024 Avant-Garde Agency.
+                </div>
+</div>
+</footer>
+<!-- Sticky Floating Action Button (Mobile/Desktop) -->
+<div class="fixed bottom-6 right-6 z-50">
+<button class="w-14 h-14 bg-primary rounded-full shadow-[0_0_20px_rgba(13,242,128,0.5)] flex items-center justify-center text-black hover:scale-110 transition-transform animate-pulse">
+<span class="material-symbols-outlined text-[28px]">chat_bubble</span>
+</button>
+</div>
+</div>
+</body></html>

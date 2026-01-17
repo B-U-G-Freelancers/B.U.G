@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alexander Void - Kinetic Portfolio</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f47b25",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#221710",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom styles for the outlined text effect */
+        .text-outline {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
+            color: transparent;
+            transition: all 0.5s ease;
+        }
+        
+        .text-outline:hover {
+            -webkit-text-stroke: 0px transparent;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(244, 123, 37, 0.5);
+        }
+
+        .text-outline-primary {
+             -webkit-text-stroke: 1px #f47b25;
+            color: transparent;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #221710;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #54453b;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f47b25;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white overflow-x-hidden selection:bg-primary selection:text-[#181411]">
+<!-- Fixed Floating Brand Mark -->
+<div class="fixed top-8 left-8 z-50 hidden lg:block">
+<a class="flex items-center gap-2 group" href="#">
+<div class="size-8 border border-white/20 rounded-full flex items-center justify-center group-hover:border-primary group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-sm text-white group-hover:text-primary">all_inclusive</span>
+</div>
+<span class="text-xs font-bold tracking-[0.2em] text-white/50 group-hover:text-white transition-colors">AV®</span>
+</a>
+</div>
+<!-- Fixed Right Scroll Progress Indicator -->
+<div class="fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col items-center gap-6">
+<span class="text-[10px] font-mono text-primary rotate-90 origin-bottom mb-8">SCROLL</span>
+<div class="h-32 w-[1px] bg-white/10 relative">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[3px] h-1/3 bg-primary rounded-full"></div>
+</div>
+<span class="text-[10px] font-mono text-white/40">01 / 03</span>
+</div>
+<div class="layout-container flex flex-col min-h-screen relative">
+<!-- SECTION 1: HERO - THE VOID -->
+<section class="min-h-screen w-full flex flex-col items-center justify-center relative p-4">
+<!-- Background Gradient Spot -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="layout-content-container flex flex-col items-center z-10">
+<h1 class="text-[14vw] lg:text-[11vw] font-black leading-[0.85] tracking-tighter text-center select-none cursor-default">
+<span class="block text-outline hover:scale-105 transition-transform duration-700">CREATING</span>
+<span class="block text-white mix-blend-overlay opacity-90">REALITY</span>
+</h1>
+<div class="mt-12 flex flex-col items-center gap-4 animate-pulse">
+<p class="text-xs tracking-[0.3em] text-primary uppercase font-mono">Scroll to Begin</p>
+<span class="material-symbols-outlined text-white/50 text-2xl">keyboard_arrow_down</span>
+</div>
+</div>
+</section>
+<!-- SECTION 2: IDENTITY REVEAL -->
+<section class="w-full py-32 px-6 flex justify-center bg-gradient-to-b from-background-dark via-[#1a120d] to-background-dark">
+<div class="max-w-5xl w-full flex flex-col md:flex-row gap-12 md:gap-24 items-start md:items-center">
+<div class="flex-1">
+<h2 class="text-6xl md:text-8xl font-black leading-tight tracking-[-0.04em] text-white mb-6">
+                        ALEXANDER <br/> <span class="text-primary">VOID</span>
+</h2>
+<div class="h-1 w-24 bg-primary mb-8"></div>
+</div>
+<div class="flex-1">
+<p class="text-xl md:text-2xl font-light leading-relaxed text-[#baa89c]">
+                        An avant-garde interface designer crafting digital experiences that blur the line between <span class="text-white font-medium">function</span> and <span class="text-white font-medium">art</span>.
+                    </p>
+<div class="mt-8 flex gap-4">
+<span class="px-3 py-1 border border-white/10 rounded-full text-xs text-white/60">UI/UX</span>
+<span class="px-3 py-1 border border-white/10 rounded-full text-xs text-white/60">Interaction</span>
+<span class="px-3 py-1 border border-white/10 rounded-full text-xs text-white/60">WebGL</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: PARALLAX WORKS -->
+<section class="w-full py-20 px-4 md:px-20 relative overflow-hidden">
+<!-- Giant Background Watermark -->
+<div class="absolute top-20 right-0 text-[20vw] font-bold text-white/[0.02] leading-none pointer-events-none select-none">
+                WORK
+            </div>
+<div class="max-w-[1200px] mx-auto flex flex-col gap-32 md:gap-48 relative z-10">
+<!-- Project 1 (Left Aligned) -->
+<div class="group flex flex-col md:w-3/4 lg:w-3/5 self-start relative">
+<div class="relative overflow-hidden rounded-lg aspect-[16/10] bg-[#181411]">
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 mix-blend-color"></div>
+<img alt="Neon lit architectural photography with dark shadows" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out" data-alt="Neon lit architectural photography with dark shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLgFl1ruvwD7w18Wf7eVUAxKU_2DX5OWyQgjap0LB_MZ_A2nhRTjURQWO3rjIbyD2ykBGIWNf9MUO8Ls9KIr8FzEihHQ2w0o06DchS5Vm8YLT1goETLJQIGxYgEd9_FoP1364ZCcsnkomfKnKzFYYw89MroDxUvDKWVdCqyYYtfGPSkg4r2-tjH5J0UMZ5NpmEPI0YdZkVV8j1MYQa7L9Yvdj-7HBYGrJkq7jirRLYin6B153Mu2NeCx4WFfF7q4W6YA79V14hj9rM"/>
+<div class="absolute bottom-4 left-4 z-20">
+<span class="material-symbols-outlined text-white text-4xl opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">arrow_outward</span>
+</div>
+</div>
+<div class="mt-6 flex justify-between items-baseline border-b border-white/10 pb-4 group-hover:border-primary/50 transition-colors">
+<div>
+<h3 class="text-3xl md:text-4xl font-bold text-white mb-1 group-hover:text-primary transition-colors">Neon Dreams</h3>
+<p class="text-sm text-white/50 font-mono">PHOTOGRAPHY / ART DIRECTION</p>
+</div>
+<p class="text-4xl font-black text-white/5 group-hover:text-white/20 transition-colors">01</p>
+</div>
+</div>
+<!-- Project 2 (Right Aligned - Offset) -->
+<div class="group flex flex-col md:w-3/4 lg:w-3/5 self-end relative pt-10 md:pt-0">
+<div class="relative overflow-hidden rounded-lg aspect-[4/5] md:aspect-square bg-[#181411]">
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 mix-blend-color"></div>
+<img alt="Abstract 3D metallic sphere floating in void" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out" data-alt="Abstract 3D metallic sphere floating in void" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN4UTOPIZt_t2xa-CSGONMy-dugczf6Jd4C0j78i2aPVCDlbQYTESGuEeAvV0JFQqas4UO7OLWYXRpapy0gb1TOvJpVRlIllv53kzSd4dEEfHm1b7avsuUR91w0sWzecydnAfkV_w5JwklSAOCIFnOSBhI_7Y_Ex8R8feBkRsGB-pI8FWS5ZdDb3XrtSY3HaPMlcZE_48g4Lia_TZvXL_u9qSOiPcAq7FcS5lOmdD4YNDnPwsP9cZ-S3tZe5gphFQ4o5Xl4LA0CDVu"/>
+<div class="absolute bottom-4 left-4 z-20">
+<span class="material-symbols-outlined text-white text-4xl opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">arrow_outward</span>
+</div>
+</div>
+<div class="mt-6 flex justify-between items-baseline border-b border-white/10 pb-4 group-hover:border-primary/50 transition-colors">
+<div>
+<h3 class="text-3xl md:text-4xl font-bold text-white mb-1 group-hover:text-primary transition-colors">Abstract Matter</h3>
+<p class="text-sm text-white/50 font-mono">3D RENDER / MOTION</p>
+</div>
+<p class="text-4xl font-black text-white/5 group-hover:text-white/20 transition-colors">02</p>
+</div>
+</div>
+<!-- Project 3 (Center - Wide) -->
+<div class="group flex flex-col w-full self-center relative">
+<div class="relative overflow-hidden rounded-lg aspect-video bg-[#181411]">
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 mix-blend-color"></div>
+<img alt="Dark mode dashboard interface with data visualization" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out" data-alt="Dark mode dashboard interface with data visualization" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDemS0Vblj0mgRvUXsvCUA3BeQHTKCzk1cOmX9OEo-G4IaCUCXxKX89NmwdA3-f3uxJrqJpaC177FtFJEBIaY5uPVUGyG_NPf0-jplB0zx1hmH2jWYV-HycOpgWbD9_fN07mgK2ywD_-81tNZVvL3-62p1avCMJ7_VWpN9lrKCHsX5EZaBJIEf7Fq5_VkM8GU7shasFBKQr7zcwP-4Dkf7EUsEeRUqs1rOdwwbhG9o7MjBPxT__1eLjrC76CtlkfPg03wOQg4g9hTSr"/>
+<div class="absolute bottom-4 left-4 z-20">
+<span class="material-symbols-outlined text-white text-4xl opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">arrow_outward</span>
+</div>
+</div>
+<div class="mt-6 flex justify-between items-baseline border-b border-white/10 pb-4 group-hover:border-primary/50 transition-colors">
+<div>
+<h3 class="text-3xl md:text-4xl font-bold text-white mb-1 group-hover:text-primary transition-colors">Digital Frontiers</h3>
+<p class="text-sm text-white/50 font-mono">PRODUCT DESIGN / UX</p>
+</div>
+<p class="text-4xl font-black text-white/5 group-hover:text-white/20 transition-colors">03</p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: FOOTER / CONTACT -->
+<section class="min-h-[60vh] flex flex-col items-center justify-center p-4 text-center relative">
+<div class="max-w-[800px] flex flex-col items-center gap-8">
+<p class="text-primary font-mono tracking-widest text-sm uppercase">Next Steps</p>
+<h2 class="text-5xl md:text-7xl font-black text-white leading-tight">
+                    READY TO <br/>BREAK THE MOLD?
+                </h2>
+<a class="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-bold text-white rounded-lg bg-[#392f28] transition-all duration-300 hover:bg-primary hover:scale-105 hover:shadow-[0_0_40px_-10px_rgba(244,123,37,0.5)]" href="#">
+<span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
+<span class="relative flex items-center gap-3">
+                        START A PROJECT
+                        <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</span>
+</a>
+</div>
+<div class="absolute bottom-8 w-full px-8 flex justify-between text-white/30 text-xs font-mono">
+<span>© 2024 ALEXANDER VOID</span>
+<div class="flex gap-4">
+<a class="hover:text-primary transition-colors" href="#">TWITTER</a>
+<a class="hover:text-primary transition-colors" href="#">INSTAGRAM</a>
+<a class="hover:text-primary transition-colors" href="#">LINKEDIN</a>
+</div>
+</div>
+</section>
+</div>
+<!-- Floating Navigation Dock (Fixed Bottom) -->
+<div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] max-w-[90vw]">
+<nav class="flex items-center gap-1 bg-[#221710]/80 backdrop-blur-xl border border-white/10 rounded-full p-1.5 shadow-2xl shadow-black/50">
+<a class="px-5 py-2 rounded-full text-sm font-bold text-[#181411] bg-white hover:bg-primary hover:text-white transition-colors" href="#">Home</a>
+<a class="px-5 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 transition-colors" href="#">Work</a>
+<a class="px-5 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 transition-colors" href="#">About</a>
+<a class="px-5 py-2 rounded-full text-sm font-medium text-primary hover:text-white hover:bg-primary/20 transition-colors" href="#">Contact</a>
+</nav>
+</div>
+</body></html>

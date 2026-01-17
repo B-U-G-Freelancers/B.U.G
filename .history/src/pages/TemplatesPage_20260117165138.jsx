@@ -214,79 +214,79 @@ const DESKTOP_CONFIG = {
 
 // ============================================
 // MOBILE LAYOUT (2-column simple grid)
-// All items auto-height to prevent overlap
+// All items same height for consistent look
 // Laptops/Tablets/Browsers = full width
 // Phones = half width (2 side by side)
 // ============================================
 const MOBILE_CONFIG = {
-  gridClass: "grid-cols-2 gap-6",
+  gridClass: "grid-cols-2 gap-4 auto-rows-[200px]",
   templates: [
-    // Laptop full width - taller
+    // Laptop full width
     {
       ...BASE_TEMPLATES[0],
-      gridClass: "col-span-2 min-h-[280px]",
+      gridClass: "col-span-2",
       rotation: { x: 0, y: 0 },
       device: "laptop",
     },
     // Two phones side by side
     {
       ...BASE_TEMPLATES[1],
-      gridClass: "col-span-1 min-h-[220px]",
+      gridClass: "col-span-1",
       rotation: { x: 0, y: 0 },
       device: "phone",
     },
     {
       ...BASE_TEMPLATES[4],
-      gridClass: "col-span-1 min-h-[220px]",
+      gridClass: "col-span-1",
       rotation: { x: 0, y: 0 },
       device: "phone",
     },
     // Tablet full width
     {
       ...BASE_TEMPLATES[3],
-      gridClass: "col-span-2 min-h-[240px]",
+      gridClass: "col-span-2",
       rotation: { x: 0, y: 0 },
       device: "tablet",
     },
     // Two phones side by side
     {
       ...BASE_TEMPLATES[6],
-      gridClass: "col-span-1 min-h-[220px]",
+      gridClass: "col-span-1",
       rotation: { x: 0, y: 0 },
       device: "phone",
     },
     {
       ...BASE_TEMPLATES[1],
       id: "genie-studio-2",
-      gridClass: "col-span-1 min-h-[220px]",
+      gridClass: "col-span-1",
       rotation: { x: 0, y: 0 },
       device: "phone",
     },
-    // Laptop full width - taller
+    // Laptop full width
     {
       ...BASE_TEMPLATES[7],
-      gridClass: "col-span-2 min-h-[280px]",
+      gridClass: "col-span-2",
       rotation: { x: 0, y: 0 },
       device: "laptop",
     },
     // Tablet full width
     {
       ...BASE_TEMPLATES[5],
-      gridClass: "col-span-2 min-h-[240px]",
+      gridClass: "col-span-2",
       rotation: { x: 0, y: 0 },
       device: "tablet",
     },
-    // Browser full width - taller
+    // Browser full width
     {
       ...BASE_TEMPLATES[8],
-      gridClass: "col-span-2 min-h-[280px]",
+      gridClass: "col-span-2",
       rotation: { x: 0, y: 0 },
       device: "browser",
     },
     // Tablet full width
     {
       ...BASE_TEMPLATES[10],
-      gridClass: "col-span-2 min-h-[240px]",
+      gridClass: "col-span-2",
       rotation: { x: 0, y: 0 },
       device: "tablet",
     },

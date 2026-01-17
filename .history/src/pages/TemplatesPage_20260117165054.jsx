@@ -16,7 +16,7 @@ import { Header } from "../components/layout/Header";
 // ============================================
 function useIsMobile(breakpoint = 768) {
   const [isMobile, setIsMobile] = useState(
-    typeof window !== "undefined" ? window.innerWidth < breakpoint : false,
+    typeof window !== "undefined" ? window.innerWidth < breakpoint : false
   );
 
   useEffect(() => {
@@ -154,142 +154,47 @@ const BASE_TEMPLATES = [
 const DESKTOP_CONFIG = {
   gridClass: "grid-cols-5 gap-6 auto-rows-[minmax(200px,auto)]",
   templates: [
-    {
-      ...BASE_TEMPLATES[0],
-      gridClass: "col-span-2 row-span-2",
-      rotation: { x: 8, y: -5 },
-    },
-    {
-      ...BASE_TEMPLATES[1],
-      gridClass: "col-span-1 row-span-2",
-      rotation: { x: 5, y: 10 },
-    },
-    {
-      ...BASE_TEMPLATES[2],
-      gridClass: "col-span-2 row-span-2",
-      rotation: { x: 4, y: -6 },
-    },
-    {
-      ...BASE_TEMPLATES[3],
-      gridClass: "col-span-2 row-span-2",
-      rotation: { x: 10, y: 5 },
-    },
-    {
-      ...BASE_TEMPLATES[4],
-      gridClass: "col-span-1 row-span-2",
-      rotation: { x: -5, y: -8 },
-    },
-    {
-      ...BASE_TEMPLATES[5],
-      gridClass: "col-span-2 row-span-2",
-      rotation: { x: 5, y: -10 },
-    },
-    {
-      ...BASE_TEMPLATES[6],
-      gridClass: "col-span-1 row-span-2",
-      rotation: { x: -8, y: 12 },
-    },
-    {
-      ...BASE_TEMPLATES[7],
-      gridClass: "col-span-2 row-span-2",
-      rotation: { x: -5, y: 8 },
-    },
-    {
-      ...BASE_TEMPLATES[8],
-      gridClass: "col-span-2 row-span-2",
-      rotation: { x: 3, y: -3 },
-    },
-    {
-      ...BASE_TEMPLATES[9],
-      gridClass: "col-span-3 row-span-2",
-      rotation: { x: 2, y: 2 },
-    },
-    {
-      ...BASE_TEMPLATES[10],
-      gridClass: "col-span-2 row-span-2",
-      rotation: { x: 10, y: -5 },
-    },
+    { ...BASE_TEMPLATES[0], gridClass: "col-span-2 row-span-2", rotation: { x: 8, y: -5 } },
+    { ...BASE_TEMPLATES[1], gridClass: "col-span-1 row-span-2", rotation: { x: 5, y: 10 } },
+    { ...BASE_TEMPLATES[2], gridClass: "col-span-2 row-span-2", rotation: { x: 4, y: -6 } },
+    { ...BASE_TEMPLATES[3], gridClass: "col-span-2 row-span-2", rotation: { x: 10, y: 5 } },
+    { ...BASE_TEMPLATES[4], gridClass: "col-span-1 row-span-2", rotation: { x: -5, y: -8 } },
+    { ...BASE_TEMPLATES[5], gridClass: "col-span-2 row-span-2", rotation: { x: 5, y: -10 } },
+    { ...BASE_TEMPLATES[6], gridClass: "col-span-1 row-span-2", rotation: { x: -8, y: 12 } },
+    { ...BASE_TEMPLATES[7], gridClass: "col-span-2 row-span-2", rotation: { x: -5, y: 8 } },
+    { ...BASE_TEMPLATES[8], gridClass: "col-span-2 row-span-2", rotation: { x: 3, y: -3 } },
+    { ...BASE_TEMPLATES[9], gridClass: "col-span-3 row-span-2", rotation: { x: 2, y: 2 } },
+    { ...BASE_TEMPLATES[10], gridClass: "col-span-2 row-span-2", rotation: { x: 10, y: -5 } },
   ],
 };
 
 // ============================================
 // MOBILE LAYOUT (2-column simple grid)
-// All items auto-height to prevent overlap
+// All items same height for consistent look
 // Laptops/Tablets/Browsers = full width
 // Phones = half width (2 side by side)
 // ============================================
 const MOBILE_CONFIG = {
-  gridClass: "grid-cols-2 gap-6",
+  gridClass: "grid-cols-2 gap-4 auto-rows-[200px]",
   templates: [
-    // Laptop full width - taller
-    {
-      ...BASE_TEMPLATES[0],
-      gridClass: "col-span-2 min-h-[280px]",
-      rotation: { x: 0, y: 0 },
-      device: "laptop",
-    },
+    // Laptop full width
+    { ...BASE_TEMPLATES[0], gridClass: "col-span-2", rotation: { x: 0, y: 0 }, device: "laptop" },
     // Two phones side by side
-    {
-      ...BASE_TEMPLATES[1],
-      gridClass: "col-span-1 min-h-[220px]",
-      rotation: { x: 0, y: 0 },
-      device: "phone",
-    },
-    {
-      ...BASE_TEMPLATES[4],
-      gridClass: "col-span-1 min-h-[220px]",
-      rotation: { x: 0, y: 0 },
-      device: "phone",
-    },
+    { ...BASE_TEMPLATES[1], gridClass: "col-span-1", rotation: { x: 0, y: 0 }, device: "phone" },
+    { ...BASE_TEMPLATES[4], gridClass: "col-span-1", rotation: { x: 0, y: 0 }, device: "phone" },
     // Tablet full width
-    {
-      ...BASE_TEMPLATES[3],
-      gridClass: "col-span-2 min-h-[240px]",
-      rotation: { x: 0, y: 0 },
-      device: "tablet",
-    },
+    { ...BASE_TEMPLATES[3], gridClass: "col-span-2", rotation: { x: 0, y: 0 }, device: "tablet" },
     // Two phones side by side
-    {
-      ...BASE_TEMPLATES[6],
-      gridClass: "col-span-1 min-h-[220px]",
-      rotation: { x: 0, y: 0 },
-      device: "phone",
-    },
-    {
-      ...BASE_TEMPLATES[1],
-      id: "genie-studio-2",
-      gridClass: "col-span-1 min-h-[220px]",
-      rotation: { x: 0, y: 0 },
-      device: "phone",
-    },
-    // Laptop full width - taller
-    {
-      ...BASE_TEMPLATES[7],
-      gridClass: "col-span-2 min-h-[280px]",
-      rotation: { x: 0, y: 0 },
-      device: "laptop",
-    },
+    { ...BASE_TEMPLATES[6], gridClass: "col-span-1", rotation: { x: 0, y: 0 }, device: "phone" },
+    { ...BASE_TEMPLATES[1], id: "genie-studio-2", gridClass: "col-span-1", rotation: { x: 0, y: 0 }, device: "phone" },
+    // Laptop full width
+    { ...BASE_TEMPLATES[7], gridClass: "col-span-2", rotation: { x: 0, y: 0 }, device: "laptop" },
     // Tablet full width
-    {
-      ...BASE_TEMPLATES[5],
-      gridClass: "col-span-2 min-h-[240px]",
-      rotation: { x: 0, y: 0 },
-      device: "tablet",
-    },
-    // Browser full width - taller
-    {
-      ...BASE_TEMPLATES[8],
-      gridClass: "col-span-2 min-h-[280px]",
-      rotation: { x: 0, y: 0 },
-      device: "browser",
-    },
+    { ...BASE_TEMPLATES[5], gridClass: "col-span-2", rotation: { x: 0, y: 0 }, device: "tablet" },
+    // Browser full width
+    { ...BASE_TEMPLATES[8], gridClass: "col-span-2", rotation: { x: 0, y: 0 }, device: "browser" },
     // Tablet full width
-    {
-      ...BASE_TEMPLATES[10],
-      gridClass: "col-span-2 min-h-[240px]",
-      rotation: { x: 0, y: 0 },
-      device: "tablet",
-    },
+    { ...BASE_TEMPLATES[10], gridClass: "col-span-2", rotation: { x: 0, y: 0 }, device: "tablet" },
   ],
 };
 
@@ -516,9 +421,6 @@ function DeviceCard({ template, index, onPreview, scrollY }) {
 
 // Main Page Component
 export default function TemplatesPage() {
-  const isMobile = useIsMobile();
-  const config = isMobile ? MOBILE_CONFIG : DESKTOP_CONFIG;
-
   const [contentVisible, setContentVisible] = useState(false);
   const [previewTemplate, setPreviewTemplate] = useState(null);
   const [scrollY, setScrollY] = useState(0);
@@ -672,8 +574,8 @@ export default function TemplatesPage() {
 
           {/* BENTO GRID with Device Mockups */}
           <div className="max-w-[1600px] mx-auto">
-            <div className={`grid ${config.gridClass}`}>
-              {config.templates.map((template, index) => (
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6 auto-rows-[minmax(150px,auto)] sm:auto-rows-[minmax(200px,auto)]">
+              {TEMPLATES.map((template, index) => (
                 <DeviceCard
                   key={template.id}
                   template={template}

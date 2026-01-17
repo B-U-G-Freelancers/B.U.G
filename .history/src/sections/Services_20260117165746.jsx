@@ -48,7 +48,7 @@ function ServiceOrb({ color, isHovered }) {
 /* =========================
    SERVICE CARD WITH ORB
 ========================= */
-function ServiceCard({ service, color }) {
+function ServiceCard({ service, color, index }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (

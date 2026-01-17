@@ -11,27 +11,17 @@ import {
 } from "../components/ui/DeviceMockup";
 import { Header } from "../components/layout/Header";
 
-// ============================================
-// CUSTOM HOOK: Detect mobile screen
-// ============================================
-function useIsMobile(breakpoint = 768) {
-  const [isMobile, setIsMobile] = useState(
-    typeof window !== "undefined" ? window.innerWidth < breakpoint : false,
-  );
+// Template showcase data with device configurations
+// DESKTOP LAYOUT (5-column grid):
+// Row 1-2: laptop(2) + phone(1) + browser(2) = 5  [Hero row]
+// Row 3-4: tablet(2) + phone(1) + tablet(2) = 5   [Tablets flanking phone]
+// Row 5-6: phone(1) + laptop(2) + browser(2) = 5  [Inverted pattern]
+// Row 7-8: browser(3) + tablet(2) = 5             [Featured finale]
 
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < breakpoint);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [breakpoint]);
+// MOBILE LAYOUT (2-column grid): Natural flow, phones side-by-side
 
-  return isMobile;
-}
-
-// ============================================
-// BASE TEMPLATE DATA (shared properties)
-// ============================================
-const BASE_TEMPLATES = [
+const TEMPLATES = [
+  // === ROW 1-2: Hero Row - laptop + phone + browser ===
   {
     id: "genie-starter",
     name: "Genie Starter",
@@ -41,6 +31,11 @@ const BASE_TEMPLATES = [
     codeUrl: "/templates/1st template/code.html",
     tier: "Essential",
     device: "laptop",
+    gridClass: "col-span-2 row-span-2",
+    rotation: { x: 8, y: -5 },
+    parallaxSpeed: 0.3,
+    floatDelay: 0,
+    floatDuration: 6,
   },
   {
     id: "genie-studio",
@@ -51,6 +46,11 @@ const BASE_TEMPLATES = [
     codeUrl: "/templates/2nd template/code.html",
     tier: "Essential",
     device: "phone",
+    gridClass: "col-span-1 row-span-2",
+    rotation: { x: 5, y: 10 },
+    parallaxSpeed: 0.5,
+    floatDelay: 1,
+    floatDuration: 5,
   },
   {
     id: "genie-new",
@@ -61,7 +61,14 @@ const BASE_TEMPLATES = [
     codeUrl: "/templates/new template/code.html",
     tier: "Professional",
     device: "browser",
+    gridClass: "col-span-2 row-span-2",
+    rotation: { x: 4, y: -6 },
+    parallaxSpeed: 0.4,
+    floatDelay: 1.5,
+    floatDuration: 6,
   },
+
+  // === ROW 3-4: Tablets flanking phone ===
   {
     id: "genie-corporate",
     name: "Genie Corporate",
@@ -71,6 +78,11 @@ const BASE_TEMPLATES = [
     codeUrl: "/templates/4th template/code.html",
     tier: "Professional",
     device: "tablet",
+    gridClass: "col-span-2 row-span-2",
+    rotation: { x: 10, y: 5 },
+    parallaxSpeed: 0.2,
+    floatDelay: 0.5,
+    floatDuration: 8,
   },
   {
     id: "genie-commerce",
@@ -81,6 +93,11 @@ const BASE_TEMPLATES = [
     codeUrl: "/templates/3rd template/code.html",
     tier: "Professional",
     device: "phone",
+    gridClass: "col-span-1 row-span-2",
+    rotation: { x: -5, y: -8 },
+    parallaxSpeed: 0.7,
+    floatDelay: 2,
+    floatDuration: 7,
   },
   {
     id: "genie-studio-pro",
@@ -91,7 +108,14 @@ const BASE_TEMPLATES = [
     codeUrl: "/templates/2nd template copy/code.html",
     tier: "Professional",
     device: "tablet",
+    gridClass: "col-span-2 row-span-2",
+    rotation: { x: 5, y: -10 },
+    parallaxSpeed: 0.25,
+    floatDelay: 0.8,
+    floatDuration: 7,
   },
+
+  // === ROW 5-6: Inverted pattern - phone + laptop + browser ===
   {
     id: "genie-starter-pro",
     name: "Genie Starter Pro",
@@ -101,6 +125,11 @@ const BASE_TEMPLATES = [
     codeUrl: "/templates/1st template copy/code.html",
     tier: "Essential",
     device: "phone",
+    gridClass: "col-span-1 row-span-2",
+    rotation: { x: -8, y: 12 },
+    parallaxSpeed: 0.6,
+    floatDelay: 2.5,
+    floatDuration: 5.5,
   },
   {
     id: "genie-commerce-pro",
@@ -111,6 +140,11 @@ const BASE_TEMPLATES = [
     codeUrl: "/templates/3rd template copy/code.html",
     tier: "Enterprise",
     device: "laptop",
+    gridClass: "col-span-2 row-span-2",
+    rotation: { x: -5, y: 8 },
+    parallaxSpeed: 0.35,
+    floatDelay: 1.2,
+    floatDuration: 6.5,
   },
   {
     id: "genie-agency",
@@ -121,7 +155,14 @@ const BASE_TEMPLATES = [
     codeUrl: "/templates/5th template/code.html",
     tier: "Enterprise",
     device: "browser",
+    gridClass: "col-span-2 row-span-2",
+    rotation: { x: 3, y: -3 },
+    parallaxSpeed: 0.4,
+    floatDelay: 1.5,
+    floatDuration: 6,
   },
+
+  // === ROW 7-8: Featured finale - wide browser + tablet ===
   {
     id: "genie-agency-pro",
     name: "Genie Agency Pro",
@@ -131,6 +172,11 @@ const BASE_TEMPLATES = [
     codeUrl: "/templates/5th template copy/page 2/code.html",
     tier: "Enterprise",
     device: "browser",
+    gridClass: "col-span-3 row-span-2",
+    rotation: { x: 2, y: 2 },
+    parallaxSpeed: 0.45,
+    floatDelay: 1.8,
+    floatDuration: 7.5,
   },
   {
     id: "genie-corporate-pro",
@@ -141,157 +187,12 @@ const BASE_TEMPLATES = [
     codeUrl: "/templates/4th template copy/page1/code.html",
     tier: "Enterprise",
     device: "tablet",
+    gridClass: "col-span-2 row-span-2",
+    parallaxSpeed: 0.55,
+    floatDelay: 3,
+    floatDuration: 5,
   },
 ];
-
-// ============================================
-// DESKTOP LAYOUT (5-column bento grid)
-// Row 1-2: laptop(2) + phone(1) + browser(2) = 5
-// Row 3-4: tablet(2) + phone(1) + tablet(2) = 5
-// Row 5-6: phone(1) + laptop(2) + browser(2) = 5
-// Row 7-8: browser(3) + tablet(2) = 5
-// ============================================
-const DESKTOP_CONFIG = {
-  gridClass: "grid-cols-5 gap-6 auto-rows-[minmax(200px,auto)]",
-  templates: [
-    {
-      ...BASE_TEMPLATES[0],
-      gridClass: "col-span-2 row-span-2",
-      rotation: { x: 8, y: -5 },
-    },
-    {
-      ...BASE_TEMPLATES[1],
-      gridClass: "col-span-1 row-span-2",
-      rotation: { x: 5, y: 10 },
-    },
-    {
-      ...BASE_TEMPLATES[2],
-      gridClass: "col-span-2 row-span-2",
-      rotation: { x: 4, y: -6 },
-    },
-    {
-      ...BASE_TEMPLATES[3],
-      gridClass: "col-span-2 row-span-2",
-      rotation: { x: 10, y: 5 },
-    },
-    {
-      ...BASE_TEMPLATES[4],
-      gridClass: "col-span-1 row-span-2",
-      rotation: { x: -5, y: -8 },
-    },
-    {
-      ...BASE_TEMPLATES[5],
-      gridClass: "col-span-2 row-span-2",
-      rotation: { x: 5, y: -10 },
-    },
-    {
-      ...BASE_TEMPLATES[6],
-      gridClass: "col-span-1 row-span-2",
-      rotation: { x: -8, y: 12 },
-    },
-    {
-      ...BASE_TEMPLATES[7],
-      gridClass: "col-span-2 row-span-2",
-      rotation: { x: -5, y: 8 },
-    },
-    {
-      ...BASE_TEMPLATES[8],
-      gridClass: "col-span-2 row-span-2",
-      rotation: { x: 3, y: -3 },
-    },
-    {
-      ...BASE_TEMPLATES[9],
-      gridClass: "col-span-3 row-span-2",
-      rotation: { x: 2, y: 2 },
-    },
-    {
-      ...BASE_TEMPLATES[10],
-      gridClass: "col-span-2 row-span-2",
-      rotation: { x: 10, y: -5 },
-    },
-  ],
-};
-
-// ============================================
-// MOBILE LAYOUT (2-column simple grid)
-// All items auto-height to prevent overlap
-// Laptops/Tablets/Browsers = full width
-// Phones = half width (2 side by side)
-// ============================================
-const MOBILE_CONFIG = {
-  gridClass: "grid-cols-2 gap-6",
-  templates: [
-    // Laptop full width - taller
-    {
-      ...BASE_TEMPLATES[0],
-      gridClass: "col-span-2 min-h-[280px]",
-      rotation: { x: 0, y: 0 },
-      device: "laptop",
-    },
-    // Two phones side by side
-    {
-      ...BASE_TEMPLATES[1],
-      gridClass: "col-span-1 min-h-[220px]",
-      rotation: { x: 0, y: 0 },
-      device: "phone",
-    },
-    {
-      ...BASE_TEMPLATES[4],
-      gridClass: "col-span-1 min-h-[220px]",
-      rotation: { x: 0, y: 0 },
-      device: "phone",
-    },
-    // Tablet full width
-    {
-      ...BASE_TEMPLATES[3],
-      gridClass: "col-span-2 min-h-[240px]",
-      rotation: { x: 0, y: 0 },
-      device: "tablet",
-    },
-    // Two phones side by side
-    {
-      ...BASE_TEMPLATES[6],
-      gridClass: "col-span-1 min-h-[220px]",
-      rotation: { x: 0, y: 0 },
-      device: "phone",
-    },
-    {
-      ...BASE_TEMPLATES[1],
-      id: "genie-studio-2",
-      gridClass: "col-span-1 min-h-[220px]",
-      rotation: { x: 0, y: 0 },
-      device: "phone",
-    },
-    // Laptop full width - taller
-    {
-      ...BASE_TEMPLATES[7],
-      gridClass: "col-span-2 min-h-[280px]",
-      rotation: { x: 0, y: 0 },
-      device: "laptop",
-    },
-    // Tablet full width
-    {
-      ...BASE_TEMPLATES[5],
-      gridClass: "col-span-2 min-h-[240px]",
-      rotation: { x: 0, y: 0 },
-      device: "tablet",
-    },
-    // Browser full width - taller
-    {
-      ...BASE_TEMPLATES[8],
-      gridClass: "col-span-2 min-h-[280px]",
-      rotation: { x: 0, y: 0 },
-      device: "browser",
-    },
-    // Tablet full width
-    {
-      ...BASE_TEMPLATES[10],
-      gridClass: "col-span-2 min-h-[240px]",
-      rotation: { x: 0, y: 0 },
-      device: "tablet",
-    },
-  ],
-};
 
 // Template preview modal with device size toggles
 function TemplatePreviewModal({ template, onClose }) {
@@ -516,9 +417,6 @@ function DeviceCard({ template, index, onPreview, scrollY }) {
 
 // Main Page Component
 export default function TemplatesPage() {
-  const isMobile = useIsMobile();
-  const config = isMobile ? MOBILE_CONFIG : DESKTOP_CONFIG;
-
   const [contentVisible, setContentVisible] = useState(false);
   const [previewTemplate, setPreviewTemplate] = useState(null);
   const [scrollY, setScrollY] = useState(0);
@@ -672,8 +570,8 @@ export default function TemplatesPage() {
 
           {/* BENTO GRID with Device Mockups */}
           <div className="max-w-[1600px] mx-auto">
-            <div className={`grid ${config.gridClass}`}>
-              {config.templates.map((template, index) => (
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6 auto-rows-[minmax(150px,auto)] sm:auto-rows-[minmax(200px,auto)]">
+              {TEMPLATES.map((template, index) => (
                 <DeviceCard
                   key={template.id}
                   template={template}

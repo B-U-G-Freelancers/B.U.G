@@ -101,7 +101,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white pt-20 overflow-x-hidden">
       {/* Hero Section */}
       <section className="relative w-full h-[40vh] sm:h-[50vh] overflow-hidden flex items-end">
         <img
@@ -131,9 +131,9 @@ export default function Contact() {
       </section>
 
       {/* Content Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-        {/* Left Column: Contact Info */}
-        <div className="lg:col-span-4 space-y-10 lg:space-y-12">
+      <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        {/* Contact Info - moves to bottom on mobile */}
+        <div className="lg:col-span-4 space-y-10 lg:space-y-12 order-2 lg:order-1">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -221,8 +221,8 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* Right Column: Form */}
-        <div className="lg:col-span-8">
+        {/* Right Column: Form - appears first on mobile */}
+        <div className="lg:col-span-8 order-1 lg:order-2">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

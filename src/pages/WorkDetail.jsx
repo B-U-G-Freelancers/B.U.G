@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import GenieWorld from "../components/gallery/GenieWorld";
 import { Header } from "../components/layout/Header";
-import PageLoader from "../components/ui/PageLoader";
 
 // Project data - B.U.G Portfolio
 const PROJECTS = [
@@ -123,7 +122,7 @@ export default function WorkDetail() {
   const [isLoading, setIsLoading] = useState(true);
   const [galleryState, setGalleryState] = useState("intro");
 
-  // Preload project images
+  // Preload project images with minimum display duration
   useEffect(() => {
     const imagePromises = PROJECTS.map((project) => {
       return new Promise((resolve) => {
@@ -134,7 +133,11 @@ export default function WorkDetail() {
       });
     });
 
-    Promise.all(imagePromises).then(() => {
+    // Minimum display duration of 1.5s to show the loader
+    const minDuration = new Promise((resolve) => setTimeout(resolve, 1500));
+
+    // Wait for both images AND minimum duration
+    Promise.all([Promise.all(imagePromises), minDuration]).then(() => {
       setIsLoading(false);
     });
 
@@ -148,15 +151,12 @@ export default function WorkDetail() {
 
   return (
     <>
-      {/* Loading Screen */}
-      <PageLoader
-        isLoading={isLoading}
-        pageName="Genie World"
-        minDuration={1500}
-      />
-
       {showHeader && <Header isFixed />}
-      <GenieWorld projects={PROJECTS} onStateChange={setGalleryState} />
+      <GenieWorld
+        projects={PROJECTS}
+        onStateChange={setGalleryState}
+        isLoading={isLoading}
+      />
     </>
   );
 }

@@ -27,7 +27,7 @@ function createTextTexture(
   gl,
   text,
   font = "bold 24px Inter, sans-serif",
-  color = "#ffffff"
+  color = "#ffffff",
 ) {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
@@ -81,7 +81,7 @@ class Title {
       this.gl,
       this.text,
       this.font,
-      this.textColor
+      this.textColor,
     );
     this.aspect = width / height;
 
@@ -390,18 +390,24 @@ class GalleryApp {
       scrollSpeed,
       scrollEase,
       onItemClick,
-    }
+      onLoopComplete,
+    },
   ) {
     this.container = container;
     this.scrollSpeed = scrollSpeed;
     this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
     this.onCheckDebounce = debounce(this.onCheck.bind(this), 200);
     this.onItemClick = onItemClick;
+    this.onLoopComplete = onLoopComplete;
     this.items = items;
     this.bend = bend;
     this.textColor = textColor;
     this.borderRadius = borderRadius;
     this.font = font;
+
+    // Track if loop has been completed
+    this.loopCompleted = false;
+    this.totalScrolled = 0;
 
     this.createRenderer();
     this.createCamera();
@@ -554,7 +560,7 @@ class GalleryApp {
     this.viewport = { width, height };
     if (this.medias) {
       this.medias.forEach((media) =>
-        media.onResize({ screen: this.screen, viewport: this.viewport })
+        media.onResize({ screen: this.screen, viewport: this.viewport }),
       );
     }
   }
@@ -563,29 +569,58 @@ class GalleryApp {
     this.scroll.current = lerp(
       this.scroll.current,
       this.scroll.target,
-      this.scroll.ease
+      this.scroll.ease,
     );
     const direction = this.scroll.current > this.scroll.last ? "right" : "left";
     if (this.medias) {
       this.medias.forEach((media) => media.update(this.scroll, direction));
     }
     this.renderer.render({ scene: this.scene, camera: this.camera });
+
+    // Track total scroll distance for loop detection
+    const scrollDelta = Math.abs(this.scroll.current - this.scroll.last);
+    this.totalScrolled += scrollDelta;
+
+    // Check if user has scrolled through all unique items (one full loop)
+    if (!this.loopCompleted && this.medias && this.medias[0]) {
+      const singleLoopWidth = this.medias[0].width * this.items.length;
+      if (this.totalScrolled >= singleLoopWidth) {
+        this.loopCompleted = true;
+        if (this.onLoopComplete) {
+          this.onLoopComplete();
+        }
+      }
+    }
+
     this.scroll.last = this.scroll.current;
     this.raf = window.requestAnimationFrame(this.update.bind(this));
   }
 
+  // Navigate to next item
+  goNext() {
+    if (!this.medias || !this.medias[0]) return;
+    const width = this.medias[0].width;
+    this.scroll.target += width;
+    this.onCheckDebounce();
+  }
+
+  // Navigate to previous item
+  goPrev() {
+    if (!this.medias || !this.medias[0]) return;
+    const width = this.medias[0].width;
+    this.scroll.target -= width;
+    this.onCheckDebounce();
+  }
+
   addEventListeners() {
     this.boundOnResize = this.onResize.bind(this);
-    this.boundOnWheel = this.onWheel.bind(this);
     this.boundOnTouchDown = this.onTouchDown.bind(this);
     this.boundOnTouchMove = this.onTouchMove.bind(this);
     this.boundOnTouchUp = this.onTouchUp.bind(this);
     this.boundOnClick = this.onClick.bind(this);
 
     window.addEventListener("resize", this.boundOnResize);
-    this.container.addEventListener("wheel", this.boundOnWheel, {
-      passive: true,
-    });
+    // NOTE: Wheel removed to allow page scrolling
     this.container.addEventListener("mousedown", this.boundOnTouchDown);
     this.container.addEventListener("mousemove", this.boundOnTouchMove);
     this.container.addEventListener("mouseup", this.boundOnTouchUp);
@@ -594,15 +629,15 @@ class GalleryApp {
     this.container.addEventListener("touchend", this.boundOnTouchUp);
     this.container.addEventListener("click", this.boundOnClick);
 
-    // Keyboard navigation
+    // Keyboard navigation (only when gallery is focused)
     this.boundOnKeyDown = this.onKeyDown.bind(this);
-    window.addEventListener("keydown", this.boundOnKeyDown);
+    this.container.addEventListener("keydown", this.boundOnKeyDown);
+    this.container.setAttribute("tabindex", "0");
   }
 
   destroy() {
     window.cancelAnimationFrame(this.raf);
     window.removeEventListener("resize", this.boundOnResize);
-    this.container.removeEventListener("wheel", this.boundOnWheel);
     this.container.removeEventListener("mousedown", this.boundOnTouchDown);
     this.container.removeEventListener("mousemove", this.boundOnTouchMove);
     this.container.removeEventListener("mouseup", this.boundOnTouchUp);
@@ -610,7 +645,7 @@ class GalleryApp {
     this.container.removeEventListener("touchmove", this.boundOnTouchMove);
     this.container.removeEventListener("touchend", this.boundOnTouchUp);
     this.container.removeEventListener("click", this.boundOnClick);
-    window.removeEventListener("keydown", this.boundOnKeyDown);
+    this.container.removeEventListener("keydown", this.boundOnKeyDown);
 
     if (
       this.renderer &&
@@ -631,58 +666,110 @@ export default function CircularGallery({
   scrollSpeed = 2,
   scrollEase = 0.05,
   onItemClick,
+  onLoopComplete,
+  showArrows = true,
 }) {
   const containerRef = useRef(null);
   const appRef = useRef(null);
 
- useEffect(() => {
-  if (!containerRef.current || !items || items.length === 0) return;
+  useEffect(() => {
+    if (!containerRef.current || !items || items.length === 0) return;
 
-  let app;
+    let app;
 
-  (async () => {
-    // Ensure canvas text fonts are available before texture creation
-    if (document.fonts && document.fonts.ready) {
-      await document.fonts.ready;
-    }
+    (async () => {
+      // Ensure canvas text fonts are available before texture creation
+      if (document.fonts && document.fonts.ready) {
+        await document.fonts.ready;
+      }
 
-    app = new GalleryApp(containerRef.current, {
-      items,
-      bend,
-      textColor,
-      borderRadius,
-      font,
-      scrollSpeed,
-      scrollEase,
-      onItemClick,
-    });
+      app = new GalleryApp(containerRef.current, {
+        items,
+        bend,
+        textColor,
+        borderRadius,
+        font,
+        scrollSpeed,
+        scrollEase,
+        onItemClick,
+        onLoopComplete,
+      });
 
-    appRef.current = app;
-  })();
+      appRef.current = app;
+    })();
 
-  return () => {
-    if (app) {
-      app.destroy();
-      app = null;
-      appRef.current = null;
-    }
-  };
-}, [
-  items,
-  bend,
-  textColor,
-  borderRadius,
-  font,
-  scrollSpeed,
-  scrollEase,
-  onItemClick,
-]);
+    return () => {
+      if (app) {
+        app.destroy();
+        app = null;
+        appRef.current = null;
+      }
+    };
+  }, [
+    items,
+    bend,
+    textColor,
+    borderRadius,
+    font,
+    scrollSpeed,
+    scrollEase,
+    onItemClick,
+    onLoopComplete,
+  ]);
 
+  const handlePrev = () => appRef.current?.goPrev();
+  const handleNext = () => appRef.current?.goNext();
 
   return (
-    <div
-      className="w-full h-full overflow-hidden cursor-grab active:cursor-grabbing"
-      ref={containerRef}
-    />
+    <div className="relative w-full h-full">
+      <div
+        className="w-full h-full overflow-hidden cursor-grab active:cursor-grabbing"
+        ref={containerRef}
+      />
+
+      {/* Arrow Navigation */}
+      {showArrows && (
+        <>
+          <button
+            onClick={handlePrev}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md transition-all group"
+            aria-label="Previous project"
+          >
+            <svg
+              className="w-6 h-6 text-white group-hover:scale-110 transition-transform"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+          <button
+            onClick={handleNext}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md transition-all group"
+            aria-label="Next project"
+          >
+            <svg
+              className="w-6 h-6 text-white group-hover:scale-110 transition-transform"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        </>
+      )}
+    </div>
   );
 }

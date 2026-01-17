@@ -8,6 +8,7 @@ import Layout from "./components/layout/Layout";
 
 // Lazy load: Non-critical pages for code splitting
 const WorkDetail = React.lazy(() => import("./pages/WorkDetail"));
+const ProjectPage = React.lazy(() => import("./pages/ProjectPage"));
 const Contact = React.lazy(() => import("./pages/Contact"));
 const About = React.lazy(() => import("./pages/About"));
 const TemplatesPage = React.lazy(() => import("./pages/TemplatesPage"));
@@ -45,6 +46,7 @@ function App() {
           <Routes>
             {/* Works page - full immersive, no layout */}
             <Route path="/works" element={<WorkDetail />} />
+            <Route path="/works/:projectId" element={<ProjectPage />} />
 
             {/* Templates & Pricing - cinematic environment */}
             <Route path="/templates" element={<TemplatesPage />} />

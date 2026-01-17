@@ -107,7 +107,7 @@ export const Header = ({
 
     const itemEls = Array.from(panel.querySelectorAll(".sm-panel-itemLabel"));
     const numberEls = Array.from(
-      panel.querySelectorAll(".sm-panel-list[data-numbering] .sm-panel-item")
+      panel.querySelectorAll(".sm-panel-list[data-numbering] .sm-panel-item"),
     );
     const socialTitle = panel.querySelector(".sm-socials-title");
     const socialLinks = Array.from(panel.querySelectorAll(".sm-socials-link"));
@@ -134,7 +134,7 @@ export const Header = ({
         ls.el,
         { xPercent: ls.start },
         { xPercent: 0, duration: 0.5, ease: "power4.out" },
-        i * 0.07
+        i * 0.07,
       );
     });
 
@@ -147,7 +147,7 @@ export const Header = ({
       panel,
       { xPercent: panelStart },
       { xPercent: 0, duration: panelDuration, ease: "power4.out" },
-      panelInsertTime
+      panelInsertTime,
     );
 
     // 3. Content Entrance
@@ -164,7 +164,7 @@ export const Header = ({
           ease: "power4.out",
           stagger: { each: 0.1, from: "start" },
         },
-        itemsStart
+        itemsStart,
       );
 
       if (numberEls.length) {
@@ -176,7 +176,7 @@ export const Header = ({
             ["--sm-num-opacity"]: 1,
             stagger: { each: 0.08, from: "start" },
           },
-          itemsStart + 0.1
+          itemsStart + 0.1,
         );
       }
     }
@@ -188,7 +188,7 @@ export const Header = ({
         tl.to(
           socialTitle,
           { opacity: 1, duration: 0.5, ease: "power2.out" },
-          socialsStart
+          socialsStart,
         );
       if (socialLinks.length) {
         tl.to(
@@ -201,7 +201,7 @@ export const Header = ({
             stagger: { each: 0.08, from: "start" },
             onComplete: () => gsap.set(socialLinks, { clearProps: "opacity" }),
           },
-          socialsStart + 0.04
+          socialsStart + 0.04,
         );
       }
     }
@@ -247,20 +247,20 @@ export const Header = ({
       onComplete: () => {
         // Reset element positions for next opening
         const itemEls = Array.from(
-          panel.querySelectorAll(".sm-panel-itemLabel")
+          panel.querySelectorAll(".sm-panel-itemLabel"),
         );
         if (itemEls.length) gsap.set(itemEls, { yPercent: 140, rotate: 10 });
 
         const numberEls = Array.from(
           panel.querySelectorAll(
-            ".sm-panel-list[data-numbering] .sm-panel-item"
-          )
+            ".sm-panel-list[data-numbering] .sm-panel-item",
+          ),
         );
         if (numberEls.length) gsap.set(numberEls, { ["--sm-num-opacity"]: 0 });
 
         const socialTitle = panel.querySelector(".sm-socials-title");
         const socialLinks = Array.from(
-          panel.querySelectorAll(".sm-socials-link")
+          panel.querySelectorAll(".sm-socials-link"),
         );
         if (socialTitle) gsap.set(socialTitle, { opacity: 0 });
         if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 });
@@ -311,7 +311,7 @@ export const Header = ({
         gsap.set(btn, { color: menuButtonColor });
       }
     },
-    [openMenuButtonColor, menuButtonColor, changeMenuColorOnOpen]
+    [openMenuButtonColor, menuButtonColor, changeMenuColorOnOpen],
   );
 
   React.useEffect(() => {
@@ -556,7 +556,7 @@ export const Header = ({
                     key={it.label + idx}
                   >
                     <a
-                      className="sm-panel-item relative font-display font-bold text-[4rem] cursor-pointer leading-none tracking-[-2px] uppercase transition-[all] duration-150 ease-linear inline-block no-underline pr-[1.4em] hover:italic text-black"
+                      className="sm-panel-item relative font-display font-bold text-[4rem] cursor-pointer leading-none tracking-[-2px] uppercase transition-[all] duration-150 ease-linear inline-block no-underline pr-[1.4em] hover:italic text-black whitespace-nowrap"
                       href={it.link}
                       aria-label={it.ariaLabel}
                       data-index={idx + 1}
@@ -665,7 +665,7 @@ export const Header = ({
 .sm-scope .sm-prelayer { position: absolute; top: 0; right: 0; height: 100%; width: 100%; transform: translateX(0); }
 
 .sm-scope .sm-panel-inner { flex: 1; display: flex; flex-direction: column; gap: 1.25rem; }
-.sm-scope .sm-panel-itemWrap { position: relative; overflow: hidden; line-height: 1; }
+.sm-scope .sm-panel-itemWrap { position: relative; overflow: visible; line-height: 1; }
 
 .sm-scope .sm-socials { margin-top: auto; padding-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
 .sm-scope .sm-socials-title { margin: 0; font-size: 1rem; font-weight: 500; color: #000000; }
@@ -696,7 +696,8 @@ export const Header = ({
 }
 @media (max-width: 640px) { 
   .sm-scope .staggered-menu-panel, .sm-scope .sm-prelayers { width: 100%; left: 0; right: 0; } 
-  .sm-scope .sm-panel-item { font-size: 2.5rem; }
+  .sm-scope .sm-panel-item { font-size: 2.5rem; padding-right: 2.5rem; }
+  .sm-scope .sm-panel-list[data-numbering] .sm-panel-item::after { right: auto; left: calc(100% - 2rem); }
 }
       `}</style>
     </div>

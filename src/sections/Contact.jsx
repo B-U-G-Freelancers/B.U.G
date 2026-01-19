@@ -67,7 +67,10 @@ function VisitingCard() {
 
           <div className="relative z-10 flex justify-between items-start">
             <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-              <span className="font-black text-white text-xs">BUG</span>
+              <span className="font-black text-white text-xs">
+
+                <img src="../assets/png/white/brand_logo_white - 64x64.png"/>
+              </span>
             </div>
             <span className="text-xs text-white/40 tracking-[0.2em] uppercase font-mono">
               2025
@@ -120,7 +123,7 @@ function VisitingCard() {
                   <Mail size={14} />
                 </div>
                 <span className="font-medium text-lg tracking-tight group-hover:text-blue-600 transition-colors">
-                  hello@buildyourgenie.com
+                  buildyourgenie@gmail.com
                 </span>
               </a>
 

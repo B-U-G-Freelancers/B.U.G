@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { ProjectProvider } from "./context/ProjectContext";
 
 // Eager load: Home page (critical path)
 import Home from "./pages/Home";
@@ -41,50 +42,52 @@ function PageLoader() {
 function App() {
   return (
     <ErrorBoundary>
-      <BrowserRouter>
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            {/* Works page - full immersive, no layout */}
-            <Route
-              path="/home"
-              element={
-                <Layout>
-                  <Home />
-                </Layout>
-              }
-            />
-            <Route path="/works" element={<WorkDetail />} />
-            <Route path="/works/:projectId" element={<ProjectPage />} />
+      <ProjectProvider>
+        <BrowserRouter>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              {/* Works page - full immersive, no layout */}
+              <Route
+                path="/home"
+                element={
+                  <Layout>
+                    <Home />
+                  </Layout>
+                }
+              />
+              <Route path="/works" element={<WorkDetail />} />
+              <Route path="/works/:projectId" element={<ProjectPage />} />
 
-            {/* Templates & Pricing - cinematic environment */}
-            <Route path="/templates" element={<TemplatesPage />} />
+              {/* Templates & Pricing - cinematic environment */}
+              <Route path="/templates" element={<TemplatesPage />} />
 
-            {/* About page - cinematic environment */}
-            <Route path="/about" element={<About />} />
+              {/* About page - cinematic environment */}
+              <Route path="/about" element={<About />} />
 
-            {/* Pages with standard layout */}
-            <Route
-              path="/"
-              element={
-                <Layout>
-                  <Home />
-                </Layout>
-              }
-            />
-            <Route
-              path="/contact"
-              element={
-                <Layout>
-                  <Contact />
-                </Layout>
-              }
-            />
+              {/* Pages with standard layout */}
+              <Route
+                path="/"
+                element={
+                  <Layout>
+                    <Home />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/contact"
+                element={
+                  <Layout>
+                    <Contact />
+                  </Layout>
+                }
+              />
 
-            {/* 404 - Not Found */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
+              {/* 404 - Not Found */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </ProjectProvider>
     </ErrorBoundary>
   );
 }

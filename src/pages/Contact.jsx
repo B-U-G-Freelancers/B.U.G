@@ -81,23 +81,72 @@ export default function Contact() {
     );
   };
 
-  const handleSubmit = (e) => {
+  // Google Apps Script Web App URL - Replace with your deployed script URL
+  const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbws7x_90uEq3vOT0SqICutIBVML_QYvYHBhyKf3lWZX7UqptcqKV9hwuArZPVHxwG-vmA/exec";
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name || !email) return;
 
     setIsSubmitting(true);
-    // TODO: Integrate with actual form submission (e.g., EmailJS, Supabase)
-    setTimeout(() => {
+
+    try {
+      // Create a hidden iframe to submit the form (bypasses CORS)
+      const iframe = document.createElement("iframe");
+      iframe.name = "hidden_iframe";
+      iframe.style.display = "none";
+      document.body.appendChild(iframe);
+
+      // Create a hidden form
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = GOOGLE_SCRIPT_URL;
+      form.target = "hidden_iframe";
+
+      // Add form fields
+      const fields = {
+        name,
+        email,
+        services: selectedServices.join(", ") || "Not specified",
+        budget: selectedBudget || "Not specified",
+        details: details || "No details provided",
+      };
+
+      Object.entries(fields).forEach(([key, value]) => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = value;
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      form.submit();
+
+      // Clean up after submission
+      setTimeout(() => {
+        document.body.removeChild(form);
+        document.body.removeChild(iframe);
+      }, 1000);
+
+      // Show success (we can't read the response, but the form submitted)
       setIsSubmitting(false);
       setIsSuccess(true);
+
       // Reset form
       setName("");
       setEmail("");
       setDetails("");
       setSelectedServices([]);
       setSelectedBudget(null);
+
       setTimeout(() => setIsSuccess(false), 3000);
-    }, 1500);
+    } catch (error) {
+      console.error("Submission error:", error);
+      setIsSubmitting(false);
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -144,10 +193,10 @@ export default function Contact() {
               <Mail className="w-4 h-4" /> Email
             </h3>
             <a
-              href="mailto:hello@buildyourgenie.com"
+              href="mailto:buildyourgenie@gmail.com"
               className="text-base sm:text-lg md:text-xl font-bold hover:text-blue-400 transition-colors block break-all sm:break-normal"
             >
-              hello@buildyourgenie.com
+              buildyourgenie@gmail.com
             </a>
           </motion.div>
 
@@ -176,7 +225,7 @@ export default function Contact() {
             </h3>
             <div className="flex gap-4">
               <a
-                href="https://instagram.com/buildyourgenie"
+                href="https://www.instagram.com/bugfreelancers/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all"
@@ -184,7 +233,7 @@ export default function Contact() {
                 <Instagram size={18} className="sm:w-5 sm:h-5" />
               </a>
               <a
-                href="https://discord.gg/buildyourgenie"
+                href="https://discord.com/channels/1454445083569950950/1459237904693072046"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all"
@@ -192,7 +241,7 @@ export default function Contact() {
                 <FaDiscord size={18} className="sm:w-5 sm:h-5" />
               </a>
               <a
-                href="https://linkedin.com/company/buildyourgenie"
+                href="https://www.linkedin.com/in/bugfreelancers/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all"
@@ -200,7 +249,7 @@ export default function Contact() {
                 <FaLinkedin size={18} className="sm:w-5 sm:h-5" />
               </a>
               <a
-                href="https://github.com/buildyourgenie"
+                href="https://github.com/orgs/B-U-G-Freelancers"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all"

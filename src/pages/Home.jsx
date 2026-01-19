@@ -14,7 +14,7 @@ export default function Home() {
       <Hero />
 
       {/* Other sections - no parallax wrapper to avoid scroll issues */}
-      <About />
+      {/* <About /> */}
       <Services />
       <Works />
       <Feedback />

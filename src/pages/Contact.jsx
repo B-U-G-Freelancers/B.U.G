@@ -53,6 +53,7 @@ export default function Contact() {
   const [selectedBudget, setSelectedBudget] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [details, setDetails] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -108,6 +109,7 @@ export default function Contact() {
       const fields = {
         name,
         email,
+        phone: phone || "Not provided",
         services: selectedServices.join(", ") || "Not specified",
         budget: selectedBudget || "Not specified",
         details: details || "No details provided",
@@ -137,6 +139,7 @@ export default function Contact() {
       // Reset form
       setName("");
       setEmail("");
+      setPhone("");
       setDetails("");
       setSelectedServices([]);
       setSelectedBudget(null);
@@ -337,6 +340,14 @@ export default function Contact() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
+
+              <AnimatedInput
+                label="Phone Number (Optional)"
+                placeholder="Enter your phone number"
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
 
               <AnimatedInput
                 label="Project Details (Optional)"

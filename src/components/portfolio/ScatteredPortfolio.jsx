@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useProjects } from "../../context/ProjectContext";
 
-// 4 cards positioned to match reference - centered clustered layout
+// Desktop: 4 cards positioned scattered/clustered layout
 const CARD_POSITIONS = [
   {
     // Top-left: tilted left
@@ -45,7 +45,8 @@ const CARD_POSITIONS = [
   },
 ];
 
-function PortfolioCard({ project, position, scrollProgress }) {
+// Desktop card with absolute positioning
+function DesktopCard({ project, position, scrollProgress }) {
   const y = useTransform(
     scrollProgress,
     [0, 1],
@@ -60,7 +61,7 @@ function PortfolioCard({ project, position, scrollProgress }) {
 
   return (
     <motion.div
-      className="absolute"
+      className="absolute hidden md:block"
       style={{
         left: position.left,
         top: position.top,
@@ -74,40 +75,65 @@ function PortfolioCard({ project, position, scrollProgress }) {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
-      <Link to={`/works/${project.id}`} className="block group">
-        <motion.div
-          className="relative overflow-hidden rounded-lg cursor-pointer"
-          whileHover={{
-            scale: 1.05,
-            rotate: position.rotation * 1.5,
-            zIndex: 50,
-            transition: { duration: 0.4, ease: "easeOut" },
-          }}
-          style={{
-            boxShadow: "0 15px 40px -10px rgba(0, 0, 0, 0.7)",
-          }}
-        >
-          <motion.img
-            src={project.image}
-            alt={project.title}
-            className="w-full aspect-[4/3] object-cover"
-            whileHover={{ scale: 1.08 }}
-            transition={{ duration: 0.5 }}
-          />
-
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-50 group-hover:opacity-80 transition-opacity" />
-
-          {/* Title on hover */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <h3 className="text-white font-semibold text-base">
-              {project.title}
-            </h3>
-            <p className="text-white/60 text-xs mt-0.5">{project.category}</p>
-          </div>
-        </motion.div>
-      </Link>
+      <CardContent project={project} rotation={position.rotation} />
     </motion.div>
+  );
+}
+
+// Mobile card in grid layout
+function MobileCard({ project, index }) {
+  const rotations = [-3, 2, -2, 3];
+  const rotation = rotations[index % 4];
+
+  return (
+    <motion.div
+      className="md:hidden"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-30px" }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      style={{ rotate: rotation }}
+    >
+      <CardContent project={project} rotation={rotation} />
+    </motion.div>
+  );
+}
+
+// Shared card content component
+function CardContent({ project, rotation }) {
+  return (
+    <Link to={`/works/${project.id}`} className="block group">
+      <motion.div
+        className="relative overflow-hidden rounded-xl cursor-pointer"
+        whileHover={{
+          scale: 1.03,
+          rotate: rotation * 0.5,
+          transition: { duration: 0.4, ease: "easeOut" },
+        }}
+        style={{
+          boxShadow: "0 15px 40px -10px rgba(0, 0, 0, 0.7)",
+        }}
+      >
+        <motion.img
+          src={project.image}
+          alt={project.title}
+          className="w-full aspect-[4/3] object-cover"
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.5 }}
+        />
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity" />
+
+        {/* Title - always visible on mobile, hover on desktop */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+          <h3 className="text-white font-semibold text-sm md:text-base">
+            {project.title}
+          </h3>
+          <p className="text-white/60 text-xs mt-0.5">{project.category}</p>
+        </div>
+      </motion.div>
+    </Link>
   );
 }
 
@@ -126,12 +152,29 @@ export default function ScatteredPortfolio() {
   return (
     <section
       ref={containerRef}
-      className="relative py-20 bg-black overflow-hidden"
+      className="relative py-16 md:py-20 bg-black overflow-hidden"
     >
-      {/* Cards container */}
-      <div className="relative w-full max-w-5xl mx-auto h-[70vh] min-h-[550px]">
+      {/* Section Header - Mobile */}
+      <div className="md:hidden text-center mb-8 px-6">
+        <p className="text-accent text-xs uppercase tracking-[0.3em] mb-2">
+          Selected Works
+        </p>
+        <h2 className="text-2xl font-display font-bold text-white">
+          Our Portfolio
+        </h2>
+      </div>
+
+      {/* Mobile: Vertical grid layout */}
+      <div className="md:hidden px-6 grid grid-cols-2 gap-4">
         {displayProjects.map((project, index) => (
-          <PortfolioCard
+          <MobileCard key={project.id} project={project} index={index} />
+        ))}
+      </div>
+
+      {/* Desktop: Scattered absolute positioning */}
+      <div className="hidden md:block relative w-full max-w-5xl mx-auto h-[70vh] min-h-[550px]">
+        {displayProjects.map((project, index) => (
+          <DesktopCard
             key={project.id}
             project={project}
             position={CARD_POSITIONS[index]}
@@ -142,7 +185,7 @@ export default function ScatteredPortfolio() {
 
       {/* View Portfolio CTA */}
       <motion.div
-        className="flex justify-center mt-8"
+        className="flex justify-center mt-8 md:mt-8"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}

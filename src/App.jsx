@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ProjectProvider } from "./context/ProjectContext";
+import ScrollToTop from "./components/ScrollToTop";
 
 // Eager load: Home page (critical path)
 import Home from "./pages/Home";
@@ -44,6 +45,7 @@ function App() {
     <ErrorBoundary>
       <ProjectProvider>
         <BrowserRouter>
+          <ScrollToTop />
           <Suspense fallback={<PageLoader />}>
             <Routes>
               {/* Works page - full immersive, no layout */}

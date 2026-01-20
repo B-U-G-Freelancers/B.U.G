@@ -15,9 +15,10 @@ export const Header = ({
     { label: "Contact", link: "/contact", isRoute: true },
   ],
   socialItems = [
-    { label: "Instagram", link: "#" },
-    { label: "Twitter", link: "#" },
-    { label: "LinkedIn", link: "#" },
+    { label: "Instagram", link: "https://www.instagram.com/bugfreelancers/" },
+    { label: "LinkedIn", link: "https://www.linkedin.com/in/bugfreelancers/" },
+    { label: "GitHub", link: "https://github.com/orgs/B-U-G-Freelancers" },
+    { label: "Discord", link: "https://discord.com/channels/1454445083569950950/1459237904693072046" },
   ],
   displaySocials = true,
   displayItemNumbering = true,
@@ -418,11 +419,10 @@ export const Header = ({
 
   return (
     <div
-      className={`sm-scope z-40 pointer-events-none ${
-        isFixed
-          ? "fixed top-0 left-0 w-full h-screen overflow-hidden"
-          : "w-full h-full"
-      }`}
+      className={`sm-scope z-40 pointer-events-none ${isFixed
+        ? "fixed top-0 left-0 w-full h-screen overflow-hidden"
+        : "w-full h-full"
+        }`}
     >
       <div
         className={

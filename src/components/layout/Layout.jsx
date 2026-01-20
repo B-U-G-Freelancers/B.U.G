@@ -9,19 +9,12 @@ import GlobalBackground from "./GlobalBackground";
 const INTRO_SHOWN_KEY = "bug_intro_shown";
 
 export default function Layout({ children }) {
-  // Check if intro was already shown this session
-  const [introComplete, setIntroComplete] = useState(() => {
-    // Check sessionStorage on initial render
-    if (typeof window !== "undefined") {
-      return sessionStorage.getItem(INTRO_SHOWN_KEY) === "true";
-    }
-    return false;
-  });
+  // Always start with intro incomplete on initial load
+  // User requested animation visible when reloaded
+  const [introComplete, setIntroComplete] = useState(false);
 
   const handleIntroComplete = () => {
     setIntroComplete(true);
-    // Persist to sessionStorage so it doesn't replay on navigation
-    sessionStorage.setItem(INTRO_SHOWN_KEY, "true");
   };
 
   return (
@@ -38,9 +31,8 @@ export default function Layout({ children }) {
 
       {/* Header / Menu - fixed position */}
       <div
-        className={`fixed top-0 left-0 w-full z-[100] transition-opacity duration-500 ${
-          introComplete ? "opacity-100" : "opacity-0"
-        }`}
+        className={`fixed top-0 left-0 w-full z-[100] transition-opacity duration-500 ${introComplete ? "opacity-100" : "opacity-0"
+          }`}
       >
         <Header isFixed />
       </div>

@@ -33,7 +33,7 @@ const DecryptionText = ({ text, className }) => {
             }
             return CHARS[Math.floor(Math.random() * CHARS.length)];
           })
-          .join("")
+          .join(""),
       );
 
       if (iterations >= text.length) {
@@ -414,7 +414,7 @@ export function HeroContent() {
         ctaRef.current,
         scrollRef.current,
       ],
-      { autoAlpha: 0, y: 30, filter: "blur(10px)" }
+      { autoAlpha: 0, y: 30, filter: "blur(10px)" },
     );
 
     tl.to(headlineRef.current, {
@@ -433,7 +433,7 @@ export function HeroContent() {
           duration: 1,
           ease: "power3.out",
         },
-        "-=0.8"
+        "-=0.8",
       )
       .to(
         ctaRef.current,
@@ -444,7 +444,7 @@ export function HeroContent() {
           duration: 1,
           ease: "power3.out",
         },
-        "-=0.8"
+        "-=0.8",
       )
       .to(
         scrollRef.current,
@@ -455,7 +455,7 @@ export function HeroContent() {
           duration: 1,
           ease: "back.out(1.7)",
         },
-        "-=0.5"
+        "-=0.5",
       );
 
     gsap.to(scrollRef.current, {
@@ -500,21 +500,20 @@ export function HeroContent() {
         className="mt-12 flex flex-col sm:flex-row gap-6 pointer-events-auto"
       >
         <a
-          href="#services"
+          href="/contact"
           className="group px-10 py-4 bg-[#3A7CFF] text-white font-bold tracking-widest uppercase hover:bg-white hover:text-[#3A7CFF] transition-all shadow-[0_0_20px_rgba(58,124,255,0.4)] clip-path-button flex items-center gap-2"
         >
           <span className="relative z-10">Get Started</span>
           <ChevronDown className="w-5 h-5 -rotate-90 group-hover:rotate-0 transition-transform duration-300" />
         </a>
         <a
-          href="#works"
+          href="/works"
           className="px-8 py-4 border border-white/20 text-white font-bold tracking-widest uppercase hover:border-[#3A7CFF] hover:text-[#3A7CFF] transition-all bg-black/50 backdrop-blur-sm"
         >
           View Systems
         </a>
       </div>
 
-      {/* Animated Scroll Arrow */}
       <a
         ref={scrollRef}
         href="#services"

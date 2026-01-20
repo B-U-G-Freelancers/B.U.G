@@ -15,9 +15,12 @@ export const Header = ({
     { label: "Contact", link: "/contact", isRoute: true },
   ],
   socialItems = [
-    { label: "Instagram", link: "#" },
-    { label: "Twitter", link: "#" },
-    { label: "LinkedIn", link: "#" },
+    { label: "Instagram", link: "https://www.instagram.com/bugfreelancers/" },
+    {
+      label: "Discord",
+      link: "https://discord.com/channels/1454445083569950950/1459237904693072046",
+    },
+    { label: "LinkedIn", link: "https://www.linkedin.com/in/bugfreelancers/" },
   ],
   displaySocials = true,
   displayItemNumbering = true,

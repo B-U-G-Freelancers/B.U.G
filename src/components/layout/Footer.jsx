@@ -25,7 +25,7 @@ export default function Footer() {
             </div>
             <p className="text-xs text-text-secondary text-center lg:text-left">
               Built for those who value engineering precision. <br />
-              San Francisco • London • Remote
+              Chennai • India • Remote
             </p>
           </div>
 
@@ -46,39 +46,28 @@ export default function Footer() {
                 Socials
               </h3>
               <a
-                href="#"
+                href="https://www.instagram.com/bugfreelancers/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-text-secondary hover:text-accent transition-colors"
               >
-                Twitter
+                Instagram
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/in/bugfreelancers/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-text-secondary hover:text-accent transition-colors"
               >
                 LinkedIn
               </a>
               <a
-                href="#"
+                href="https://discord.com/channels/1454445083569950950/1459237904693072046"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-text-secondary hover:text-accent transition-colors"
               >
-                Instagram
-              </a>
-            </div>
-            <div className="flex flex-col gap-3">
-              <h3 className="font-semibold text-text-muted uppercase tracking-widest text-xs">
-                Legal
-              </h3>
-              <a
-                href="#"
-                className="text-text-secondary hover:text-accent transition-colors"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="#"
-                className="text-text-secondary hover:text-accent transition-colors"
-              >
-                Terms of Service
+                Discord
               </a>
             </div>
           </div>

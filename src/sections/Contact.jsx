@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Instagram, Mail, MapPin, ArrowRight } from "lucide-react";
 import { FaDiscord, FaLinkedin, FaGithub } from "react-icons/fa";
+import logoWhite from "../assets/bug_logo_white.svg";
 
 function VisitingCard() {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -47,7 +48,7 @@ function VisitingCard() {
         initial={false}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         style={{
-          rotateX: isFlipped ? 0 : rotateX, // Only tilt when not flipped to avoid confusion
+          rotateX: rotateX,
           rotateY: isFlipped ? 180 : rotateY,
           transformStyle: "preserve-3d",
         }}
@@ -60,17 +61,17 @@ function VisitingCard() {
         className="relative w-full h-full"
       >
         {/* FRONT SIDE */}
-        <div className="absolute inset-0 backface-hidden rounded-xl bg-black border border-white/10 shadow-2xl p-8 flex flex-col justify-between overflow-hidden">
+        <div
+          className="absolute inset-0 rounded-xl bg-black border border-white/10 shadow-2xl p-8 flex flex-col justify-between overflow-hidden"
+          style={{ backfaceVisibility: "hidden" }}
+        >
           {/* Subtle texture/gradient */}
           <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
           <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-[50px] rounded-full pointer-events-none" />
 
           <div className="relative z-10 flex justify-between items-start">
             <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-              <span className="font-black text-white text-xs">
-
-                <img src="../assets/png/white/brand_logo_white - 64x64.png"/>
-              </span>
+              <img src={logoWhite} alt="BUG Logo" className="w-6 h-6" />
             </div>
             <span className="text-xs text-white/40 tracking-[0.2em] uppercase font-mono">
               2025
@@ -95,16 +96,44 @@ function VisitingCard() {
               <br />
               DESIGN & ENGINEERING
             </div>
-            <div className="flex items-center gap-2 text-blue-400 text-xs tracking-widest uppercase animate-pulse">
-              Click to flip <ArrowRight size={12} />
+            <div className="flex gap-3 pointer-events-auto">
+              {[
+                {
+                  icon: Instagram,
+                  href: "https://www.instagram.com/bugfreelancers/",
+                },
+                {
+                  icon: FaGithub,
+                  href: "https://github.com/orgs/B-U-G-Freelancers",
+                },
+                {
+                  icon: FaLinkedin,
+                  href: "https://www.linkedin.com/in/bugfreelancers/",
+                },
+                {
+                  icon: FaDiscord,
+                  href: "https://discord.com/channels/1454445083569950950/1459237904693072046",
+                },
+              ].map((social, i) => (
+                <a
+                  key={i}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="text-white/40 hover:text-blue-400 hover:scale-110 transition-all"
+                >
+                  <social.icon size={16} />
+                </a>
+              ))}
             </div>
           </div>
         </div>
 
         {/* BACK SIDE */}
         <div
-          className="absolute inset-0 backface-hidden rounded-xl bg-white text-black p-8 flex flex-col justify-between shadow-2xl overflow-hidden"
-          style={{ transform: "rotateY(180deg)" }}
+          className="absolute inset-0 rounded-xl bg-white text-black p-8 flex flex-col justify-between shadow-2xl overflow-hidden"
+          style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden" }}
         >
           {/* Decorative elements */}
           <div className="absolute bottom-0 right-0 w-40 h-40 bg-blue-500/10 blur-[60px] rounded-full pointer-events-none" />
@@ -116,7 +145,7 @@ function VisitingCard() {
 
             <div className="space-y-4">
               <a
-                href="mailto:hello@buildyourgenie.com"
+                href="mailto:buildyourgenie@gmail.com"
                 className="flex items-center gap-3 group"
               >
                 <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition-colors">
@@ -136,25 +165,10 @@ function VisitingCard() {
             </div>
           </div>
 
-          <div>
+          <div className="relative z-10">
             <div className="h-px w-full bg-gray-100 mb-4" />
-            <div className="flex gap-4">
-              {[
-                { icon: Instagram, href: "https://instagram.com" },
-                { icon: FaGithub, href: "https://github.com" },
-                { icon: FaLinkedin, href: "https://linkedin.com" },
-                { icon: FaDiscord, href: "https://discord.com" },
-              ].map((social, i) => (
-                <a
-                  key={i}
-                  href={social.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-gray-400 hover:text-blue-600 hover:scale-110 transition-all"
-                >
-                  <social.icon size={20} />
-                </a>
-              ))}
+            <div className="flex items-center gap-2 text-blue-400 text-xs tracking-widest uppercase animate-pulse">
+              <ArrowRight size={12} className="rotate-180" /> Click to flip back
             </div>
           </div>
         </div>

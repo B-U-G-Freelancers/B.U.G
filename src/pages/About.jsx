@@ -235,7 +235,7 @@ export default function About() {
   return (
     <>
       <Header isFixed />
-      <section className="relative min-h-screen bg-[#050505] overflow-hidden py-32 px-6 text-white">
+      <section className="relative min-h-screen bg-[#050505] overflow-hidden pt-32 pb-20 px-6 text-white">
         <Starfield />
 
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />

@@ -30,7 +30,7 @@ export default function ProjectPage() {
   return (
     <>
       <Header isFixed />
-      <main className="min-h-screen bg-black text-white">
+      <main className="min-h-screen bg-black text-white pt-20">
         {/* Hero Image */}
         <motion.div
           initial={{ scale: 1.1, opacity: 0 }}

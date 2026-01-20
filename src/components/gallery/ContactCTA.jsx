@@ -32,20 +32,17 @@ export default function ContactCTA() {
             {/* Contact Details */}
             <div className="space-y-3 sm:space-y-4">
               <a
-                href="mailto:hello@buildyourgenie.com"
+                href="mailto:buildyourgenie@gmail.com"
                 className="flex items-center gap-3 sm:gap-4 text-gray-400 hover:text-white transition-colors group text-sm sm:text-base"
               >
                 <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 group-hover:scale-110 transition-transform shrink-0" />
-                <span className="truncate">hello@buildyourgenie.com</span>
+                <span className="truncate">buildyourgenie@gmail.com</span>
               </a>
 
-              <a
-                href="tel:+919876543210"
-                className="flex items-center gap-3 sm:gap-4 text-gray-400 hover:text-white transition-colors group text-sm sm:text-base"
-              >
-                <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400 group-hover:scale-110 transition-transform shrink-0" />
-                <span>+91 98765 43210</span>
-              </a>
+              <div className="flex items-center gap-3 sm:gap-4 text-gray-400 text-sm sm:text-base">
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400 shrink-0" />
+                <span>Chennai, India</span>
+              </div>
 
               <a
                 href="https://buildyourgenie.com"
@@ -58,7 +55,7 @@ export default function ContactCTA() {
               </a>
 
               <a
-                href="https://linkedin.com/company/buildyourgenie"
+                href="https://www.linkedin.com/in/bugfreelancers/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 sm:gap-4 text-gray-400 hover:text-white transition-colors group text-sm sm:text-base"

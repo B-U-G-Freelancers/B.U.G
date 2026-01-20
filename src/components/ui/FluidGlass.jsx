@@ -34,9 +34,9 @@ export default function FluidGlass({
 
   const {
     navItems = [
-      { label: "Home", link: "#hero" },
-      { label: "About", link: "#about" },
-      { label: "Contact", link: "#contact" },
+      { label: "Home", link: "/" },
+      { label: "About", link: "/about" },
+      { label: "Contact", link: "/contact" },
     ],
     ...modeProps
   } = rawOverrides;
@@ -91,8 +91,8 @@ const ModeWrapper = memo(function ModeWrapper({
     const destY = lockToBottom
       ? -v.height / 2 + 0.2
       : followPointer
-      ? (pointer.y * v.height) / 2
-      : 0;
+        ? (pointer.y * v.height) / 2
+        : 0;
     easing.damp3(ref.current.position, [destX, destY, 15], 0.15, delta);
 
     if (modeProps.scale == null) {
@@ -210,8 +210,8 @@ function NavItems({ items }) {
     return w <= DEVICE.mobile.max
       ? "mobile"
       : w <= DEVICE.tablet.max
-      ? "tablet"
-      : "desktop";
+        ? "tablet"
+        : "desktop";
   };
 
   const [device, setDevice] = useState(getDevice());

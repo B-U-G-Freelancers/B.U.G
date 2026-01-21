@@ -218,13 +218,13 @@ export default function About() {
   const galleryRef = useRef(null);
 
   const team = [
-    { image: "https://picsum.photos/seed/1/800/600?grayscale" },
-    { image: "https://picsum.photos/seed/2/800/600?grayscale" },
-    { image: "https://picsum.photos/seed/3/800/600?grayscale" },
-    { image: "https://picsum.photos/seed/4/800/600?grayscale" },
-    { image: "https://picsum.photos/seed/5/800/600?grayscale" },
-    { image: "https://picsum.photos/seed/6/800/600?grayscale" },
-    { image: "https://picsum.photos/seed/7/800/600?grayscale" },
+    { image: "/team/member1.jpeg" },
+    { image: "/team/member2.jpeg" },
+    { image: "/team/member3.jpeg" },
+    { image: "/team/member4.jpeg" },
+    { image: "/team/member5.jpeg" },
+    { image: "/team/member6.jpeg" },
+    { image: "/team/member7.jpeg" },
   ];
 
   useEffect(() => {

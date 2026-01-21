@@ -269,42 +269,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Center CTA Section */}
-        <div className="flex flex-col items-center justify-center my-16 py-12 border-y border-white/5">
-          <p className="text-xs text-accent uppercase tracking-[0.3em] mb-4">
-            Ready to start?
-          </p>
-          <h3 className="text-3xl md:text-4xl font-display font-bold text-center mb-4 bg-gradient-to-r from-text-primary via-accent to-text-primary bg-clip-text text-transparent">
-            Let's Build Together
-          </h3>
-          <p className="text-sm text-text-muted text-center max-w-md mb-8">
-            Have a project in mind? We'd love to hear about it. Let's create
-            something extraordinary.
-          </p>
-          <Link
-            to="/contact"
-            onClick={scrollToTop}
-            className="group relative inline-flex items-center gap-2 px-6 py-3 bg-accent/10 border border-accent/30 rounded-full text-accent hover:bg-accent hover:text-bg-primary transition-all duration-300 overflow-hidden"
-          >
-            <span className="relative z-10 text-sm font-medium">
-              Start a Project
-            </span>
-            <svg
-              className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-            <div className="absolute inset-0 bg-accent translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-          </Link>
-        </div>
+
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-white/5">

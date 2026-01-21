@@ -16,29 +16,8 @@ const About = React.lazy(() => import("./pages/About"));
 const TemplatesPage = React.lazy(() => import("./pages/TemplatesPage"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
 
-// Loading fallback component
-function PageLoader() {
-  return (
-    <div
-      className="fixed inset-0 flex items-center justify-center"
-      style={{ backgroundColor: "#0b0d10" }}
-    >
-      <div className="flex flex-col items-center gap-4">
-        {/* Animated loader */}
-        <div className="relative w-12 h-12">
-          <div className="absolute inset-0 rounded-full border-2 border-white/10" />
-          <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-[#3a7cff] animate-spin" />
-        </div>
-        <span
-          className="text-white/40 text-xs tracking-[0.3em] uppercase"
-          style={{ fontFamily: "'Space Grotesk', monospace" }}
-        >
-          Loading...
-        </span>
-      </div>
-    </div>
-  );
-}
+// Import BugIntro for premium loading experience
+import BugIntro from "./components/ui/BugIntro";
 
 function App() {
   return (
@@ -46,7 +25,7 @@ function App() {
       <ProjectProvider>
         <BrowserRouter>
           <ScrollToTop />
-          <Suspense fallback={<PageLoader />}>
+          <Suspense fallback={<BugIntro />}>
             <Routes>
               {/* Works page - full immersive, no layout */}
               <Route

@@ -120,11 +120,6 @@ class CircularGalleryApp {
   createMedias() {
     this.medias = this.items.map((item, index) => {
       const texture = new Texture(this.gl);
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      img.src = item.image;
-      img.onload = () => (texture.image = img);
-
       const program = new Program(this.gl, {
         vertex: `
           attribute vec3 position;
@@ -143,18 +138,50 @@ class CircularGalleryApp {
         fragment: `
           precision highp float;
           uniform sampler2D tMap;
+          uniform vec2 uImageRes;
+          uniform vec2 uPlaneRes;
           varying vec2 vUv;
+          
           void main() {
-            vec4 c = texture2D(tMap, vUv);
+            // Compute aspect ratios
+            float imageAspect = uImageRes.x / uImageRes.y;
+            float planeAspect = uPlaneRes.x / uPlaneRes.y;
+            
+            // Calculate ratio of plane AR to image AR
+            float r = planeAspect / imageAspect;
+            vec2 uv = vUv;
+            
+            if (r < 1.0) {
+               // Plane is narrower (taller) than image. Match heights. Crop width (x).
+               uv.x = (uv.x - 0.5) * r + 0.5;
+            } else {
+               // Plane is wider than image. Match widths. Crop height (y).
+               uv.y = (uv.y - 0.5) / r + 0.5;
+            }
+            
+            vec4 c = texture2D(tMap, uv);
             gl_FragColor = vec4(c.rgb, c.a);
           }
         `,
         uniforms: {
           tMap: { value: texture },
           uTime: { value: Math.random() * 10 },
+          uImageRes: { value: [1, 1] },
+          uPlaneRes: { value: [1, 1] },
         },
         transparent: true,
       });
+
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.src = item.image;
+      img.onload = () => {
+        texture.image = img;
+        program.uniforms.uImageRes.value = [
+          img.naturalWidth,
+          img.naturalHeight,
+        ];
+      };
 
       const mesh = new Mesh(this.gl, { geometry: this.geometry, program });
       mesh.index = index;
@@ -174,15 +201,26 @@ class CircularGalleryApp {
     const viewportHeight = 2 * Math.tan(fov / 2) * this.camera.position.z;
     const viewportWidth = viewportHeight * (w / h);
 
+    // Changed standard Aspect Ratio to be a bit more portrait-friendly or square-ish if needed
+    // But now with the shader, we can keep any shape and image will cover it.
+    // Let's keep a nice cinematic aspect ratio for the cards (4:5 portrait is good for headshots)
     this.planeHeight = viewportHeight * 0.55;
-    this.planeWidth = this.planeHeight * 1.4;
-    this.gap = this.planeWidth * 0.35;
+    this.planeWidth = this.planeHeight * 0.8; // Changed from 1.4 to 0.8 for portrait style cards
+    this.gap = this.planeWidth * 0.2; // Reduced gap
 
     this.totalWidth = (this.planeWidth + this.gap) * this.medias.length;
 
     this.medias.forEach((m, i) => {
       m.scale.set(this.planeWidth, this.planeHeight, 1);
       m.position.x = i * (this.planeWidth + this.gap);
+
+      // Update plane resolution uniform
+      if (m.program.uniforms.uPlaneRes) {
+        m.program.uniforms.uPlaneRes.value = [
+          this.planeWidth,
+          this.planeHeight,
+        ];
+      }
     });
   }
 
@@ -190,13 +228,21 @@ class CircularGalleryApp {
     this.scroll.target += this.speed;
     this.scroll.current = lerp(this.scroll.current, this.scroll.target, 0.05);
 
-    this.medias.forEach((m) => {
-      m.position.x =
-        m.index * (this.planeWidth + this.gap) - this.scroll.current;
+    const itemWidth = this.planeWidth + this.gap;
+    const totalW = itemWidth * this.medias.length;
 
-      if (m.position.x < -this.totalWidth / 2) {
-        m.position.x += this.totalWidth;
-      }
+    this.medias.forEach((m, i) => {
+      // Calculate base position relative to scroll
+      let pos = i * itemWidth - this.scroll.current;
+
+      // Wrap position to stay within [-totalW/2, totalW/2] relative to camera
+      // Modulo logic to wrap around
+      const halfW = totalW / 2;
+      pos = (pos + halfW) % totalW;
+      if (pos < 0) pos += totalW;
+      pos -= halfW;
+
+      m.position.x = pos;
 
       m.program.uniforms.uTime.value += 0.04;
     });
@@ -218,13 +264,13 @@ export default function About() {
   const galleryRef = useRef(null);
 
   const team = [
-    { image: "https://picsum.photos/seed/1/800/600?grayscale" },
-    { image: "https://picsum.photos/seed/2/800/600?grayscale" },
-    { image: "https://picsum.photos/seed/3/800/600?grayscale" },
-    { image: "https://picsum.photos/seed/4/800/600?grayscale" },
-    { image: "https://picsum.photos/seed/5/800/600?grayscale" },
-    { image: "https://picsum.photos/seed/6/800/600?grayscale" },
-    { image: "https://picsum.photos/seed/7/800/600?grayscale" },
+    { image: "/images/bhuvanesh.png" },
+    { image: "/images/jothish.png" },
+    { image: "/images/om naren.png" },
+    { image: "/images/sanjeev.jpeg" },
+    { image: "/images/shajin.jpeg" },
+    { image: "/images/vaman.jpeg" },
+    { image: "/images/vimalesh.jpeg" },
   ];
 
   useEffect(() => {

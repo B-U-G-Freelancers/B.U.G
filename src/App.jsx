@@ -25,7 +25,7 @@ function App() {
       <ProjectProvider>
         <BrowserRouter>
           <ScrollToTop />
-          <Suspense fallback={<BugIntro />}>
+          <Suspense fallback={<div className="min-h-screen bg-[#0b0d10]" />}>
             <Routes>
               {/* Works page - full immersive, no layout */}
               <Route

@@ -11,6 +11,7 @@ import {
   Signal,
   Wifi,
 } from "lucide-react";
+import GlitchLogo from "./GlitchLogo";
 
 /* =========================
    DECRYPTION TEXT EFFECT
@@ -478,10 +479,10 @@ export function HeroContent() {
 
       <h1
         ref={headlineRef}
-        className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white leading-tight drop-shadow-2xl px-2"
+        className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white leading-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] px-2"
       >
         WE BUILD <br />
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3A7CFF] via-[#5c92ff] to-[#E947F5] animate-pulse-slow">
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3A7CFF] via-[#5c92ff] to-[#E947F5] animate-pulse-slow drop-shadow-[0_0_15px_rgba(58,124,255,0.5)]">
           <DecryptionText text="DIGITAL REALITIES" />
         </span>
       </h1>
@@ -536,6 +537,7 @@ export function HeroSection() {
       {/* Background Layer */}
       <div className="absolute inset-0 bg-transparent z-0">
         <ParticleOverlay />
+        <GlitchLogo />
       </div>
 
       {/* HUD/Command Center - Hidden on mobile for cleaner experience */}

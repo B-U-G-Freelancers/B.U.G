@@ -1,5 +1,5 @@
 // src/context/ProjectContext.jsx
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import { PROJECTS } from "../data/projects";
 
 // Create the context
@@ -9,15 +9,19 @@ const ProjectContext = createContext(null);
  * ProjectProvider - Wraps the app to provide project data throughout
  */
 export function ProjectProvider({ children }) {
+  const [introComplete, setIntroComplete] = useState(false);
+
   // Memoize the context value to prevent unnecessary re-renders
   const value = useMemo(
     () => ({
       projects: PROJECTS,
+      introComplete,
+      setIntroComplete,
       getProjectById: (id) => PROJECTS.find((p) => p.id === id),
       getProjectsByCategory: (category) =>
         PROJECTS.filter((p) => p.category === category),
     }),
-    [],
+    [introComplete],
   );
 
   return (

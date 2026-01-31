@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import {
   ChevronDown,
@@ -500,19 +501,19 @@ export function HeroContent() {
         ref={ctaRef}
         className="mt-12 flex flex-col sm:flex-row gap-6 pointer-events-auto"
       >
-        <a
-          href="/contact"
+        <Link
+          to="/contact"
           className="group px-10 py-4 bg-[#3A7CFF] text-white font-bold tracking-widest uppercase hover:bg-white hover:text-[#3A7CFF] transition-all shadow-[0_0_20px_rgba(58,124,255,0.4)] clip-path-button flex items-center gap-2"
         >
           <span className="relative z-10">Get Started</span>
           <ChevronDown className="w-5 h-5 -rotate-90 group-hover:rotate-0 transition-transform duration-300" />
-        </a>
-        <a
-          href="/works"
+        </Link>
+        <Link
+          to="/works"
           className="px-8 py-4 border border-white/20 text-white font-bold tracking-widest uppercase hover:border-[#3A7CFF] hover:text-[#3A7CFF] transition-all bg-black/50 backdrop-blur-sm"
         >
           View Systems
-        </a>
+        </Link>
       </div>
 
       <a

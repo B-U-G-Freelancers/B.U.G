@@ -1,4 +1,5 @@
 import { Mail, Phone, Linkedin, Globe } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function ContactCTA() {
   return (
@@ -67,13 +68,13 @@ export default function ContactCTA() {
 
             {/* CTA Button */}
             <div className="mt-8 sm:mt-10">
-              <a
-                href="/contact"
+              <Link
+                to="/contact"
                 className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-white text-black font-semibold text-sm sm:text-base hover:bg-gray-200 transition-colors"
               >
                 Let's Talk
                 <span className="text-lg sm:text-xl">→</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

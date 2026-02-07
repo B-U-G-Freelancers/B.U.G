@@ -52,16 +52,16 @@ function Starfield() {
    PROFESSIONAL TEXT COMPONENTS
 ========================= */
 const ProfessionalTitle = ({ children }) => (
-  <h2 className="relative inline-block text-4xl sm:text-6xl md:text-8xl font-black tracking-tight mb-16 group cursor-default">
+  <h2 className="relative inline-block text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-black tracking-tight mb-12 sm:mb-16 group cursor-default px-4">
     <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-slate-400 group-hover:to-slate-200 transition-all duration-700">
       {children}
     </span>
-    <span className="absolute -bottom-4 left-0 w-full h-1 bg-[#4f9cff] scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-expo origin-left" />
+    <span className="absolute -bottom-2 sm:-bottom-4 left-0 w-full h-0.5 sm:h-1 bg-[#4f9cff] scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-expo origin-left" />
   </h2>
 );
 
 const ProfessionalText = ({ children }) => (
-  <p className="max-w-4xl mx-auto text-xl md:text-2xl leading-relaxed mb-24 text-slate-400 font-light">
+  <p className="max-w-4xl mx-auto text-lg sm:text-xl md:text-2xl leading-relaxed mb-16 sm:mb-24 text-slate-400 font-light px-4">
     <span className="hover:text-white transition-colors duration-500">
       {children}
     </span>
@@ -73,49 +73,51 @@ const ProfessionalText = ({ children }) => (
 ========================= */
 const TeamMember = ({ member }) => {
   return (
-    <div className="group relative w-full aspect-[3/4] overflow-hidden rounded-xl bg-neutral-900 border border-white/10">
+    <div className="group relative w-full aspect-[3/4] overflow-hidden rounded-xl bg-neutral-900 border border-white/10 shadow-2xl shadow-black/50">
       {/* Image */}
       <img
         src={member.image}
         alt={member.name}
-        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:blur-[2px] group-hover:brightness-50"
+        className="w-full h-full object-cover transition-transform duration-700 scale-100 lg:group-hover:scale-110 lg:group-hover:blur-[2px] lg:group-hover:brightness-50"
       />
 
-      {/* Overlay Content */}
-      <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
-        <h4 className="text-2xl font-bold text-white mb-1">{member.name}</h4>
-        <p className="text-[#4f9cff] font-medium mb-4 text-sm tracking-widest uppercase">
+      {/* Overlay Content - Always visible on mobile, Hover on Desktop */}
+      <div className="absolute inset-0 flex flex-col justify-end p-6 transition-all duration-500 bg-gradient-to-t from-black/95 via-black/60 to-transparent opacity-100 translate-y-0 lg:opacity-0 lg:translate-y-4 lg:group-hover:opacity-100 lg:group-hover:translate-y-0">
+        <h4 className="text-2xl font-bold text-white mb-1 drop-shadow-md">
+          {member.name}
+        </h4>
+        <p className="text-[#4f9cff] font-medium mb-4 text-sm tracking-widest uppercase drop-shadow-sm">
           {member.role}
         </p>
 
-        {/* Social Icons */}
+        {/* Social Icons - Tappable on Mobile */}
         <div className="flex gap-4">
           <a
             href={member.socials.linkedin || "#"}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-white transition-colors"
+            className="text-gray-300 hover:text-white transition-colors p-2 -ml-2 hover:bg-white/10 rounded-full"
             title="LinkedIn"
           >
-            <Linkedin className="w-5 h-5" />
+            <Linkedin className="w-6 h-6 lg:w-5 lg:h-5" />
           </a>
           <a
             href={member.socials.github || "#"}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-white transition-colors"
+            className="text-gray-300 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
             title="GitHub"
           >
-            <Github className="w-5 h-5" />
+            <Github className="w-6 h-6 lg:w-5 lg:h-5" />
           </a>
           <a
             href={member.socials.instagram || "#"}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-white transition-colors"
+            className="text-gray-300 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
             title="Instagram"
           >
-            <Instagram className="w-5 h-5" />
+            <Instagram className="w-6 h-6 lg:w-5 lg:h-5" />
           </a>
         </div>
       </div>
@@ -197,8 +199,17 @@ export default function About() {
             The People Behind <span className="text-[#4f9cff]">B.U.G</span>
           </h3>
 
-          {/* INFINITE SCROLL MARQUEE */}
-          <div className="marquee-container relative w-full overflow-hidden py-10">
+          {/* MOBILE/TABLET GRID VIEW (Structured & Cool) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-6 sm:gap-8 px-4 sm:px-0">
+            {team.map((member, index) => (
+              <div key={index} className="w-full">
+                <TeamMember member={member} />
+              </div>
+            ))}
+          </div>
+
+          {/* DESKTOP INFINITE SCROLL MARQUEE */}
+          <div className="marquee-container relative w-full overflow-hidden py-10 hidden lg:block">
             {/* Gradient Masks for fade effect at edges */}
             <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
             <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />

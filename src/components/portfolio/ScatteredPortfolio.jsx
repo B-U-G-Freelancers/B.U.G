@@ -92,9 +92,8 @@ function MobileCard({ project, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-30px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      style={{ rotate: rotation }}
     >
-      <CardContent project={project} rotation={rotation} />
+      <CardContent project={project} rotation={0} />
     </motion.div>
   );
 }

@@ -1,18 +1,7 @@
 import { useEffect, useRef } from "react";
-import {
-  Camera,
-  Mesh,
-  Plane,
-  Program,
-  Renderer,
-  Texture,
-  Transform,
-} from "ogl";
 import { Header } from "../components/layout/Header";
+import { Github, Instagram, Linkedin } from "lucide-react";
 
-/* =========================
-   STARFIELD
-========================= */
 function Starfield() {
   const canvasRef = useRef(null);
 
@@ -63,7 +52,7 @@ function Starfield() {
    PROFESSIONAL TEXT COMPONENTS
 ========================= */
 const ProfessionalTitle = ({ children }) => (
-  <h2 className="relative inline-block text-6xl md:text-8xl font-black tracking-tight mb-16 group cursor-default">
+  <h2 className="relative inline-block text-4xl sm:text-6xl md:text-8xl font-black tracking-tight mb-16 group cursor-default">
     <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-slate-400 group-hover:to-slate-200 transition-all duration-700">
       {children}
     </span>
@@ -80,203 +69,108 @@ const ProfessionalText = ({ children }) => (
 );
 
 /* =========================
-   UTILS
+   TEAM COMPONENT
 ========================= */
-const lerp = (a, b, t) => a + (b - a) * t;
+const TeamMember = ({ member }) => {
+  return (
+    <div className="group relative w-full aspect-[3/4] overflow-hidden rounded-xl bg-neutral-900 border border-white/10">
+      {/* Image */}
+      <img
+        src={member.image}
+        alt={member.name}
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:blur-[2px] group-hover:brightness-50"
+      />
 
-/* =========================
-   CIRCULAR GALLERY (AUTO SCROLL)
-========================= */
-class CircularGalleryApp {
-  constructor(container, items) {
-    this.container = container;
-    this.items = items;
-    this.scroll = { current: 0, target: 0 };
-    this.speed = 0.02;
-    this.init();
-  }
+      {/* Overlay Content */}
+      <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+        <h4 className="text-2xl font-bold text-white mb-1">{member.name}</h4>
+        <p className="text-[#4f9cff] font-medium mb-4 text-sm tracking-widest uppercase">
+          {member.role}
+        </p>
 
-  init() {
-    this.renderer = new Renderer({ alpha: true, antialias: true });
-    this.gl = this.renderer.gl;
-    this.container.appendChild(this.gl.canvas);
-
-    this.camera = new Camera(this.gl, { fov: 45 });
-    this.camera.position.z = 12;
-
-    this.scene = new Transform();
-    this.geometry = new Plane(this.gl, {
-      widthSegments: 40,
-      heightSegments: 20,
-    });
-
-    this.createMedias();
-    this.onResize();
-    this.update();
-
-    window.addEventListener("resize", () => this.onResize());
-  }
-
-  createMedias() {
-    this.medias = this.items.map((item, index) => {
-      const texture = new Texture(this.gl);
-      const program = new Program(this.gl, {
-        vertex: `
-          attribute vec3 position;
-          attribute vec2 uv;
-          uniform mat4 modelViewMatrix;
-          uniform mat4 projectionMatrix;
-          uniform float uTime;
-          varying vec2 vUv;
-          void main() {
-            vUv = uv;
-            vec3 p = position;
-            p.z += sin(p.x * 3.0 + uTime) * 0.3;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
-          }
-        `,
-        fragment: `
-          precision highp float;
-          uniform sampler2D tMap;
-          uniform vec2 uImageRes;
-          uniform vec2 uPlaneRes;
-          varying vec2 vUv;
-          
-          void main() {
-            // Compute aspect ratios
-            float imageAspect = uImageRes.x / uImageRes.y;
-            float planeAspect = uPlaneRes.x / uPlaneRes.y;
-            
-            // Calculate ratio of plane AR to image AR
-            float r = planeAspect / imageAspect;
-            vec2 uv = vUv;
-            
-            if (r < 1.0) {
-               // Plane is narrower (taller) than image. Match heights. Crop width (x).
-               uv.x = (uv.x - 0.5) * r + 0.5;
-            } else {
-               // Plane is wider than image. Match widths. Crop height (y).
-               uv.y = (uv.y - 0.5) / r + 0.5;
-            }
-            
-            vec4 c = texture2D(tMap, uv);
-            gl_FragColor = vec4(c.rgb, c.a);
-          }
-        `,
-        uniforms: {
-          tMap: { value: texture },
-          uTime: { value: Math.random() * 10 },
-          uImageRes: { value: [1, 1] },
-          uPlaneRes: { value: [1, 1] },
-        },
-        transparent: true,
-      });
-
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      img.src = item.image;
-      img.onload = () => {
-        texture.image = img;
-        program.uniforms.uImageRes.value = [
-          img.naturalWidth,
-          img.naturalHeight,
-        ];
-      };
-
-      const mesh = new Mesh(this.gl, { geometry: this.geometry, program });
-      mesh.index = index;
-      mesh.setParent(this.scene);
-      return mesh;
-    });
-  }
-
-  onResize() {
-    const w = this.container.clientWidth;
-    const h = this.container.clientHeight;
-
-    this.renderer.setSize(w, h);
-    this.camera.perspective({ aspect: w / h });
-
-    const fov = (this.camera.fov * Math.PI) / 180;
-    const viewportHeight = 2 * Math.tan(fov / 2) * this.camera.position.z;
-    const viewportWidth = viewportHeight * (w / h);
-
-    // Changed standard Aspect Ratio to be a bit more portrait-friendly or square-ish if needed
-    // But now with the shader, we can keep any shape and image will cover it.
-    // Let's keep a nice cinematic aspect ratio for the cards (4:5 portrait is good for headshots)
-    this.planeHeight = viewportHeight * 0.55;
-    this.planeWidth = this.planeHeight * 0.8; // Changed from 1.4 to 0.8 for portrait style cards
-    this.gap = this.planeWidth * 0.2; // Reduced gap
-
-    this.totalWidth = (this.planeWidth + this.gap) * this.medias.length;
-
-    this.medias.forEach((m, i) => {
-      m.scale.set(this.planeWidth, this.planeHeight, 1);
-      m.position.x = i * (this.planeWidth + this.gap);
-
-      // Update plane resolution uniform
-      if (m.program.uniforms.uPlaneRes) {
-        m.program.uniforms.uPlaneRes.value = [
-          this.planeWidth,
-          this.planeHeight,
-        ];
-      }
-    });
-  }
-
-  update() {
-    this.scroll.target += this.speed;
-    this.scroll.current = lerp(this.scroll.current, this.scroll.target, 0.05);
-
-    const itemWidth = this.planeWidth + this.gap;
-    const totalW = itemWidth * this.medias.length;
-
-    this.medias.forEach((m, i) => {
-      // Calculate base position relative to scroll
-      let pos = i * itemWidth - this.scroll.current;
-
-      // Wrap position to stay within [-totalW/2, totalW/2] relative to camera
-      // Modulo logic to wrap around
-      const halfW = totalW / 2;
-      pos = (pos + halfW) % totalW;
-      if (pos < 0) pos += totalW;
-      pos -= halfW;
-
-      m.position.x = pos;
-
-      m.program.uniforms.uTime.value += 0.04;
-    });
-
-    this.renderer.render({ scene: this.scene, camera: this.camera });
-    this.raf = requestAnimationFrame(() => this.update());
-  }
-
-  destroy() {
-    cancelAnimationFrame(this.raf);
-    this.gl.canvas.remove();
-  }
-}
+        {/* Social Icons */}
+        <div className="flex gap-4">
+          <a
+            href={member.socials.linkedin || "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-white transition-colors"
+            title="LinkedIn"
+          >
+            <Linkedin className="w-5 h-5" />
+          </a>
+          <a
+            href={member.socials.github || "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-white transition-colors"
+            title="GitHub"
+          >
+            <Github className="w-5 h-5" />
+          </a>
+          <a
+            href={member.socials.instagram || "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-white transition-colors"
+            title="Instagram"
+          >
+            <Instagram className="w-5 h-5" />
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 /* =========================
    ABOUT SECTION
 ========================= */
 export default function About() {
-  const galleryRef = useRef(null);
-
   const team = [
-    { image: "/images/bhuvanesh.png" },
-    { image: "/images/jothish.png" },
-    { image: "/images/om naren.png" },
-    { image: "/images/sanjeev.jpeg" },
-    { image: "/images/shajin.jpeg" },
-    { image: "/images/vaman.jpeg" },
-    { image: "/images/vimalesh.jpeg" },
+    {
+      name: "Bhuvanesh",
+      role: "Full Stack Developer",
+      image: "/images/bhuvanesh.png",
+      socials: { linkedin: "https://www.linkedin.com/in/bhuvaneshkumar08/", github: "https://github.com/Bhuvi888", instagram: "https://www.instagram.com/bhxvi._.106/" },
+    },
+    {
+      name: "Jothish",
+      role: "Social Media Manager",
+      image: "/images/jothish.png",
+      socials: { linkedin: "https://www.linkedin.com/in/jothishwaran-s-914406314/", github: "#", instagram: "https://www.instagram.com/_jo.daz_/" },
+    },
+    {
+      name: "Om Naren",
+      role: "Business Advisor",
+      image: "/images/om naren.png",
+      socials: { linkedin: "https://www.linkedin.com/in/om-naren-d-68a2502b5/", github: "https://github.com/OmnarenD-cyber", instagram: "https://www.instagram.com/naren_____1235/" },
+    },
+    {
+      name: "Sanjeev",
+      role: "Full Stack Developer",
+      image: "/images/sanjeev.jpeg",
+      socials: { linkedin: "https://www.linkedin.com/in/sanjeevrajg2312/", github: "https://github.com/Sanjeev23Raj", instagram: "https://www.instagram.com/sanjeev._.sr23/" },
+    },
+    {
+      name: "Shajin",
+      role: "Full Stack Developer",
+      image: "/images/shajin.jpeg",
+      socials: { linkedin: "https://www.linkedin.com/in/shajinaiml/", github: "https://github.com/shajin0307", instagram: "https://www.instagram.com/shajin_037/" },
+    },
+    {
+      name: "Vaman Prabhakar",
+      role: "Full Stack Developer ",
+      image: "/images/vaman.jpeg",
+      socials: { linkedin: "https://www.linkedin.com/in/vaman-prabakar-32b6072a1/", github: "https://github.com/VamanPrabhakar-03", instagram: "https://www.instagram.com/vaman_prabakar/" },
+    },
+    {
+      name: "Vimalesh",
+      role: "Full Stack Developer",
+      image: "/images/vimalesh.jpeg",
+      socials: { linkedin: "https://www.linkedin.com/in/vimalesh-s-1bbba53a8/", github: "https://github.com/Vimal27896", instagram: "https://www.instagram.com/_.toxic_kiddo__/" },
+    },
   ];
-
-  useEffect(() => {
-    const gallery = new CircularGalleryApp(galleryRef.current, team);
-    return () => gallery.destroy();
-  }, []);
 
   return (
     <>
@@ -303,9 +197,44 @@ export default function About() {
             The People Behind <span className="text-[#4f9cff]">B.U.G</span>
           </h3>
 
-          <div ref={galleryRef} className="w-full h-[600px]" />
+          {/* INFINITE SCROLL MARQUEE */}
+          <div className="marquee-container relative w-full overflow-hidden py-10">
+            {/* Gradient Masks for fade effect at edges */}
+            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
+
+            <div className="flex animate-marquee w-max">
+              {/* Original List */}
+              {team.map((member, index) => (
+                <div key={`original-${index}`} className="w-72 sm:w-80 flex-shrink-0 mr-8">
+                  <TeamMember member={member} />
+                </div>
+              ))}
+              {/* Duplicate List for Seamless Loop */}
+              {team.map((member, index) => (
+                <div key={`duplicate-${index}`} className="w-72 sm:w-80 flex-shrink-0 mr-8">
+                  <TeamMember member={member} />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
+
+      {/* INJECTED STYLES FOR MARQUEE ANIMATION */}
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
+        }
+        /* Explicit Pause on Hover */
+        .marquee-container:hover .animate-marquee {
+          animation-play-state: paused;
+        }
+      `}</style>
     </>
   );
 }

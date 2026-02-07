@@ -98,29 +98,29 @@ export const PROJECTS = [
     type: "internal",
   },
   {
-    id: "bug-portfolio",
-    title: "B.U.G Portfolio",
-    category: "WEB APP",
-    subcategory: "INTERNAL",
-    year: "2025",
-    image: "/portfolio/bug-portfolio/cover.png",
+    id: "avinyaa",
+    title: "AVINYAA",
+    category: "WEB DEVELOPMENT",
+    subcategory: "CLIENT",
+    year: "2026",
+    image: "/portfolio/bug-portfolio/cover.png", // Using a placeholder image for now, ideally should use one from the site if available or ask user
     description:
-      "The very website you're browsing — an immersive showcase of B.U.G's capabilities, featuring 3D animations, WebGL effects, and cutting-edge React patterns.",
+      "The official web presence for AVINYAA '26, a cutting-edge technical symposium. Designed to showcase events, workshops, and the vibrant spirit of the fest.",
     challenge:
-      "Building an Awwwards-worthy portfolio that demonstrates our technical prowess while remaining performant and accessible.",
+      "To create a digital experience that reflects the energy and innovation of the symposium while making event registration seamless.",
     solution:
-      "Created an experiential website with particle systems, infinite scrolling galleries, cinematic page transitions, and premium micro-interactions.",
-    tech: "React, Vite, GSAP, Three.js, OGL, Tailwind CSS",
-    role: "Full-Stack Development",
-    timeline: "4 weeks",
-    liveUrl: "https://buildyourgenie.com",
+      "A high-performance web application with dynamic event showcases, real-time updates, and an engaging user interface.",
+    tech: "React, Vite, Tailwind CSS",
+    role: "Web Development",
+    timeline: "Ongoing",
+    liveUrl: "https://avinyaa.pages.dev/",
     features: [
-      "3D Animations",
-      "Infinite Gallery",
-      "Particle Effects",
-      "Dark Mode",
+      "Event Registration",
+      "Live Updates",
+      "Interactive Gallery",
+      "Schedule Planner",
     ],
-    type: "internal",
+    type: "client",
   },
 ];
 

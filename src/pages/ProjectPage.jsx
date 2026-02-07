@@ -48,7 +48,7 @@ export default function ProjectPage() {
           {/* Back Button */}
           <button
             onClick={() => navigate("/works")}
-            className="absolute top-24 left-6 z-20 flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full text-white text-sm transition-colors"
+            className="absolute top-24 left-6 z-50 flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full text-white text-sm transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Works
